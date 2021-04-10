@@ -64,6 +64,8 @@ function handleResult(resultData) {
     resultData[0]["movie_genres"] +
     "</th>";
 
+  //Since query has been altered, changes have been made here.
+
   //Stars array
   let stars = resultData[0]["movie_actors"];
   let starsArr = stars.split(",");
