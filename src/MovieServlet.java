@@ -48,17 +48,15 @@ public class MovieServlet extends HttpServlet {
         // Get a connection from dataSource and let resource manager close the connection after usage.
         try (Connection conn = dataSource.getConnection()) {
             // Get a connection from dataSource
-
+            
+            // We append the id with the query for easier searching.
             String query = "SELECT\n" +
-                    "    m.title as 'title',\n" +
-                    "    m.year as 'year',\n" +
-                    "    m.director as 'director',\n" +
-                    "    group_concat(distinct g.name SEPARATOR ', ') 'genres',\n" +
-                    "    group_concat(s.name SEPARATOR ', ') 'actors',\n" +
-                    "    group_concat(s.id SEPARATOR ', ') 'starId',\n" +
-                    "    (select r.rating from ratings r, movies m where r.movieID = m.id AND m.id = \"tt0395642\") as 'rating'\n" +
-                    "FROM\n" +
-                    "    movies m, genres_in_movies gim, genres g, stars_in_movies sim, stars s\n" +
+                    "\tm.title as 'title', m.year as 'year', m.director as 'director',\n" +
+                    "    group_concat(distinct g.name) 'genres',\n" +
+                    "    group_concat(distinct s.name order by s.name) 'actors',\n" +
+                    "    group_concat(distinct s.id order by s.name) 'starId',\n" +
+                    "    (select r.rating from ratings r, movies m where r.movieID = m.id AND m.id = '" + id +"') as 'rating'\n" +
+                    "FROM movies m, genres_in_movies gim, genres g, stars_in_movies sim, stars s\n" +
                     "where m.id = '" + id + "' AND m.id = gim.movieId AND gim.genreId = g.id AND m.id = sim.movieId AND sim.starID = s.id";
 
             // Declare our statement
