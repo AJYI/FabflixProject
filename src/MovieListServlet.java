@@ -48,20 +48,12 @@ public class MovieListServlet extends HttpServlet {
             Statement statement = conn.createStatement();
 
             // prepare query
-            String query = "SELECT m.title as title,\n" +
-                    "        m.id as movieId,\n" +
-                    "        m.year as year,\n" +
-                    "        m.director as director,\n" +
-                    "        r.rating as rating,\n" +
-                    "        substring_index(group_concat(distinct g.name SEPARATOR ', '), ', ', 3) genres,\n" +
-                    "        substring_index(group_concat(s.name SEPARATOR ', '), ', ', 3) actors,\n" +
-                    "        substring_index(group_concat(s.id SEPARATOR ', '), ', ', 3) starId\n" +
+            String query = "SELECT m.title as 'title', m.id as 'movieId', m.year as 'year', m.director as 'director', r.rating as 'rating',\n" +
+                    "        substring_index(group_concat(distinct g.name), ',', 3) 'genres',\n" +
+                    "        substring_index(group_concat(distinct s.name), ',', 3) 'actors',\n" +
+                    "        substring_index(group_concat(distinct s.id order by s.name), ',', 3) 'starId'\n" +
                     "        FROM (SELECT r.rating, r.movieId from ratings r order by r.rating desc limit 20) as r,\n" +
-                    "        movies m,\n" +
-                    "        genres_in_movies gim,\n" +
-                    "        genres g,\n" +
-                    "        stars_in_movies sim,\n" +
-                    "        stars s\n" +
+                    "        movies m, genres_in_movies gim, genres g, stars_in_movies sim, stars s\n" +
                     "        where r.movieId = m.id AND m.id = gim.movieId AND gim.genreId = g.id AND m.id = sim.movieId AND sim.starID = s.id\n" +
                     "        group by m.title\n" +
                     "        order by r.rating desc, m.title asc\n" +
