@@ -8,12 +8,10 @@ This video is a recording of a demonstration of our project on Amazon Web Servic
 
 ### How to deploy the application using Tomcat
 
-1. In the project files, find the folder marked 'target'
-2. Find the file marked 'cs122b-spring21-project1.war.' Get the location of the file by right-clicking on it and selecting 'Open in Terminal,' and then running 'pwd' in the terminal.
-3. (optional) If needed, place the file somewhere where you can easily navigate to it later.
-4. Open up the Tomcat Web Applicatoin manager, by doing the following: get your public IPv4 address from your EC2 instance, and open it along with the 8080/manager/html on your web browser (for example, 34.208.237.5:8080/manager/html)
-5. Go to "Select WAR file to upload," and upload the war file from Steps 2 and 3.
-6. Deploy the file. The application should appear on your browser.
+1. Clone this repository using `git clone https://github.com/UCI-Chenli-teaching/cs122b-spring21-team-22.git`
+2. Import the project using intellij and choose Maven as the external model
+3. edit the configurations for the tomcat server. Refer to ([canvas](https://canvas.eee.uci.edu/courses/36596/pages/intellij-idea-tomcat-configuration))
+4. Run the server.
 
 ### Each member's contribution to Project 1
 
