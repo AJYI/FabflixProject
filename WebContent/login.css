@@ -1,0 +1,13 @@
+.loginIntro {
+    width: 200px;
+    position: relative;
+    left: 50%;
+    margin-left: -100px
+}
+
+.credentialsCenter {
+    width: 200px;
+    position: absolute;
+    left: 50%;
+    margin-left: -100px
+}

@@ -2,39 +2,42 @@
 <html lang="en">
   <head>
     <title>Fablix - Log in</title>
+    <link rel="stylesheet" href="login.css">
   </head>
 
   <body>
     <h1>Fablix</h1>
-    <h1 align="CENTER">Login</h1>
 
-<!--    Gotta change to post soon because of security-->
-    <form action="login" method="GET">
-      <p>
-        <label for="username">Enter username: </label>
-        <input type="text" name="ID" id="username" placeholder="Username" />
-      </p>
+    <div class="loginIntro">
+      <h1>Login</h1>
+      <p id="login_error_message"></p>
+    </div>
 
-      <p>
-        <label for="password">Enter password: </label>
-        <input
-          type="password"
-          name="PASSWORD"
-          id="password"
-          placeholder="Password"
-        />
-      </p>
-      <p>
-        <input type="submit" value="Log In" />
-      </p>
-    </form>
+    <div class="credentialsCenter">
+      <!--    Gotta change to post soon because of security-->
+      <form action="login_form" method="GET" action="#">
+        <p>
+          <label for="username">Enter username: </label>
+          <input type="text" name="ID" id="username" placeholder="Username" />
+        </p>
 
-    <!-- 
-<form ACTION="form" METHOD="POST">
-    Star name: <input TYPE="TEXT" name="name"> (Use % to replace any strings. e.g. Arnold%)<br>
+        <p>
+          <label for="password">Enter password: </label>
+          <input
+                  type="password"
+                  name="PASSWORD"
+                  id="password"
+                  placeholder="Password"
+          />
+        </p>
+        <p>
+          <input type="submit" value="Log In" />
+        </p>
+      </form>
+    </div>
 
-    <input TYPE="SUBMIT" VALUE="Search Star">
 
-</form> -->
+    <!-- include our own JS file -->
+    <script src="./login.js"></script>
   </body>
 </html>
