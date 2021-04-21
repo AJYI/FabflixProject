@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <meta charset="UTF-8">
     <title>Fablix - Log in</title>
     <link rel="stylesheet" href="login.css">
   </head>
@@ -15,17 +16,17 @@
 
     <div class="credentialsCenter">
       <!--    Gotta change to post soon because of security-->
-      <form action="login_form" method="POST" action="#">
+      <form id="login_form" method="post" action="#">
         <p>
-          <label for="username">Enter username: </label>
-          <input type="text" name="ID" id="username" placeholder="Username" />
+          <label for="email">Enter Email</label>
+          <input type="text" name="email" id="email" placeholder="Email" />
         </p>
 
         <p>
           <label for="password">Enter password: </label>
           <input
                   type="password"
-                  name="PASSWORD"
+                  name="pass"
                   id="password"
                   placeholder="Password"
           />
@@ -36,7 +37,8 @@
       </form>
     </div>
 
-
+    <!-- include jQuery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- include our own JS file -->
     <script src="./login.js"></script>
   </body>

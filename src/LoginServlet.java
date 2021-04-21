@@ -1,6 +1,4 @@
-import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.servlet.ServletConfig;
@@ -10,10 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 
 
 @WebServlet(name = "LoginServlet", urlPatterns = "/login")
@@ -23,6 +20,7 @@ public class LoginServlet extends HttpServlet {
     // Create a dataSource which registered in web.
     private DataSource dataSource;
 
+    // Auto login to database
     public void init(ServletConfig config) {
         try {
             dataSource = (DataSource) new InitialContext().lookup("java:comp/env/jdbc/moviedb");
@@ -34,88 +32,79 @@ public class LoginServlet extends HttpServlet {
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        /*
+        Fetching the id and pass from the url
+         */
+        String email = request.getParameter("email");
+        String password = request.getParameter("pass");
 
-//        response.setContentType("application/json"); // Response mime type
-//
-//        // Output stream to STDOUT
-//        PrintWriter out = response.getWriter();
-//
-//        // Get a connection from dataSource and let resource manager close the connection after usage.
-//        try (Connection conn = dataSource.getConnection()) {
-//
-//            // Declare our statement
-//            Statement statement = conn.createStatement();
-//
-//            // prepare query
-//            String query = "SELECT m.title as 'title', m.id as 'movieId', m.year as 'year', m.director as 'director', r.rating as 'rating',\n" +
-//                    "        substring_index(group_concat(distinct g.name), ',', 3) 'genres',\n" +
-//                    "        substring_index(group_concat(distinct s.name), ',', 3) 'actors',\n" +
-//                    "        substring_index(group_concat(distinct s.id order by s.name), ',', 3) 'starId'\n" +
-//                    "        FROM (SELECT r.rating, r.movieId from ratings r order by r.rating desc limit 20) as r,\n" +
-//                    "        movies m, genres_in_movies gim, genres g, stars_in_movies sim, stars s\n" +
-//                    "        where r.movieId = m.id AND m.id = gim.movieId AND gim.genreId = g.id AND m.id = sim.movieId AND sim.starID = s.id\n" +
-//                    "        group by m.title\n" +
-//                    "        order by r.rating desc, m.title asc\n" +
-//                    "        limit 20";
-//
-//            // Perform the query
-//            ResultSet rs = statement.executeQuery(query);
-//
-//            JsonArray jsonArray = new JsonArray();
-//
-//            // Iterate through each row of rs
-//            while (rs.next()) {
-//                String movieID = rs.getString("movieId");
-//                String movieTitle = rs.getString("title");
-//                String movieYear = rs.getString("year");
-//                String movieDirector = rs.getString("director");
-//                String movieGenre = rs.getString("genres");
-//                String movieActors = rs.getString("actors");
-//                String movieRating = rs.getString("rating");
-//                String starID = rs.getString("starId");
-//
-//                // Create a JsonObject based on the data we retrieve from rs
-//                JsonObject jsonObject = new JsonObject();
-//                jsonObject.addProperty("movie_id", movieID);
-//                jsonObject.addProperty("movie_title", movieTitle);
-//                jsonObject.addProperty("movie_year", movieYear);
-//                jsonObject.addProperty("movie_director", movieDirector);
-//                jsonObject.addProperty("movie_genre", movieGenre);
-//                jsonObject.addProperty("movie_actors", movieActors);
-//                jsonObject.addProperty("movie_rating", movieRating);
-//                jsonObject.addProperty("star_id", starID);
-//
-//                jsonArray.add(jsonObject);
-//            }
-//
-//            rs.close();
-//            statement.close();
-//
-//            System.out.println(jsonArray.toString());
-//            // write JSON string to output
-//            out.write(jsonArray.toString());
-//            // set response status to 200 (OK)
-//            response.setStatus(200);
-//
-//
-//        } catch (Exception e) {
-//
-//            // write error message JSON object to output
-//            JsonObject jsonObject = new JsonObject();
-//            jsonObject.addProperty("errorMessage", e.getMessage());
-//            out.write(jsonObject.toString());
-//
-//            // set response status to 500 (Internal Server Error)
-//            response.setStatus(500);
-//        } finally {
-//            out.close();
-//        }
-//        // always remember to close db connection after usage. Here it's done by try-with-resources
+        // Will be used in either login success/fail
+        JsonObject jsonObject = new JsonObject();
 
+        // Login Success
+        if(validateUser(email, password)){
+            request.getSession().setAttribute("user", new User(email));
+
+            jsonObject.addProperty("status", "success");
+            jsonObject.addProperty("message", "success");
+        }
+        else{
+            //We had a login fail
+            jsonObject.addProperty("status", "fail");
+            // We don't want to notify the user if it's either id or password for security reasons
+            jsonObject.addProperty("message", "Incorrect credentials!");
+
+        }
+
+        // set response status to 200 (OK)
+        response.setStatus(200);
+        response.getWriter().write(jsonObject.toString());
     }
 
-    protected void doPOST(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        doGet(request, response);
+    protected boolean validateUser(String email, String pass){
+        boolean verified = false;
+        try (Connection conn = dataSource.getConnection()){
+
+            //System.out.println(email + " " + pass);
+
+            // Preparing the query
+            String query = "SELECT EXISTS (SELECT c.email, c.password\n" +
+                    "FROM customers c\n" +
+                    "WHERE c.email = ? AND c.password = ?) as findUser";
+
+            // Declare our statement
+            PreparedStatement statement = conn.prepareStatement(query);
+
+            statement.setString(1, email);
+            statement.setString(2, pass);
+
+            // Perform the query
+            ResultSet rs = statement.executeQuery();
+
+            // To get the 0/1
+            rs.next();
+
+            String findUser = rs.getString("findUser");
+
+            // Means found
+            if(Integer.parseInt(findUser) == 1) {
+                verified = true;
+            }
+            // Not found
+            else{
+                verified = false;
+            }
+
+            // Closing after opening
+            rs.close();
+            statement.close();
+        }
+        catch(Exception e){
+            // Need to work on finding out a better way to write to the log
+            System.out.println(e.getMessage());
+        }
+        return verified;
     }
+
 }
