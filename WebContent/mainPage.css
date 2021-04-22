@@ -1,0 +1,57 @@
+/* Using: https://colorhunt.co/palette/225760 */
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #dddddd;
+}
+
+/* Setting the navbar background */
+nav {
+  background-color: #222831;
+  padding: 10px 40px 10px 70px;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+nav ul li.logo {
+  flex: 1;
+  color: #dddddd;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+nav ul div.menu-items {
+  padding: 0 25px;
+  display: inline-flex;
+}
+
+nav ul div.menu-items a {
+  color: #dddddd;
+  font-size: 18px;
+  padding: 0 12px;
+}
+
+nav ul div.menu-items a:hover {
+  color: #30475e;
+}
+
+.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+main div h1 {
+  text-align: center;
+}
