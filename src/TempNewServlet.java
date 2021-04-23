@@ -19,9 +19,9 @@ import java.util.List;
  * generates output as a html <table>
  */
 
-// Declaring a WebServlet called FormServlet, which maps to url "/form"
-@WebServlet(name = "FormServlet", urlPatterns = "/form")
-public class SearchFormServlet extends HttpServlet {
+
+@WebServlet(name = "TempMovieServlet", urlPatterns = "api/tempMovieList")
+public class TempMovieServlet extends HttpServlet {
 
     // Create a dataSource which registered in web.xml
     private DataSource dataSource;
@@ -63,15 +63,29 @@ public class SearchFormServlet extends HttpServlet {
             String movieYear = request.getParameter("movieYear");
             String movieDirector = request.getParameter("movieDirector");
             String movieStar = request.getParameter("movieStar");
+            String movieGenre = request.getParameter("movieGenre");
+
 
             // Generate a SQL query
-            String query = String.format("select m.title as 'Title', m.year as 'Year', m.director as 'Director',\n" +
-                    "\tgroup_concat(s.name SEPARATOR ', ') Stars\n" +
-                    "from movies m, stars s, stars_in_movies sim\n" +
-                    "where m.id = sim.movieId and sim.starId = s.id\n" +
-                    "and m.title like '%%%s%%' and m.year like '%%%s%%' and m.director like '%%%s%%'\n" +
-                    "group by m.id\n" +
-                    "having Stars like '%%%s%%'", movieTitle, movieYear, movieDirector, movieStar);
+            String query = String.format("SELECT m.title as title,\n" +
+                    "        m.id as movieId,\n" +
+                    "        m.year as year,\n" +
+                    "        m.director as director,\n" +
+                    "        r.rating as rating,\n" +
+                    "        substring_index(group_concat(distinct g.name SEPARATOR ', '), ', ', 3) genres,\n" +
+                    "        substring_index(group_concat(s.name SEPARATOR ', '), ', ', 3) actors,\n" +
+                    "        substring_index(group_concat(s.id SEPARATOR ', '), ', ', 3) starId\n" +
+                    "        FROM (SELECT r.rating, r.movieId from ratings r order by r.rating desc limit 20) as r,\n" +
+                    "        movies m,\n" +
+                    "        genres_in_movies gim,\n" +
+                    "        genres g,\n" +
+                    "        stars_in_movies sim,\n" +
+                    "        stars s\n" +
+                    "        where r.movieId = m.id AND m.id = gim.movieId AND gim.genreId = g.id AND m.id = sim.movieId AND sim.starID = s.id\n" +
+                    "        and m.title like '%%%s%%' and m.year like '%%%s%%' and m.director like '%%%s%%'\n" +
+                    "        group by m.title\n" +
+                    "        having actors like '%%%s%%' and genres like 's%%'\n" +
+                    "        order by r.rating desc, m.title asc\n", movieTitle, movieYear, movieDirector, movieStar, movieGenre);
 
             // Perform the query
             ResultSet rs = statement.executeQuery(query);
@@ -80,15 +94,17 @@ public class SearchFormServlet extends HttpServlet {
             out.println("<table border>");
 
             // Iterate through each row of rs and create a table row <tr>
-            out.println("<tr><td>Movie Title</td><td>Movie Year</td><td>Movie Director</td><td>Movie Star(s)</td></tr>");
+            out.println("<tr><td>Movie Title</td><td>Movie Year</td><td>Movie Director</td><td>Movie Rating</td><td>Movie Star(s)</td><td>Genres</td></tr>");
             while (rs.next()) {
-                String m_Title = rs.getString("Title");
-                String m_Year = rs.getString("Year");
-                String m_Director = rs.getString("Director");
-                String m_Stars = rs.getString("Stars");
-    //          List<String> starList = Arrays.asList(m_Stars.split(","));
+                String m_Title = rs.getString("title");
+                String m_Year = rs.getString("year");
+                String m_Director = rs.getString("director");
+                String m_Rating = rs.getString("rating");
+                String m_Stars = rs.getString("actors");
+                //          List<String> starList = Arrays.asList(m_Stars.split(","));
+                String m_Genres = rs.getString("genres");
 
-                out.println(String.format("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>", m_Title, m_Year, m_Director, m_Stars));
+                out.println(String.format("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>", m_Title, m_Year, m_Director, m_Rating, m_Genres, m_Stars));
             }
             out.println("</table>");
 
