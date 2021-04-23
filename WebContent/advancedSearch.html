@@ -1,10 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="advancedSearch.css">
+      <script
+              src="https://kit.fontawesome.com/36cadc13cf.js"
+              crossorigin="anonymous"
+      ></script>
+    <title>FabFlix Advanced Search</title>
+  </head>
+  <body>
+    <nav class="navbar">
+      <ul>
+        <li class="logo">FabFlix</li>
+        <div class="menu-items">
+          <li><a href="mainPage.html">Home</a></li>
+          <li><a href="#">Browse</a></li>
+          <li><a href="#">Advanced Search</a></li>
+        </div>
+        <li class="search-bar">
+          <form action="searchForm" method="GET">
+            <input
+              type="TEXT"
+              placeholder="Explore Movies"
+              name="movie_title"
+            />
+            <button type="submit"><i class="fas fa-search"></i></button>
+          </form>
+        </li>
+      </ul>
+    </nav>
+    <main>
+        <div class = "page-title">
+            <h1>Advanced Search</h1>
+        </div>
+
+        <div class = "search-form">
+            <form action="movieList.html" method="GET">
+                <p>
+                    <label for="movieTitle">Movie Title: </label>
+                    <input type="search" name="movieTitle" id="movieTitle">
+                </p>
+                <p>
+                    <label for="movieYear">Movie Year: </label>
+                    <input type="search" name="movieYear" id = "movieYear">
+                </p>
+                <p>
+                    <label for="movieDirector">Movie Director: </label>
+                    <input type="search" name="movieDirector" id ="movieDirector">
+                </p>
+                <p>
+                    <label for="movieStar">Movie Star: </label>
+                    <input type="search" name="movieStar" id="movieStar">
+                </p>
+                <p>
+                    <input type="submit" value="Search">
+                    <input type="reset" value="Reset">
+                </p>
+            </form>
+        </div>
+    </form>
+    </main>
+  </body>
 </html>

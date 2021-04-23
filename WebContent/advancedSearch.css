@@ -1,0 +1,12 @@
+div.page-title h1 {
+    text-align: center;
+    text-decoration: underline;
+  padding: 50px 0px 20px 0px;
+}
+
+div.search-form {
+    display: inline;
+    text-align: center;
+    vertical-align: middle;
+}
+
