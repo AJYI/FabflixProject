@@ -19,7 +19,7 @@ import java.util.List;
  * generates output as a html <table>
  */
 
-// Declaring a WebServlet called FormServlet, which maps to url "/form"
+
 @WebServlet(name = "TempMovieServlet", urlPatterns = "api/tempMovieList")
 public class TempMovieServlet extends HttpServlet {
 
@@ -67,7 +67,6 @@ public class TempMovieServlet extends HttpServlet {
 
 
             // Generate a SQL query
-            // To do: Need to make sure that the servlet can handle both queries from browsing and searching
             String query = String.format("SELECT m.title as title,\n" +
                     "        m.id as movieId,\n" +
                     "        m.year as year,\n" +
@@ -95,7 +94,7 @@ public class TempMovieServlet extends HttpServlet {
             out.println("<table border>");
 
             // Iterate through each row of rs and create a table row <tr>
-            out.println("<tr><td>Movie Title</td><td>Movie Year</td><td>Movie Director</td><td>Movie Star(s)</td></tr>");
+            out.println("<tr><td>Movie Title</td><td>Movie Year</td><td>Movie Director</td><td>Movie Rating</td><td>Movie Star(s)</td><td>Genres</td></tr>");
             while (rs.next()) {
                 String m_Title = rs.getString("title");
                 String m_Year = rs.getString("year");
