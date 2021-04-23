@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="browse.css" />
+    <script
+      src="https://kit.fontawesome.com/36cadc13cf.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>Fablix Browse</title>
+  </head>
+  <body>
+    <nav class="navbar">
+      <ul>
+        <li class="logo">FabFlix</li>
+        <div class="menu-items">
+          <li><a href="mainPage.html">Home</a></li>
+          <li><a href="browse.html">Browse</a></li>
+          <li><a href="advancedSearch.html">Advanced Search</a></li>
+        </div>
+        <li class="search-bar">
+          <form action="movieList.html" method="GET">
+            <input
+              type="TEXT"
+              placeholder="Explore Movies"
+              name="movie_title"
+            />
+            <button type="submit"><i class="fas fa-search"></i></button>
+          </form>
+        </li>
+      </ul>
+    </nav>
+    <main>
+      <div>
+        <h1 class="title">Browse by Movie Title</h1>
+      </div>
+
+      <hr />
+      <div>
+        <h1 class="title">Browse by Movie Genre</h1>
+      </div>
+    </main>
+  </body>
+</html>
