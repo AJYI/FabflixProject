@@ -40,26 +40,28 @@
 
         <div class = "search-form">
             <form action="movieList.html" method="GET">
-                <p>
-                    <label for="movieTitle">Movie Title: </label>
-                    <input type="search" name="movieTitle" id="movieTitle">
-                </p>
-                <p>
-                    <label for="movieYear">Movie Year: </label>
-                    <input type="search" name="movieYear" id = "movieYear">
-                </p>
-                <p>
-                    <label for="movieDirector">Movie Director: </label>
-                    <input type="search" name="movieDirector" id ="movieDirector">
-                </p>
-                <p>
-                    <label for="movieStar">Movie Star: </label>
-                    <input type="search" name="movieStar" id="movieStar">
-                </p>
-                <p>
-                    <input type="submit" value="Search">
-                    <input type="reset" value="Reset">
-                </p>
+                <table>
+                    <tr>
+                        <td>Movie Title: </td>
+                        <td><input type="search" name="movieTitle"></td>
+                    </tr>
+                    <tr>
+                      <td>Movie Director: </td>
+                      <td><input type="search" name="movieDirector"></td>
+                    </tr>
+                    <tr>
+                      <td>Movie Star: </td>
+                      <td><input type="search" name="movieStar"></td>
+                    </tr>
+                    <tr>
+                      <td>Movie Year: </td>
+                      <td><input type="search" name="movieYear"></td>
+                    </tr>
+                </table>
+                <div class="buttons">
+                  <input type="submit" value="Search">
+                  <input type="reset" value="Reset">
+                </div>
             </form>
         </div>
     </form>
