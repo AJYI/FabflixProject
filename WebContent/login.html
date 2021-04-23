@@ -3,12 +3,18 @@
   <head>
     <meta charset="UTF-8">
     <title>FabFlix - Log in</title>
+    <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="login.css">
   </head>
 
   <body>
-    <h1>FabFlix</h1>
+  <nav class="navbar">
+    <ul>
+      <li class="logo">FabFlix</li>
+    </ul>
+  </nav>
 
+  <main>
     <div class="loginIntro">
       <h1>Login</h1>
       <p id="login_error_message"></p>
@@ -18,12 +24,12 @@
       <!--    Gotta change to post soon because of security-->
       <form id="login_form" method="post" action="#">
         <p>
-          <label for="email"></label>
+          <label for="email">Enter Email</label>
           <input type="text" name="email" id="email" placeholder="Email" />
         </p>
 
         <p>
-          <label for="password"></label>
+          <label for="password">Enter Password</label>
           <input
                   type="password"
                   name="pass"
@@ -36,6 +42,7 @@
         </p>
       </form>
     </div>
+  </main>
 
     <!-- include jQuery-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

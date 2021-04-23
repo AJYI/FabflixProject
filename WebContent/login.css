@@ -1,9 +1,15 @@
+
+
+
 .loginIntro {
-  width: 200px;
-  position: relative;
-  left: 50%;
-  margin-left: -100px;
+  margin-left: auto;
+  margin-right: auto;
+  position: absolute;
+  text-align: center;
 }
+
+
+
 
 .credentialsCenter {
   width: 200px;

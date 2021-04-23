@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="mainPage.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
@@ -17,8 +18,8 @@
           <li><a href="#">Advanced Search</a></li>
         </div>
         <li class="search-bar">
-          <form action="#">
-            <input type="search" placeholder="Explore Movies" name="movies" />
+          <form ACTION="searchForm" METHOD="GET">
+            <input type="TEXT" placeholder="Explore Movies" name="movie_title" />
             <button type="submit"><i class="fas fa-search"></i></button>
           </form>
         </li>
@@ -26,11 +27,11 @@
     </nav>
 
     <main>
-      <div class="center">
+      <div>
         <h1>List Of The Top 20 Highest Rated Movies:</h1>
 
         <!-- Id "star_table" is useful for jQuery to find the html element with id, class here is mapping to Bootstrap defined class CSS -->
-        <table border id="movie_list_table">
+        <table border id="movie_list_table" class="center">
           <!-- Create a table header -->
           <thead>
             <tr>

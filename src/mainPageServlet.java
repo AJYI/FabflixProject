@@ -112,6 +112,5 @@ public class mainPageServlet extends HttpServlet {
             out.close();
         }
         // always remember to close db connection after usage. Here it's done by try-with-resources
-
     }
 }
