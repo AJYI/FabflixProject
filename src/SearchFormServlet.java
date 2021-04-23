@@ -59,18 +59,19 @@ public class SearchFormServlet extends HttpServlet {
             Statement statement = dbCon.createStatement();
 
             // Retrieve parameter "name" from the http request, which refers to the value of <input name="name"> in index.html
-            String movieTitle = request.getParameter("movie_title");
-            String movieYear = request.getParameter("movie_year");
-            String movieDirector = request.getParameter("movie_director");
-            String movieStar = request.getParameter("movie_star");
+            String movieTitle = request.getParameter("movieTitle");
+            String movieYear = request.getParameter("movieYear");
+            String movieDirector = request.getParameter("movieDirector");
+            String movieStar = request.getParameter("movieStar");
 
             // Generate a SQL query
             String query = String.format("select m.title as 'Title', m.year as 'Year', m.director as 'Director',\n" +
                     "\tgroup_concat(s.name SEPARATOR ', ') Stars\n" +
                     "from movies m, stars s, stars_in_movies sim\n" +
                     "where m.id = sim.movieId and sim.starId = s.id\n" +
-                    "and m.title like '%%%s%%' and m.year like '%%%s%%' and m.director like '%%%s%%'" +
-                    "group by m.id", movieTitle, movieYear, movieDirector, movieStar);
+                    "and m.title like '%%%s%%' and m.year like '%%%s%%' and m.director like '%%%s%%'\n" +
+                    "group by m.id\n" +
+                    "having Stars like '%%%s%%'", movieTitle, movieYear, movieDirector, movieStar);
 
             // Perform the query
             ResultSet rs = statement.executeQuery(query);
@@ -84,10 +85,10 @@ public class SearchFormServlet extends HttpServlet {
                 String m_Title = rs.getString("Title");
                 String m_Year = rs.getString("Year");
                 String m_Director = rs.getString("Director");
-//                String m_Stars = rs.getString("Stars");
-//                List<String> starList = Arrays.asList(m_Stars.split(","));
+                String m_Stars = rs.getString("Stars");
+    //          List<String> starList = Arrays.asList(m_Stars.split(","));
 
-                out.println(String.format("<tr><td>%s</td><td>%s</td><td>%s</td></tr>", m_Title, m_Year, m_Director));
+                out.println(String.format("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>", m_Title, m_Year, m_Director, m_Stars));
             }
             out.println("</table>");
 
