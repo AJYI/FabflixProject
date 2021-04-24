@@ -57,7 +57,7 @@ public class movieListServlet extends HttpServlet {
             /*
             Only String (VARCHAR) fields are required to support substring matching. Thus, year should not support it.
              */
-            if(movieYear == new String()){
+            if(movieYear.equals(new String())){
                 // prepare query
                 String query = "select m.title as 'title', m.id as 'movieID', m.year as 'year', m.director as 'director', r.rating as 'rating',\n" +
                         "substring_index(group_concat(distinct g.name), ',', 3) 'genres',\n" +
