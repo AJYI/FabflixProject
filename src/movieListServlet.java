@@ -50,7 +50,7 @@ public class movieListServlet extends HttpServlet {
             String movieDirector = request.getParameter("movieDirector");
             String movieStar = request.getParameter("movieStar");
 
-            //System.out.println(movieTitle + " " + movieDirector + " " + movieStar + " " + movieYear);
+            System.out.println(movieTitle + " " + movieDirector + " " + movieStar + " " + movieYear);
 
             // prepare query
             String query = "select m.title as 'title', m.id as 'movieID', m.year as 'year', m.director as 'director', r.rating as 'rating',\n" +
@@ -72,8 +72,8 @@ public class movieListServlet extends HttpServlet {
 
             statement.setString(1,  movieTitle + "%");
             statement.setString(2, movieYear + "%");
-            statement.setString(3,  "% "+ movieDirector + "%");
-            statement.setString(4, "% "+ movieStar + "%");
+            statement.setString(3,  "%"+ movieDirector + "%");
+            statement.setString(4, "%"+ movieStar + "%");
 
             // Perform the query
             ResultSet rs = statement.executeQuery();
