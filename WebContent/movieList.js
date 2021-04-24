@@ -89,6 +89,7 @@ let movieTitle = getParameterByName("movieTitle");
 let movieYear = getParameterByName("movieYear");
 let movieDirector = getParameterByName("movieDirector");
 let movieStar = getParameterByName("movieStar");
+let movieGenre = getParameterByName("movieGenre");
 
 
 
@@ -96,6 +97,6 @@ let movieStar = getParameterByName("movieStar");
 jQuery.ajax({
     dataType: "json", // Setting return data type
     method: "GET", // Setting request method
-    url: "api/movieList?movieTitle=" + movieTitle + "&movieYear=" + movieYear + "&movieDirector=" + movieDirector + "&movieStar=" + movieStar, // Setting request url, which is mapped by MovieListServlet in MovieListServlet.java
+    url: "api/movieList?movieTitle=" + movieTitle + "&movieYear=" + movieYear + "&movieDirector=" + movieDirector + "&movieStar=" + movieStar + "&movieGenre=" + movieGenre, // Setting request url, which is mapped by MovieListServlet in MovieListServlet.java
     success: (resultData) => handleMovieResult(resultData), // Setting callback function to handle data returned successfully by the MovieListServlet
 });
