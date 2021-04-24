@@ -3,3 +3,22 @@
   text-decoration: underline;
   padding: 50px 0px 20px 0px;
 }
+
+.center-table {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.center-table tr th {
+  padding: 10px;
+}
+
+.center-table tr th a {
+  color: #30475e;
+  text-decoration: none;
+}
+
+.center-table tr th a:hover {
+  color: #f05454;
+  text-decoration: underline;
+}

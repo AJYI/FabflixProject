@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="browse.css" />
+    <link rel="stylesheet" href="styles.css" />
     <script
       src="https://kit.fontawesome.com/36cadc13cf.js"
       crossorigin="anonymous"
@@ -24,9 +24,9 @@
         <li class="search-bar">
           <form action="movieList.html" method="GET">
             <input
-                    type="search"
-                    placeholder="Explore Movies"
-                    name="movieTitle"
+              type="search"
+              placeholder="Explore Movies"
+              name="movieTitle"
             />
             <button type="submit"><i class="fas fa-search"></i></button>
           </form>
@@ -36,11 +36,103 @@
     <main>
       <div>
         <h1 class="title">Browse by Movie Title</h1>
+        <div class="movie-title-numbered">
+          <table class="center-table">
+            <tr>
+              <th><a href="movieList.html?movieTitle=0">0</a></th>
+              <th><a href="movieList.html?movieTitle=1">1</a></th>
+              <th><a href="movieList.html?movieTitle=2">2</a></th>
+              <th><a href="movieList.html?movieTitle=3">3</a></th>
+              <th><a href="movieList.html?movieTitle=4">4</a></th>
+              <th><a href="movieList.html?movieTitle=5">5</a></th>
+              <th><a href="movieList.html?movieTitle=6">6</a></th>
+              <th><a href="movieList.html?movieTitle=7">7</a></th>
+              <th><a href="movieList.html?movieTitle=8">0</a></th>
+              <th><a href="movieList.html?movieTitle=9">9</a></th>
+            </tr>
+          </table>
+
+          <table class="center-table">
+            <tr>
+              <th><a href="movieList.html?movieTitle=a">a</a></th>
+              <th><a href="movieList.html?movieTitle=b">b</a></th>
+              <th><a href="movieList.html?movieTitle=c">c</a></th>
+              <th><a href="movieList.html?movieTitle=d">d</a></th>
+              <th><a href="movieList.html?movieTitle=e">e</a></th>
+              <th><a href="movieList.html?movieTitle=f">f</a></th>
+              <th><a href="movieList.html?movieTitle=g">g</a></th>
+              <th><a href="movieList.html?movieTitle=h">h</a></th>
+              <th><a href="movieList.html?movieTitle=i">i</a></th>
+            </tr>
+            <tr>
+              <th><a href="movieList.html?movieTitle=j">j</a></th>
+              <th><a href="movieList.html?movieTitle=k">k</a></th>
+              <th><a href="movieList.html?movieTitle=l">l</a></th>
+              <th><a href="movieList.html?movieTitle=m">m</a></th>
+              <th><a href="movieList.html?movieTitle=n">n</a></th>
+              <th><a href="movieList.html?movieTitle=o">o</a></th>
+              <th><a href="movieList.html?movieTitle=p">p</a></th>
+              <th><a href="movieList.html?movieTitle=q">q</a></th>
+              <th><a href="movieList.html?movieTitle=r">r</a></th>
+            </tr>
+            <tr>
+              <th><a href="movieList.html?movieTitle=s">s</a></th>
+              <th><a href="movieList.html?movieTitle=t">t</a></th>
+              <th><a href="movieList.html?movieTitle=u">u</a></th>
+              <th><a href="movieList.html?movieTitle=v">v</a></th>
+              <th><a href="movieList.html?movieTitle=w">w</a></th>
+              <th><a href="movieList.html?movieTitle=x">x</a></th>
+              <th><a href="movieList.html?movieTitle=y">y</a></th>
+              <th><a href="movieList.html?movieTitle=z">z</a></th>
+              <th><a href="movieList.html?movieTitle=*">*</a></th>
+            </tr>
+          </table>
+        </div>
       </div>
 
       <hr />
+
       <div>
         <h1 class="title">Browse by Movie Genre</h1>
+
+        <div class="movie-genre-table">
+          <!-- Id "star_table" is useful for jQuery to find the html element with id, class here is mapping to Bootstrap defined class CSS -->
+          <table class="center-table">
+            <!-- Create a table header -->
+            <tr>
+              <!-- Titles of each column-->
+              <th><a href="">Action</a></th>
+              <th><a href="">Adult</a></th>
+              <th><a href="">Adventure</a></th>
+              <th><a href="">Animation</a></th>
+              <th><a href="">Biography</a></th>
+              <th><a href="">Comedy</a></th>
+            </tr>
+            <tr>
+              <th><a href="">Crime</a></th>
+              <th><a href="">Documentary</a></th>
+              <th><a href="">Drama</a></th>
+              <th><a href="">Family</a></th>
+              <th><a href="">Fantasy</a></th>
+              <th><a href="">History</a></th>
+            </tr>
+            <tr>
+              <th><a href="">Horror</a></th>
+              <th><a href="">Music</a></th>
+              <th><a href="">Musical</a></th>
+              <th><a href="">Mystery</a></th>
+              <th><a href="">Reality-TV</a></th>
+              <th><a href="">Romance</a></th>
+            </tr>
+            <tr>
+              <th><a href="">Sci-Fi</a></th>
+              <th><a href="">Sport</a></th>
+              <th><a href="">Thriller</a></th>
+              <th><a href="">War</a></th>
+              <th><a href="">Western</a></th>
+            </tr>
+          </table>
+        </div>
       </div>
     </main>
   </body>
