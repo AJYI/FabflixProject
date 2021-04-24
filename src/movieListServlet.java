@@ -49,8 +49,9 @@ public class movieListServlet extends HttpServlet {
             String movieYear = request.getParameter("movieYear");
             String movieDirector = request.getParameter("movieDirector");
             String movieStar = request.getParameter("movieStar");
+            String movieGen = request.getParameter("movieGenre");
 
-            System.out.println("Movie Title: " + movieTitle + " Movie Director: " + movieDirector + " Movie Star: " + movieStar + " Movie Year: " + movieYear);
+            System.out.println("Movie Title: " + movieTitle + " Movie Director: " + movieDirector + " Movie Star: " + movieStar + " Movie Year: " + movieYear + "Movie Genre: " + movieGen);
 
             PreparedStatement statement;
 
@@ -62,7 +63,7 @@ public class movieListServlet extends HttpServlet {
                 // prepare query
                 String query = "select m.title as 'title', m.id as 'movieID', m.year as 'year', m.director as 'director', r.rating as 'rating',\n" +
                         "substring_index(group_concat(distinct g.name), ',', 3) 'genres',\n" +
-                        "substring_index(group_concat(s.name order by s.id), ',', 3) 'actors',\n" +
+                        "substring_index(group_concat(distinct s.name order by s.id), ',', 3) 'actors',\n" +
                         "substring_index(group_concat(distinct s.id), ',', 3) 'starId'\n" +
                         "from movies m\n" +
                         "left join ratings r on r.movieId = m.id\n" +
@@ -72,7 +73,7 @@ public class movieListServlet extends HttpServlet {
                         "inner join stars s on s.id = sim.starId\n" +
                         "where m.title like ? AND m.year like ? AND m.director like ?\n" +
                         "group by m.title, r.rating\n" +
-                        "having actors like ?\n" +
+                        "having actors like ? AND genres like ?\n" +
                         "order by r.rating desc, m.title asc";
 
                 // Declare our statement
@@ -82,6 +83,7 @@ public class movieListServlet extends HttpServlet {
                 statement.setString(2, movieYear + "%");
                 statement.setString(3,  "%"+ movieDirector + "%");
                 statement.setString(4, "%"+ movieStar + "%");
+                statement.setString(5, "%" + movieGen + "%");
             }
             else{
                 // prepare query
