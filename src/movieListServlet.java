@@ -64,28 +64,30 @@ public class movieListServlet extends HttpServlet {
                 movieYear = new String();
             }
 
-            System.out.println(movieTitle);
             //System.out.println(movieTitle + " " + movieDirector + " " + movieStar + " " + movieYear);
 
             // prepare query
-            String query = "SELECT m.title as 'title', m.id as 'movieId', m.year as 'year', m.director as 'director', r.rating as 'rating',\n" +
-                    "        substring_index(group_concat(distinct g.name), ',', 3) 'genres',\n" +
-                    "        substring_index(group_concat(distinct s.name), ',', 3) 'actors',\n" +
-                    "        substring_index(group_concat(distinct s.id order by s.name), ',', 3) 'starId'\n" +
-                    "        FROM (SELECT r.rating, r.movieId from ratings r order by r.rating) as r,\n" +
-                    "        movies m, genres_in_movies gim, genres g, stars_in_movies sim, stars s\n" +
-                    "        where r.movieId = m.id AND m.id = gim.movieId AND gim.genreId = g.id AND m.id = sim.movieId AND sim.starID = s.id\n" +
-                    "        AND m.title like ? AND m.director like ? AND m.year like ? AND s.name like ? \n" +
-                    "        group by m.title\n" +
-                    "        order by r.rating desc, m.title asc\n";
+            String query = "select m.title as 'title', m.id as 'movieID', m.year as 'year', m.director as 'director', r.rating as 'rating',\n" +
+                    "substring_index(group_concat(distinct g.name), ',', 3) 'genres',\n" +
+                    "substring_index(group_concat(distinct s.name), ',', 3) 'actors',\n" +
+                    "substring_index(group_concat(distinct s.id order by s.name), ',', 3) 'starId'\n" +
+                    "from movies m\n" +
+                    "left join ratings r on r.movieId = m.id\n" +
+                    "inner join genres_in_movies gim on gim.movieId = m.id\n" +
+                    "inner join stars_in_movies sim on sim.movieId = m.id\n" +
+                    "inner join genres g on g.id = gim.genreId\n" +
+                    "inner join stars s on s.id = sim.starId\n" +
+                    "where m.title like ? AND m.director like ? AND m.year like ? and s.name like ?\n" +
+                    "group by m.title, r.rating\n" +
+                    "order by r.rating desc\n";
 
             // Declare our statement
             PreparedStatement statement = conn.prepareStatement(query);
 
-            statement.setString(1, "%" + movieTitle + "%");
-            statement.setString(2, "%"+ movieDirector + "%");
-            statement.setString(3, "%" + movieStar + "%");
-            statement.setString(4, "%" + movieYear + "%");
+            statement.setString(1,  movieTitle + "%");
+            statement.setString(2, movieDirector + "%");
+            statement.setString(3, movieStar + "%");
+            statement.setString(4, movieYear + "%");
 
             // Perform the query
             ResultSet rs = statement.executeQuery();
