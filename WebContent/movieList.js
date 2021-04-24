@@ -17,7 +17,7 @@ function getParameterByName(target) {
     // Ues regular expression to find matched parameter value
     let regex = new RegExp("[?&]" + target + "(=([^&#]*)|&|#|$)"),
         results = regex.exec(url);
-    if (!results) return null;
+    if (!results) return ""; // Changed from null
     if (!results[2]) return "";
 
     // Return the decoded parameter value
@@ -86,11 +86,16 @@ function handleMovieResult(resultData) {
  */
 // Get id from URL
 let movieTitle = getParameterByName("movieTitle");
+let movieYear = getParameterByName("movieYear");
+let movieDirector = getParameterByName("movieDirector");
+let movieStar = getParameterByName("movieStar");
+
+
 
 // Makes the HTTP GET request and registers on success callback function handleMovieResult
 jQuery.ajax({
     dataType: "json", // Setting return data type
     method: "GET", // Setting request method
-    url: "api/movieList?movieTitle=" + movieTitle, // Setting request url, which is mapped by MovieListServlet in MovieListServlet.java
+    url: "api/movieList?movieTitle=" + movieTitle + "&movieYear=" + movieYear + "&movieDirector=" + movieDirector + "&movieStar=" + movieStar, // Setting request url, which is mapped by MovieListServlet in MovieListServlet.java
     success: (resultData) => handleMovieResult(resultData), // Setting callback function to handle data returned successfully by the MovieListServlet
 });

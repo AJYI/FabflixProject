@@ -46,23 +46,9 @@ public class movieListServlet extends HttpServlet {
 
             // Getting the parameters
             String movieTitle = request.getParameter("movieTitle");
+            String movieYear = request.getParameter("movieYear");
             String movieDirector = request.getParameter("movieDirector");
             String movieStar = request.getParameter("movieStar");
-            String movieYear = request.getParameter("movieYear");
-
-            if (movieTitle == null){
-                movieTitle = new String();
-            }
-            if (movieDirector == null){
-                movieDirector = new String();
-            }
-            if (movieStar == null){
-                movieStar = new String();
-            }
-
-            if (movieYear == null){
-                movieYear = new String();
-            }
 
             //System.out.println(movieTitle + " " + movieDirector + " " + movieStar + " " + movieYear);
 
@@ -77,7 +63,7 @@ public class movieListServlet extends HttpServlet {
                     "inner join stars_in_movies sim on sim.movieId = m.id\n" +
                     "inner join genres g on g.id = gim.genreId\n" +
                     "inner join stars s on s.id = sim.starId\n" +
-                    "where m.title like ? AND m.director like ? AND m.year like ? and s.name like ?\n" +
+                    "where m.title like ?  AND m.year like ? AND m.director like ? and s.name like ?\n" +
                     "group by m.title, r.rating\n" +
                     "order by r.rating desc\n";
 
@@ -85,9 +71,9 @@ public class movieListServlet extends HttpServlet {
             PreparedStatement statement = conn.prepareStatement(query);
 
             statement.setString(1,  movieTitle + "%");
-            statement.setString(2, movieDirector + "%");
-            statement.setString(3, movieStar + "%");
-            statement.setString(4, movieYear + "%");
+            statement.setString(2, movieYear + "%");
+            statement.setString(3,  "% "+ movieDirector + "%");
+            statement.setString(4, "% "+ movieStar + "%");
 
             // Perform the query
             ResultSet rs = statement.executeQuery();
