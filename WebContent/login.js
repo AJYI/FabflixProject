@@ -13,7 +13,7 @@ function handleLoginResult(resultDataString) {
 
     // If login succeeds, it will redirect the user to index.html
     if (resultDataJson["status"] === "success") {
-        window.location.replace("mainPage.html");
+        window.location.replace("index.html");
     } else {
         // If login fails, the web page will display
         // error messages on <div> with id "login_error_message"
@@ -36,7 +36,6 @@ function submitLoginForm(formSubmitEvent) {
      * event handler when the event is triggered.
      */
     formSubmitEvent.preventDefault();
-    console.log("CHECK");
     $.ajax(
         "login", {
             method: "POST",
