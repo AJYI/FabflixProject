@@ -50,7 +50,7 @@ public class movieListServlet extends HttpServlet {
             String movieDirector = request.getParameter("movieDirector");
             String movieStar = request.getParameter("movieStar");
 
-            System.out.println("Movie Title: " + movieTitle + " Movie Director: " + movieDirector + " Movie Star: " + movieStar + " Movie Director: " + movieYear);
+            System.out.println("Movie Title: " + movieTitle + " Movie Director: " + movieDirector + " Movie Star: " + movieStar + " Movie Year: " + movieYear);
 
             PreparedStatement statement;
 
@@ -58,20 +58,22 @@ public class movieListServlet extends HttpServlet {
             Only String (VARCHAR) fields are required to support substring matching. Thus, year should not support it.
              */
             if(movieYear.equals(new String())){
+                System.out.println("inside first");
                 // prepare query
                 String query = "select m.title as 'title', m.id as 'movieID', m.year as 'year', m.director as 'director', r.rating as 'rating',\n" +
                         "substring_index(group_concat(distinct g.name), ',', 3) 'genres',\n" +
-                        "substring_index(group_concat(distinct s.name), ',', 3) 'actors',\n" +
-                        "substring_index(group_concat(distinct s.id order by s.name), ',', 3) 'starId'\n" +
+                        "substring_index(group_concat(s.name order by s.id), ',', 3) 'actors',\n" +
+                        "substring_index(group_concat(distinct s.id), ',', 3) 'starId'\n" +
                         "from movies m\n" +
                         "left join ratings r on r.movieId = m.id\n" +
                         "inner join genres_in_movies gim on gim.movieId = m.id\n" +
                         "inner join stars_in_movies sim on sim.movieId = m.id\n" +
                         "inner join genres g on g.id = gim.genreId\n" +
                         "inner join stars s on s.id = sim.starId\n" +
-                        "where m.title like ?  AND m.year like ? AND m.director like ? and s.name like ?\n" +
+                        "where m.title like ? AND m.year like ? AND m.director like ?\n" +
                         "group by m.title, r.rating\n" +
-                        "order by r.rating desc\n";
+                        "having actors like ?\n" +
+                        "order by r.rating desc, m.title asc";
 
                 // Declare our statement
                 statement = conn.prepareStatement(query);
@@ -85,17 +87,18 @@ public class movieListServlet extends HttpServlet {
                 // prepare query
                 String query = "select m.title as 'title', m.id as 'movieID', m.year as 'year', m.director as 'director', r.rating as 'rating',\n" +
                         "substring_index(group_concat(distinct g.name), ',', 3) 'genres',\n" +
-                        "substring_index(group_concat(distinct s.name), ',', 3) 'actors',\n" +
-                        "substring_index(group_concat(distinct s.id order by s.name), ',', 3) 'starId'\n" +
+                        "substring_index(group_concat(s.name order by s.id), ',', 3) 'actors',\n" +
+                        "substring_index(group_concat(distinct s.id), ',', 3) 'starId'\n" +
                         "from movies m\n" +
                         "left join ratings r on r.movieId = m.id\n" +
                         "inner join genres_in_movies gim on gim.movieId = m.id\n" +
                         "inner join stars_in_movies sim on sim.movieId = m.id\n" +
                         "inner join genres g on g.id = gim.genreId\n" +
                         "inner join stars s on s.id = sim.starId\n" +
-                        "where m.title like ?  AND m.year = ? AND m.director like ? and s.name like ?\n" +
+                        "where m.title like ? AND m.year = ? AND m.director like ?\n" +
                         "group by m.title, r.rating\n" +
-                        "order by r.rating desc\n";
+                        "having actors like ?\n" +
+                        "order by r.rating desc, m.title asc";
 
                 // Declare our statement
                 statement = conn.prepareStatement(query);
@@ -140,7 +143,7 @@ public class movieListServlet extends HttpServlet {
             rs.close();
             statement.close();
 
-            //System.out.println(jsonArray.toString());
+            System.out.println(jsonArray.toString());
             // write JSON string to output
             out.write(jsonArray.toString());
             // set response status to 200 (OK)
