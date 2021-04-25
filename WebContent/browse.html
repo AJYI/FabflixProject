@@ -13,27 +13,27 @@
     <title>Fablix Browse</title>
   </head>
   <body>
-  <nav class="navbar">
-    <ul>
-      <li class="logo">FabFlix</li>
-      <div class="menu-items">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="browse.html">Browse</a></li>
-        <li><a href="advancedSearch.html">Advanced Search</a></li>
-        <li><a href="shoppingCart.html">Checkout</a></li>
-      </div>
-      <li class="search-bar">
-        <form action="movieList.html" method="GET">
-          <input
-                  type="search"
-                  placeholder="Explore Movies"
-                  name="movieTitle"
-          />
-          <button type="submit"><i class="fas fa-search"></i></button>
-        </form>
-      </li>
-    </ul>
-  </nav>
+    <nav class="navbar">
+      <ul>
+        <li class="logo">FabFlix</li>
+        <div class="menu-items">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="browse.html">Browse</a></li>
+          <li><a href="advancedSearch.html">Advanced Search</a></li>
+          <li><a href="shoppingCart.html">Checkout</a></li>
+        </div>
+        <li class="search-bar">
+          <form action="movieList.html" method="GET">
+            <input
+              type="search"
+              placeholder="Explore Movies"
+              name="movieTitle"
+            />
+            <button type="submit"><i class="fas fa-search"></i></button>
+          </form>
+        </li>
+      </ul>
+    </nav>
 
     <main>
       <div>
@@ -103,35 +103,150 @@
             <!-- Create a table header -->
             <tr>
               <!-- Titles of each column-->
-              <th><a href="movieList.html?movieTitle=&movieYear=&movieDirector=&movieStar=&movieGenre=Action">Action</a></th>
-              <th><a href="movieList.html?movieTitle=&movieYear=&movieDirector=&movieStar=&movieGenre=Adult">Adult</a></th>
-              <th><a href="movieList.html?movieTitle=&movieYear=&movieDirector=&movieStar=&movieGenre=Adventure">Adventure</a></th>
-              <th><a href="movieList.html?movieTitle=&movieYear=&movieDirector=&movieStar=&movieGenre=Animation">Animation</a></th>
-              <th><a href="movieList.html?movieTitle=&movieYear=&movieDirector=&movieStar=&movieGenre=Biography">Biography</a></th>
-              <th><a href="movieList.html?movieTitle=&movieYear=&movieDirector=&movieStar=&movieGenre=Comedy">Comedy</a></th>
+              <th>
+                <a
+                  href="movieList.html?movieTitle=&movieYear=&movieDirector=&movieStar=&movieGenre=Action"
+                  >Action</a
+                >
+              </th>
+              <th>
+                <a
+                  href="movieList.html?movieTitle=&movieYear=&movieDirector=&movieStar=&movieGenre=Adult"
+                  >Adult</a
+                >
+              </th>
+              <th>
+                <a
+                  href="movieList.html?movieTitle=&movieYear=&movieDirector=&movieStar=&movieGenre=Adventure"
+                  >Adventure</a
+                >
+              </th>
+              <th>
+                <a
+                  href="movieList.html?movieTitle=&movieYear=&movieDirector=&movieStar=&movieGenre=Animation"
+                  >Animation</a
+                >
+              </th>
+              <th>
+                <a
+                  href="movieList.html?movieTitle=&movieYear=&movieDirector=&movieStar=&movieGenre=Biography"
+                  >Biography</a
+                >
+              </th>
+              <th>
+                <a
+                  href="movieList.html?movieTitle=&movieYear=&movieDirector=&movieStar=&movieGenre=Comedy"
+                  >Comedy</a
+                >
+              </th>
             </tr>
             <tr>
-              <th><a href="movieList.html?movieTitle=&movieYear=&movieDirector=&movieStar=&movieGenre=Crime">Crime</a></th>
-              <th><a href="movieList.html?movieTitle=&movieYear=&movieDirector=&movieStar=&movieGenre=Crime">Documentary</a></th>
-              <th><a href="movieList.html?movieTitle=&movieYear=&movieDirector=&movieStar=&movieGenre=Drama">Drama</a></th>
-              <th><a href="movieList.html?movieTitle=&movieYear=&movieDirector=&movieStar=&movieGenre=Family">Family</a></th>
-              <th><a href="movieList.html?movieTitle=&movieYear=&movieDirector=&movieStar=&movieGenre=Fantasy">Fantasy</a></th>
-              <th><a href="movieList.html?movieTitle=&movieYear=&movieDirector=&movieStar=&movieGenre=History">History</a></th>
+              <th>
+                <a
+                  href="movieList.html?movieTitle=&movieYear=&movieDirector=&movieStar=&movieGenre=Crime"
+                  >Crime</a
+                >
+              </th>
+              <th>
+                <a
+                  href="movieList.html?movieTitle=&movieYear=&movieDirector=&movieStar=&movieGenre=Crime"
+                  >Documentary</a
+                >
+              </th>
+              <th>
+                <a
+                  href="movieList.html?movieTitle=&movieYear=&movieDirector=&movieStar=&movieGenre=Drama"
+                  >Drama</a
+                >
+              </th>
+              <th>
+                <a
+                  href="movieList.html?movieTitle=&movieYear=&movieDirector=&movieStar=&movieGenre=Family"
+                  >Family</a
+                >
+              </th>
+              <th>
+                <a
+                  href="movieList.html?movieTitle=&movieYear=&movieDirector=&movieStar=&movieGenre=Fantasy"
+                  >Fantasy</a
+                >
+              </th>
+              <th>
+                <a
+                  href="movieList.html?movieTitle=&movieYear=&movieDirector=&movieStar=&movieGenre=History"
+                  >History</a
+                >
+              </th>
             </tr>
             <tr>
-              <th><a href="movieList.html?movieTitle=&movieYear=&movieDirector=&movieStar=&movieGenre=Horror">Horror</a></th>
-              <th><a href="movieList.html?movieTitle=&movieYear=&movieDirector=&movieStar=&movieGenre=Music">Music</a></th>
-              <th><a href="movieList.html?movieTitle=&movieYear=&movieDirector=&movieStar=&movieGenre=Musical">Musical</a></th>
-              <th><a href="movieList.html?movieTitle=&movieYear=&movieDirector=&movieStar=&movieGenre=Mystery">Mystery</a></th>
-              <th><a href="movieList.html?movieTitle=&movieYear=&movieDirector=&movieStar=&movieGenre=Reality">Reality-TV</a></th>
-              <th><a href="movieList.html?movieTitle=&movieYear=&movieDirector=&movieStar=&movieGenre=Romance">Romance</a></th>
+              <th>
+                <a
+                  href="movieList.html?movieTitle=&movieYear=&movieDirector=&movieStar=&movieGenre=Horror"
+                  >Horror</a
+                >
+              </th>
+              <th>
+                <a
+                  href="movieList.html?movieTitle=&movieYear=&movieDirector=&movieStar=&movieGenre=Music"
+                  >Music</a
+                >
+              </th>
+              <th>
+                <a
+                  href="movieList.html?movieTitle=&movieYear=&movieDirector=&movieStar=&movieGenre=Musical"
+                  >Musical</a
+                >
+              </th>
+              <th>
+                <a
+                  href="movieList.html?movieTitle=&movieYear=&movieDirector=&movieStar=&movieGenre=Mystery"
+                  >Mystery</a
+                >
+              </th>
+              <th>
+                <a
+                  href="movieList.html?movieTitle=&movieYear=&movieDirector=&movieStar=&movieGenre=Reality"
+                  >Reality-TV</a
+                >
+              </th>
+              <th>
+                <a
+                  href="movieList.html?movieTitle=&movieYear=&movieDirector=&movieStar=&movieGenre=Romance"
+                  >Romance</a
+                >
+              </th>
             </tr>
             <tr>
-              <th><a href="movieList.html?movieTitle=&movieYear=&movieDirector=&movieStar=&movieGenre=Sci-Fi">Sci-Fi</a></th>
-              <th><a href="movieList.html?movieTitle=&movieYear=&movieDirector=&movieStar=&movieGenre=Sport">Sport</a></th>
-              <th><a href="movieList.html?movieTitle=&movieYear=&movieDirector=&movieStar=&movieGenre=Thriller">Thriller</a></th>
-              <th><a href="movieList.html?movieTitle=&movieYear=&movieDirector=&movieStar=&movieGenre=War">War</a></th>
-              <th><a href="movieList.html?movieTitle=&movieYear=&movieDirector=&movieStar=&movieGenre=Western">Western</a></th>
+              <th>
+                <a
+                  href="movieList.html?movieTitle=&movieYear=&movieDirector=&movieStar=&movieGenre=Sci-Fi"
+                  >Sci-Fi</a
+                >
+              </th>
+              <th>
+                <a
+                  href="movieList.html?movieTitle=&movieYear=&movieDirector=&movieStar=&movieGenre=Sport"
+                  >Sport</a
+                >
+              </th>
+              <th>
+                <a
+                  href="movieList.html?movieTitle=&movieYear=&movieDirector=&movieStar=&movieGenre=Thriller"
+                  >Thriller</a
+                >
+              </th>
+              <th>
+                <a
+                  href="movieList.html?movieTitle=&movieYear=&movieDirector=&movieStar=&movieGenre=War"
+                  >War</a
+                >
+              </th>
+              <th>
+                <a
+                  href="movieList.html?movieTitle=&movieYear=&movieDirector=&movieStar=&movieGenre=Western"
+                  >Western</a
+                >
+              </th>
             </tr>
           </table>
         </div>
