@@ -10,7 +10,8 @@
 }
 
 .center-table tr th {
-  padding: 10px;
+  text-align: center;
+  padding: 30px;
 }
 
 .center-table tr th a {
