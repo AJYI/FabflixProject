@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="index.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Movie List</title>
 </head>
 <body>
 <nav class="navbar">
@@ -16,11 +16,12 @@
             <li><a href="index.html">Home</a></li>
             <li><a href="browse.html">Browse</a></li>
             <li><a href="advancedSearch.html">Advanced Search</a></li>
+            <li><a href="shoppingCart.html">Checkout</a></li>
         </div>
         <li class="search-bar">
             <form action="movieList.html" method="GET">
                 <input
-                        type="TEXT"
+                        type="search"
                         placeholder="Explore Movies"
                         name="movieTitle"
                 />
@@ -46,6 +47,7 @@
                 <th>Genres</th>
                 <th>Actors</th>
                 <th>Rating</th>
+                <th>Add To Cart</th>
             </tr>
             </thead>
             <!-- Table body is left empty here, will be populated with the data retrieved with index.js -->

@@ -21,7 +21,30 @@
     <title id="star_title_page"></title>
   </head>
   <body>
-    <p id="back_to_movie_list"></p>
+  <nav class="navbar">
+    <ul>
+      <li class="logo">FabFlix</li>
+      <div class="menu-items">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="browse.html">Browse</a></li>
+        <li><a href="advancedSearch.html">Advanced Search</a></li>
+        <li><a href="shoppingCart.html">Checkout</a></li>
+      </div>
+      <li class="search-bar">
+        <form action="movieList.html" method="GET">
+          <input
+                  type="search"
+                  placeholder="Explore Movies"
+                  name="movieTitle"
+          />
+          <button type="submit"><i class="fas fa-search"></i></button>
+        </form>
+      </li>
+    </ul>
+  </nav>
+
+
+  <p id="back_to_movie_list"></p>
 
     <h1 id="star_name" style="text-align: center"></h1>
 
