@@ -1,12 +1,25 @@
-.loginIntro {
+.loginIntro h1 {
   margin-left: auto;
   margin-right: auto;
   text-align: center;
 }
 
-.credentialsCenter {
-  width: 200px;
-  position: absolute;
-  left: 50%;
-  margin-left: -100px;
+.loginIntro p {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.credentialCenter {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.credentialCenter tr td {
+  padding-left: auto;
+  padding-bottom: auto;
+}
+
+.button {
+  text-align: center;
 }

@@ -1,48 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>FabFlix - Log in</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="login.css" />
   </head>
 
   <body>
-  <nav class="navbar">
-    <ul>
-      <li class="logo">FabFlix</li>
-    </ul>
-  </nav>
+    <nav class="navbar">
+      <ul>
+        <li class="logo">FabFlix</li>
+      </ul>
+    </nav>
 
-  <main>
-    <div class="loginIntro">
-      <h1>Login</h1>
-      <p id="login_error_message"></p>
-    </div>
+    <main>
+      <div class="loginIntro">
+        <h1>Login</h1>
+        <p id="login_error_message"></p>
+      </div>
 
-    <div class="credentialsCenter">
-      <!--    Gotta change to post soon because of security-->
-      <form id="login_form" method="post" action="#">
-        <p>
-          <label for="email">Enter Email</label>
-          <input type="text" name="email" id="email" placeholder="Email" />
-        </p>
-
-        <p>
-          <label for="password">Enter Password</label>
-          <input
+      <div>
+        <!--    Gotta change to post soon because of security-->
+        <form id="login_form" method="post" action="#">
+          <table class="credentialCenter">
+            <tr>
+              <td>Enter Email:</td>
+              <td>
+                <input
+                  type="text"
+                  name="email"
+                  id="email"
+                  placeholder="Email"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>Enter Password:</td>
+              <td>
+                <input
                   type="password"
                   name="pass"
                   id="password"
                   placeholder="Password"
-          />
-        </p>
-        <p>
-          <input type="submit" value="Log In" />
-        </p>
-      </form>
-    </div>
-  </main>
+                />
+              </td>
+            </tr>
+          </table>
+          <div class="button">
+            <input type="submit" value="Log In" class="button" />
+          </div>
+        </form>
+      </div>
+    </main>
 
     <!-- include jQuery-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
