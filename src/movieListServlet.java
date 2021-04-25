@@ -43,6 +43,7 @@ public class movieListServlet extends HttpServlet {
 
         // Get a connection from dataSource and let resource manager close the connection after usage.
         try (Connection conn = dataSource.getConnection()) {
+            System.out.println("Inside first");
 
             // Getting the parameters
             String movieTitle = request.getParameter("movieTitle");
@@ -55,12 +56,8 @@ public class movieListServlet extends HttpServlet {
 
             PreparedStatement statement;
 
-            /*
-            Only String (VARCHAR) fields are required to support substring matching. Thus, year should not support it.
-             */
-            if(movieYear.equals(new String())){
-                System.out.println("inside first");
-                // prepare query
+            // For the condition when the user browses a movie with *, means things that are not A-Z and 0-9
+            if(movieTitle.equals("*")){
                 String query = "select m.title as 'title', m.id as 'movieID', m.year as 'year', m.director as 'director', r.rating as 'rating',\n" +
                         "substring_index(group_concat(distinct g.name), ',', 3) 'genres',\n" +
                         "substring_index(group_concat(distinct s.name order by s.id), ',', 3) 'actors',\n" +
@@ -71,21 +68,14 @@ public class movieListServlet extends HttpServlet {
                         "inner join stars_in_movies sim on sim.movieId = m.id\n" +
                         "inner join genres g on g.id = gim.genreId\n" +
                         "inner join stars s on s.id = sim.starId\n" +
-                        "where m.title like ? AND m.year like ? AND m.director like ?\n" +
+                        "where m.title regexp '^[^a-zA-Z0-9]'\n" +
                         "group by m.title, r.rating\n" +
-                        "having actors like ? AND genres like ?\n" +
                         "order by r.rating desc, m.title asc";
-
-                // Declare our statement
                 statement = conn.prepareStatement(query);
-
-                statement.setString(1,  movieTitle + "%");
-                statement.setString(2, movieYear + "%");
-                statement.setString(3,  "%"+ movieDirector + "%");
-                statement.setString(4, "%"+ movieStar + "%");
-                statement.setString(5, "%" + movieGen + "%");
             }
-            else{
+            // Case when the movie year is inputted
+            else if(!movieYear.equals(new String())){
+                System.out.println("inside 2nd");
                 // prepare query
                 String query = "select m.title as 'title', m.id as 'movieID', m.year as 'year', m.director as 'director', r.rating as 'rating',\n" +
                         "substring_index(group_concat(distinct g.name), ',', 3) 'genres',\n" +
@@ -111,6 +101,36 @@ public class movieListServlet extends HttpServlet {
                 statement.setString(4, "%"+ movieStar + "%");
             }
 
+            /*
+            Else general case where there are no constraints so far
+            Only String (VARCHAR) fields are required to support substring matching. Thus, year should not support it.
+             */
+            else {
+                System.out.println("inside third");
+                // prepare query
+                String query = "select m.title as 'title', m.id as 'movieID', m.year as 'year', m.director as 'director', r.rating as 'rating',\n" +
+                        "substring_index(group_concat(distinct g.name), ',', 3) 'genres',\n" +
+                        "substring_index(group_concat(distinct s.name order by s.id), ',', 3) 'actors',\n" +
+                        "substring_index(group_concat(distinct s.id), ',', 3) 'starId'\n" +
+                        "from movies m\n" +
+                        "left join ratings r on r.movieId = m.id\n" +
+                        "inner join genres_in_movies gim on gim.movieId = m.id\n" +
+                        "inner join stars_in_movies sim on sim.movieId = m.id\n" +
+                        "inner join genres g on g.id = gim.genreId\n" +
+                        "inner join stars s on s.id = sim.starId\n" +
+                        "where m.title like ? AND m.year like ? AND m.director like ?\n" +
+                        "group by m.title, r.rating\n" +
+                        "having actors like ? AND genres like ?\n" +
+                        "order by r.rating desc, m.title asc";
+
+                // Declare our statement
+                statement = conn.prepareStatement(query);
+                statement.setString(1,  movieTitle + "%");
+                statement.setString(2, movieYear + "%");
+                statement.setString(3,  "%"+ movieDirector + "%");
+                statement.setString(4, "%"+ movieStar + "%");
+                statement.setString(5, "%" + movieGen + "%");
+            }
 
             // Perform the query
             ResultSet rs = statement.executeQuery();
@@ -145,7 +165,9 @@ public class movieListServlet extends HttpServlet {
             rs.close();
             statement.close();
 
+            // For debugging purposes
             System.out.println(jsonArray.toString());
+
             // write JSON string to output
             out.write(jsonArray.toString());
             // set response status to 200 (OK)
