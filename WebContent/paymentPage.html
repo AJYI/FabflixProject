@@ -34,7 +34,7 @@
 <h2 style="text-align: center">Please Enter Your Information:</h2>
 
   <div class="center" style="text-align: center">
-    <form id="login_form" method="post" action="#">
+    <form id="credit_card_form" method="post" action="#">
       <table class="center">
         <tr>
           <td>First Name: </td>
@@ -80,8 +80,14 @@
             />
           </td>
       </table>
+      <div class="button">
+        <input type="submit" value="Submit" class="button" />
+      </div>
     </form>
+
+    <div id="cc_error_message"></div>
   </div>
 
+<script src="/api/payment"></script>
 </body>
 </html>
