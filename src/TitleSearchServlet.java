@@ -77,7 +77,6 @@ public class TitleSearchServlet extends HttpServlet {
                 statement.setString(1,  titleStart + "%");
             }
 
-
             // Perform the query
             ResultSet rs = statement.executeQuery();
 
