@@ -27,11 +27,11 @@ function handleMovieResult(resultData) {
     rowHTML +=
       "<th>" +
       // Adding a link to the movie
-      '<a href="movie.html?id=' +
-      resultData[i]["movie_id"] +
-      '">' +
+      //'<a href="movie.html?id=' +
+      //resultData[i]["movie_id"] +
+      //'">' +
       resultData[i]["movie_title"] +
-      "</a>" +
+      //"</a>" +
       "</th>";
     rowHTML += "<th>" + resultData[i]["movie_year"] + "</th>";
     rowHTML += "<th>" + resultData[i]["movie_director"] + "</th>";
@@ -49,11 +49,11 @@ function handleMovieResult(resultData) {
       rowHTML +=
         "<p>" +
         // Adding a link to the movie
-        '<a href="star.html?id=' +
-        actorIdArr[j] +
-        '">' +
+        //'<a href="star.html?id=' +
+        //actorIdArr[j] +
+        //'">' +
         movieActorArr[j] +
-        "</a>" +
+        //"</a>" +
         "</p>";
     }
     rowHTML += "</th>";
