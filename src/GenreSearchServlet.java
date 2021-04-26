@@ -66,10 +66,10 @@ public class GenreSearchServlet extends HttpServlet {
                 if(sort1.equals("TA")){
                     System.out.println("HI I AM HERE"+ sort2);
                     if(sort2.equals("RA")){
-                        query += "order by title ASC, rating ASC\n";
+                        query += "order by title ASC, rating DESC\n";
                     }
                     else if (sort2.equals("RD")){
-                        query += "order by title ASC, rating DESC\n";
+                        query += "order by title ASC, rating ASC\n";
                     }
                     else{
                         query += "order by title ASC\n";
@@ -77,10 +77,10 @@ public class GenreSearchServlet extends HttpServlet {
                 }
                 else{
                     if(sort2.equals("RA")){
-                        query += "order by title DESC, rating ASC";
+                        query += "order by title DESC, rating DESC";
                     }
                     else if(sort2.equals("RD")){
-                        query += "order by title DESC, rating DESC";
+                        query += "order by title DESC, rating ASC";
                     }
                     else{
                         query += "order by title DESC";
@@ -104,24 +104,24 @@ public class GenreSearchServlet extends HttpServlet {
 
                 if(sort1.equals("RA")){
                     if(sort2.equals("TA")){
-                        query += "order by rating ASC, title ASC ";
+                        query += "order by rating DESC, title ASC ";
                     }
                     else if (sort2.equals("TD")){
-                        query += "order by rating ASC, title DESC";
-                    }
-                    else{
-                        query += "order by rating ASC";
-                    }
-                }
-                else{
-                    if(sort2.equals("TA")){
-                        query += "order by rating DESC, title ASC";
-                    }
-                    else if(sort2.equals("TD")){
                         query += "order by rating DESC, title DESC";
                     }
                     else{
                         query += "order by rating DESC";
+                    }
+                }
+                else{
+                    if(sort2.equals("TA")){
+                        query += "order by rating ASC, title ASC";
+                    }
+                    else if(sort2.equals("TD")){
+                        query += "order by rating ASC, title DESC";
+                    }
+                    else{
+                        query += "order by rating ASC";
                     }
                 }
 
