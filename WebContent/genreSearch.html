@@ -35,6 +35,42 @@
       <div>
         <h1>Movie List</h1>
 
+        <div class="sortingButtonsHold">
+          <table class="centerButton">
+            <tr>
+              <th>Order by:</th>
+              <th>
+                <input
+                  type="button"
+                  value="Title Asc"
+                  onclick="sortClick('TA');"
+                />
+              </th>
+              <th>
+                <input
+                  type="button"
+                  value="Title Desc"
+                  onclick="sortClick('TD');"
+                />
+              </th>
+              <th>
+                <input
+                  type="button"
+                  value="Rating Asc"
+                  onclick="sortClick('RA');"
+                />
+              </th>
+              <th>
+                <input
+                  type="button"
+                  value="Rating Desc"
+                  onclick="sortClick('RD');"
+                />
+              </th>
+            </tr>
+          </table>
+        </div>
+
         <!-- Id "star_table" is useful for jQuery to find the html element with id, class here is mapping to Bootstrap defined class CSS -->
         <table border id="movie_list_table" class="center">
           <!-- Create a table header -->
@@ -70,5 +106,6 @@
     <!-- Note the url does not contain a "/" in the beginning, which means the url is relative to current path
  otherwise the url is relative to the root path-->
     <script src="genreSearch.js"></script>
+    <script src="sorting.js"></script>
   </body>
 </html>
