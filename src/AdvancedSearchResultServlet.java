@@ -89,7 +89,7 @@ public class AdvancedSearchResultServlet extends HttpServlet {
                 statement.setString(3,  movieDirector + "%");
                 statement.setString(4,  movieYear);
             }
-            
+
             // Perform the query
             ResultSet rs = statement.executeQuery();
 
