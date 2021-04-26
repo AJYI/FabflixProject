@@ -51,9 +51,19 @@ function handleMovieResult(resultData) {
       "</th>";
     rowHTML += "<th>" + resultData[i]["movie_year"] + "</th>";
     rowHTML += "<th>" + resultData[i]["movie_director"] + "</th>";
-    rowHTML += "<th>" + resultData[i]["movie_genre"] + "</th>";
+    //rowHTML += "<th>" + resultData[i]["movie_genre"] + "</th>";
 
     // Need a way to split this
+    rowHTML += "<th>";
+    let movGen = resultData[i]["movie_genre"];
+    let movArr = movGen.split(",");
+
+    for (let j in movArr){
+      rowHTML +=
+          "<a>" +
+          '<a href="genreSearch.html?genre=' + movArr[j] + '">' + movArr[j] + "</a>" + "</p>";
+    }
+    rowHTML += "</th>";
 
     rowHTML += "<th>";
     let starIds = resultData[i]["star_id"];
@@ -73,6 +83,10 @@ function handleMovieResult(resultData) {
         "</p>";
     }
     rowHTML += "</th>";
+
+    if (resultData[i]["movie_rating"] === null){
+      resultData[i]["movie_rating"] = "N/A";
+    }
     rowHTML += "<th>" + resultData[i]["movie_rating"] + "</th>";
 
     rowHTML +=
@@ -97,11 +111,13 @@ function handleMovieResult(resultData) {
  */
 // Get id from URL
 let titleStart = getParameterByName("titleStart");
+let sort1 = getParameterByName("sort1");
+let sort2 = getParameterByName("sort2");
 
 // Makes the HTTP GET request and registers on success callback function handleMovieResult
 jQuery.ajax({
   dataType: "json", // Setting return data type
   method: "GET", // Setting request method
-  url: "titleSearch?titleStart=" + titleStart, // Setting request url, which is mapped by MovieListServlet in MovieListServlet.java
+  url: "titleSearch?titleStart=" + titleStart + "&sort1=" + sort1 + "&sort2=" + sort2, // Setting request url, which is mapped by MovieListServlet in MovieListServlet.java
   success: (resultData) => handleMovieResult(resultData), // Setting callback function to handle data returned successfully by the MovieListServlet
 });
