@@ -15,7 +15,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
 
-@WebServlet(name = "titleSearchServlet", urlPatterns = "/titleSearch")
+@WebServlet(name = "titleSearcHServlet", urlPatterns = "/titleSearch")
 public class TitleSearchServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -41,6 +41,7 @@ public class TitleSearchServlet extends HttpServlet {
 
         // Get a connection from dataSource and let resource manager close the connection after usage.
         try (Connection conn = dataSource.getConnection()) {
+            System.out.println("Inside first");
 
             // Getting the parameters
             String titleStart = request.getParameter("titleStart");
@@ -48,10 +49,8 @@ public class TitleSearchServlet extends HttpServlet {
 
             PreparedStatement statement;
 
-            String query;
-
-            if (titleStart.equals("*")){
-                query = "select m.title as 'title', m.id as 'movieID', m.year as 'year', m.director as 'director', r.rating as 'rating',\n" +
+            if(titleStart.equals("*")){
+                String query = "select m.title as 'title', m.id as 'movieID', m.year as 'year', m.director as 'director', r.rating as 'rating',\n" +
                         "substring_index(group_concat(distinct g.name), ',', 3) 'genres',\n" +
                         "substring_index(group_concat(distinct s.name), ',', 3) 'actors',\n" +
                         "substring_index(group_concat(distinct s.id order by s.name), ',', 3) 'starId'\n" +
@@ -62,8 +61,8 @@ public class TitleSearchServlet extends HttpServlet {
 
                 statement = conn.prepareStatement(query);
             }
-            else{
-                query = "select m.title as 'title', m.id as 'movieID', m.year as 'year', m.director as 'director', r.rating as 'rating',\n" +
+            else {
+                String query = "select m.title as 'title', m.id as 'movieID', m.year as 'year', m.director as 'director', r.rating as 'rating',\n" +
                         "substring_index(group_concat(distinct g.name), ',', 3) 'genres',\n" +
                         "substring_index(group_concat(distinct s.name), ',', 3) 'actors',\n" +
                         "substring_index(group_concat(distinct s.id order by s.name), ',', 3) 'starId'\n" +
@@ -73,9 +72,9 @@ public class TitleSearchServlet extends HttpServlet {
                         "group by title, movieID, year, director";
 
                 statement = conn.prepareStatement(query);
-
                 statement.setString(1,  titleStart + "%");
             }
+
 
             // Perform the query
             ResultSet rs = statement.executeQuery();
