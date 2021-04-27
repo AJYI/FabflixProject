@@ -5,8 +5,8 @@ import java.lang.*;
 public class ShoppingCart {
     private int totalItems;
     private double totalPrice;
-    private Map<String, Integer> shoppingCart;
-    private Map<String, Double> moviePrices;
+    public Map<String, Integer> shoppingCart;
+    public Map<String, Double> moviePrices;
 
 //
 //    ShoppingCart() {
@@ -58,6 +58,10 @@ public class ShoppingCart {
 
     int returnTotalNumOfItems() {
         return totalItems;
+    }
+
+    int getNumOfCopies(String movie) {
+        return shoppingCart.get(movie);
     }
 
     void setMoviePrice(String movie) {

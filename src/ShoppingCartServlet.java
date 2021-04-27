@@ -7,8 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
 
 /**
  * This IndexServlet is declared in the web annotation below,
@@ -31,7 +29,12 @@ public class ShoppingCartServlet extends HttpServlet {
         JsonObject responseJsonObject = new JsonObject();
         if (customer != null) {
             // Start adding items into JSON Object
-
+            for (String movieTitle : customer.showCart().shoppingCart.keySet()) {
+                responseJsonObject.addProperty("movieTitle", movieTitle);
+                responseJsonObject.addProperty("movieQuantity", customer.showCart().getNumOfCopies(movieTitle));
+                responseJsonObject.addProperty("moviePrice", customer.showCart().moviePrices.get(movieTitle));
+                previousItemsJsonArray.add(responseJsonObject);
+            }
         }
         else {
             responseJsonObject.add("Movies", previousItemsJsonArray);
@@ -46,30 +49,6 @@ public class ShoppingCartServlet extends HttpServlet {
      * handles POST requests to add and show the item list information
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String item = request.getParameter("item");
-        System.out.println(item);
-        HttpSession session = request.getSession();
-
-        // get the previous items in a ArrayList
-        ArrayList<String> previousItems = (ArrayList<String>) session.getAttribute("previousItems");
-        if (previousItems == null) {
-            previousItems = new ArrayList<>();
-            previousItems.add(item);
-            session.setAttribute("previousItems", previousItems);
-        } else {
-            // prevent corrupted states through sharing under multi-threads
-            // will only be executed by one thread at a time
-            synchronized (previousItems) {
-                previousItems.add(item);
-            }
-        }
-
-        JsonObject responseJsonObject = new JsonObject();
-
-        JsonArray previousItemsJsonArray = new JsonArray();
-        previousItems.forEach(previousItemsJsonArray::add);
-        responseJsonObject.add("previousItems", previousItemsJsonArray);
-
-        response.getWriter().write(responseJsonObject.toString());
+        doGet(request, response);
     }
 }

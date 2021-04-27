@@ -7,7 +7,6 @@ import java.util.ArrayList;
 public class User {
 
     private final String username;
-    public ArrayList<String> cartItems;
     private double totalPrice;
     private ShoppingCart cart;
 
@@ -18,9 +17,8 @@ public class User {
     }
 
 
-    void showCart() {
-        // Transfer all movies and prices into an arrayList
-
+    ShoppingCart showCart() {
+        return cart;
     }
 
 //    int getMovieQuantity(String movie) {
