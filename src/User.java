@@ -13,32 +13,13 @@ public class User {
 
     public User(String username) {
         this.username = username;
-        cart = new ArrayList<ShoppingCartItem>;
-
-        //cart = new ShoppingCart();
-        //totalPrice = 0;
+        cart = new ArrayList<ShoppingCartItem>();
     }
 
-    public void addItemToShoppingCart()
+    public void addItemToShoppingCart(ShoppingCartItem movie) {
+        cart.add(movie);
+    }
 
-
-
-    // ShoppingCart showCart() {
-    //     return cart;
-    // }
-
-//    int getMovieQuantity(String movie) {
-//        return cart.getNumOfCopies(movie);
-//    }
-//
-//    double getTotalMoviePrice(String movie) {
-//        return cart.getMoviePriceSum(movie);
-//    }
-//
-//    double getTotal() {
-//        totalPrice = cart.getTotalCartPrice();
-//        return totalPrice;
-//    }
-
+    ArrayList<ShoppingCartItem> accessCart() { return cart; }
 
 }

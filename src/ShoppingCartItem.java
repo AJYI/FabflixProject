@@ -17,8 +17,14 @@ public class ShoppingCartItem {
         quantity ++;
     }
 
+    void decrementQuantity() { quantity -- ;}
+
     void updateQuantity(int quantity){
         this.quantity = quantity;
     }
+
+    int getQuantity() { return quantity; }
+
+    String getTitle() { return title; }
 
 }

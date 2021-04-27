@@ -1,5 +1,7 @@
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import java.util.ArrayList;
+
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,14 +27,19 @@ public class ShoppingCartServlet extends HttpServlet {
         // Checks to see if a session has been set up --> this is done by the login filter
         HttpSession session = request.getSession();
         User customer = (User) session.getAttribute("user");
+
+        ArrayList<ShoppingCartItem> customerCart = new ArrayList<ShoppingCartItem>();
+        customerCart = customer.accessCart(); // check to make sure this is valid;
+
         JsonArray previousItemsJsonArray = new JsonArray();
         JsonObject responseJsonObject = new JsonObject();
         if (customer != null) {
             // Start adding items into JSON Object
-            for (String movieTitle : customer.showCart().shoppingCart.keySet()) {
-                responseJsonObject.addProperty("movieTitle", movieTitle);
-                responseJsonObject.addProperty("movieQuantity", customer.showCart().getNumOfCopies(movieTitle));
-                responseJsonObject.addProperty("moviePrice", customer.showCart().moviePrices.get(movieTitle));
+            for (ShoppingCartItem movie : customerCart) {
+                responseJsonObject.addProperty("movieTitle", movie.getTitle());
+                responseJsonObject.addProperty("movieQuantity", movie.getQuantity());
+                responseJsonObject.addProperty("moviePrice", "1.00");
+
                 previousItemsJsonArray.add(responseJsonObject);
             }
         }
