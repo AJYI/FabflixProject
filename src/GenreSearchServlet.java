@@ -39,6 +39,10 @@ public class GenreSearchServlet extends HttpServlet {
         // Output stream to STDOUT
         PrintWriter out = response.getWriter();
 
+        // Get a instance of current session on the request
+        SessionURL.printPreviousSession(request);
+        SessionURL.rememberSession(request);
+
         // Get a connection from dataSource and let resource manager close the connection after usage.
         try (Connection conn = dataSource.getConnection()) {
             System.out.println("Inside first");

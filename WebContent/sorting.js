@@ -19,7 +19,7 @@ function sortClick(sortConfig) {
   let sortParam2 = getParameterByName("sort2");
 
   // First time
-  if (sortParam1 === null) {
+  if (sortParam1 == null) {
     if (sortConfig === "TA") {
       window.location.href += "&sort1=TA&sort2=NA";
     } else if (sortConfig === "TD") {
@@ -32,16 +32,21 @@ function sortClick(sortConfig) {
     console.log("First time reached the end");
   }
 
+  else if(sortParam1 == "null"){
+    let strReplace = sortParam1;
+    let url = window.location.href
+    window.location.href = url.replace(strReplace, sortConfig);
+  }
+
   // Checking whether we are updating parameter1 again
-  else if(sortParam1.charAt(0) === sortConfig.charAt(0)){
-    console.log("in here");
+  else if(sortParam1.charAt(0) == sortConfig.charAt(0)){
     let strReplace = sortParam1;
     let url = window.location.href
     console.log(strReplace + " " + url);
     window.location.href = url.replace(strReplace, sortConfig);
   }
 
-  else if (sortParam2 === "NA"){
+  else if (sortParam2 == "NA"){
     let url = window.location.href
     let strReplace = "NA";
     if (sortConfig === "TA") {
@@ -54,6 +59,12 @@ function sortClick(sortConfig) {
       window.location.href = url.replace(strReplace, "RD");
     }
     console.log("Second time reached the end");
+  }
+
+  else if(sortParam2 == "null"){
+    let strReplace = sortParam2;
+    let url = window.location.href
+    window.location.href = url.replace(strReplace, sortConfig);
   }
 
   // Checking whether we are updating parameter1 again

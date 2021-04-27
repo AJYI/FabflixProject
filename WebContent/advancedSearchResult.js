@@ -17,7 +17,7 @@ function getParameterByName(target) {
   // Ues regular expression to find matched parameter value
   let regex = new RegExp("[?&]" + target + "(=([^&#]*)|&|#|$)"),
     results = regex.exec(url);
-  if (!results) return ""; // Changed from null
+  if (!results) return null; // Changed from null
   if (!results[2]) return "";
 
   // Return the decoded parameter value
