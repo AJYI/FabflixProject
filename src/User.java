@@ -6,20 +6,26 @@ import java.util.ArrayList;
 
 public class User {
 
-    private final String username;
-    private double totalPrice;
-    private ShoppingCart cart;
+    private String username;
+    //private double totalPrice;
+    private ArrayList<ShoppingCartItem> cart;
+    //private ShoppingCart cart;
 
     public User(String username) {
         this.username = username;
-        cart = new ShoppingCart();
-        totalPrice = 0;
+        cart = new ArrayList<ShoppingCartItem>;
+
+        //cart = new ShoppingCart();
+        //totalPrice = 0;
     }
 
+    public void addItemToShoppingCart()
 
-    ShoppingCart showCart() {
-        return cart;
-    }
+
+
+    // ShoppingCart showCart() {
+    //     return cart;
+    // }
 
 //    int getMovieQuantity(String movie) {
 //        return cart.getNumOfCopies(movie);

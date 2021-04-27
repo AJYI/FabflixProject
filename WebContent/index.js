@@ -58,15 +58,8 @@ function handleMovieResult(resultData) {
     }
     rowHTML += "</th>";
     rowHTML += "<th>" + resultData[i]["movie_rating"] + "</th>";
-    rowHTML += "<th>" +
-        "<p>" +
-        '<a href="placeOrder.html?id='
-        + resultData[i]["movie_id"]
-        + '">'
-        + "Add To Cart"
-        + "</a>"
-        + "</p>"
-        + "</th>";
+    rowHTML +=
+      "<th>" + '<button onclick="addToCart()">Add To Cart</button>' + "</th>";
     rowHTML += "</tr>";
 
     // Append the row created to the table body, which will refresh the page
