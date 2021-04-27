@@ -27,7 +27,7 @@ function sortClick(sortConfig) {
     } else if (sortConfig === "RA") {
       window.location.href += "&sort1=RA&sort2=NA";
     } else if (sortConfig === "RD"){
-      window.location.href += "sort1=RD&sort2=NA";
+      window.location.href += "&sort1=RD&sort2=NA";
     }
     console.log("First time reached the end");
   }

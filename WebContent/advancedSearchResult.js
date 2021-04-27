@@ -100,6 +100,8 @@ let movieTitle = getParameterByName("movieTitle");
 let movieYear = getParameterByName("movieYear");
 let movieDirector = getParameterByName("movieDirector");
 let movieStar = getParameterByName("movieStar");
+let sort1 = getParameterByName("sort1");
+let sort2 = getParameterByName("sort2");
 
 // Makes the HTTP GET request and registers on success callback function handleMovieResult
 jQuery.ajax({
@@ -113,6 +115,6 @@ jQuery.ajax({
     "&movieDirector=" +
     movieDirector +
     "&movieStar=" +
-    movieStar,
+    movieStar + "&sort1=" + sort1 + "&sort2=" + sort2,
   success: (resultData) => handleMovieResult(resultData), // Setting callback function to handle data returned successfully by the MovieListServlet
 });

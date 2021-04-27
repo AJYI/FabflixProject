@@ -43,15 +43,16 @@ public class AdvancedSearchResultServlet extends HttpServlet {
 
         // Get a connection from dataSource and let resource manager close the connection after usage.
         try (Connection conn = dataSource.getConnection()) {
-            System.out.println("Inside first");
 
             // Getting the parameters
             String movieTitle = request.getParameter("movieTitle");
             String movieYear = request.getParameter("movieYear");
             String movieDirector = request.getParameter("movieDirector");
             String movieStar = request.getParameter("movieStar");
+            String sort1 = request.getParameter("sort1");
+            String sort2 = request.getParameter("sort2");
 
-            System.out.println("Movie Title: " + movieTitle + " Movie Director: " + movieDirector + " Movie Star: " + movieStar + " Movie Year: " + movieYear);
+            //System.out.println("Movie Title: " + movieTitle + " Movie Director: " + movieDirector + " Movie Star: " + movieStar + " Movie Year: " + movieYear + " sort1:" + sort1 + " sort2:" + sort2);
 
             PreparedStatement statement;
 
@@ -124,7 +125,7 @@ public class AdvancedSearchResultServlet extends HttpServlet {
             statement.close();
 
             // For debugging purposes
-            System.out.println(jsonArray.toString());
+            //System.out.println(jsonArray.toString());
 
             // write JSON string to output
             out.write(jsonArray.toString());

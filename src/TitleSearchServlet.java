@@ -15,7 +15,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
 
-@WebServlet(name = "titleSearcHServlet", urlPatterns = "/titleSearch")
+@WebServlet(name = "titleSearchServlet", urlPatterns = "/titleSearch")
 public class TitleSearchServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -41,40 +41,198 @@ public class TitleSearchServlet extends HttpServlet {
 
         // Get a connection from dataSource and let resource manager close the connection after usage.
         try (Connection conn = dataSource.getConnection()) {
-            System.out.println("Inside first");
+            //System.out.println("Inside first");
 
             // Getting the parameters
             String titleStart = request.getParameter("titleStart");
-            System.out.println("Movie Genre: " + titleStart);
+            String sort1 = request.getParameter("sort1");
+            String sort2 = request.getParameter("sort2");
+            //System.out.println("titleStart: " + titleStart + " sort1:" + sort1 + " sort2:" + sort2);
 
             PreparedStatement statement;
+            char c1 = sort1.charAt(0);
 
-            if(titleStart.equals("*")){
-                String query = "select m.title as 'title', m.id as 'movieID', m.year as 'year', m.director as 'director', r.rating as 'rating',\n" +
-                        "substring_index(group_concat(distinct g.name), ',', 3) 'genres',\n" +
-                        "substring_index(group_concat(distinct s.name), ',', 3) 'actors',\n" +
-                        "substring_index(group_concat(distinct s.id order by s.name), ',', 3) 'starId'\n" +
-                        "from genres g, genres_in_movies gim, stars s, stars_in_movies sim, movies m\n" +
-                        "left join ratings r on r.movieId = m.id\n" +
-                        "where m.id = gim.movieId AND gim.genreId = g.id AND m.id = sim.movieId AND sim.starId = s.id AND m.title regexp '^[^a-zA-Z0-9]'\n" +
-                        "group by title, movieID, year, director";
+            if (c1 == 'T'){
+                if(titleStart.equals("*")){
+                    String query = "select m.title as 'title', m.id as 'movieID', m.year as 'year', m.director as 'director', r.rating as 'rating',\n" +
+                            "substring_index(group_concat(distinct g.name), ',', 3) 'genres',\n" +
+                            "substring_index(group_concat(distinct s.name), ',', 3) 'actors',\n" +
+                            "substring_index(group_concat(distinct s.id order by s.name), ',', 3) 'starId'\n" +
+                            "from genres g, genres_in_movies gim, stars s, stars_in_movies sim, movies m\n" +
+                            "left join ratings r on r.movieId = m.id\n" +
+                            "where m.id = gim.movieId AND gim.genreId = g.id AND m.id = sim.movieId AND sim.starId = s.id AND m.title regexp '^[^a-zA-Z0-9]'\n" +
+                            "group by title, movieID, year, director\n";
 
-                statement = conn.prepareStatement(query);
+                    if(sort1.equals("TA")){
+                        if(sort2.equals("RA")){
+                            query += "order by title ASC, rating DESC\n";
+                        }
+                        else if (sort2.equals("RD")){
+                            query += "order by title ASC, rating ASC\n";
+                        }
+                        else{
+                            query += "order by title ASC\n";
+                        }
+                    }
+                    else if (sort1.equals("TD")){
+                        //System.out.println("Entered here" + sort1 + " " + sort2) ;
+                        if(sort2.equals("RA")){
+                            query += "order by title DESC, rating DESC\n";
+                        }
+                        else if(sort2.equals("RD")){
+                            query += "order by title DESC, rating ASC\n";
+                        }
+                        else{
+                            query += "order by title DESC\n";
+                        }
+                    }
+                    //System.out.println(query);
+                    statement = conn.prepareStatement(query);
+
+                }
+                else {
+                    String query = "select m.title as 'title', m.id as 'movieID', m.year as 'year', m.director as 'director', r.rating as 'rating',\n" +
+                            "substring_index(group_concat(distinct g.name), ',', 3) 'genres',\n" +
+                            "substring_index(group_concat(distinct s.name), ',', 3) 'actors',\n" +
+                            "substring_index(group_concat(distinct s.id order by s.name), ',', 3) 'starId'\n" +
+                            "from genres g, genres_in_movies gim, stars s, stars_in_movies sim, movies m\n" +
+                            "left join ratings r on r.movieId = m.id\n" +
+                            "where m.id = gim.movieId AND gim.genreId = g.id AND m.id = sim.movieId AND sim.starId = s.id AND m.title like ?\n" +
+                            "group by title, movieID, year, director\n";
+
+                    //System.out.println("in here");
+
+                    if(sort1.equals("TA")){
+                        if(sort2.equals("RA")){
+                            query += "order by title ASC, rating DESC\n";
+                        }
+                        else if (sort2.equals("RD")){
+                            query += "order by title ASC, rating ASC\n";
+                        }
+                        else{
+                            query += "order by title ASC\n";
+                        }
+                    }
+                    else{
+                        if(sort2.equals("RA")){
+                            query += "order by title DESC, rating DESC";
+                        }
+                        else if(sort2.equals("RD")){
+                            query += "order by title DESC, rating ASC";
+                        }
+                        else{
+                            query += "order by title DESC";
+                        }
+                    }
+                    //System.out.println(query);
+                    statement = conn.prepareStatement(query);
+                    statement.setString(1,  titleStart + "%");
+                }
             }
-            else {
-                String query = "select m.title as 'title', m.id as 'movieID', m.year as 'year', m.director as 'director', r.rating as 'rating',\n" +
-                        "substring_index(group_concat(distinct g.name), ',', 3) 'genres',\n" +
-                        "substring_index(group_concat(distinct s.name), ',', 3) 'actors',\n" +
-                        "substring_index(group_concat(distinct s.id order by s.name), ',', 3) 'starId'\n" +
-                        "from genres g, genres_in_movies gim, stars s, stars_in_movies sim, movies m\n" +
-                        "left join ratings r on r.movieId = m.id\n" +
-                        "where m.id = gim.movieId AND gim.genreId = g.id AND m.id = sim.movieId AND sim.starId = s.id AND m.title like ?\n" +
-                        "group by title, movieID, year, director";
 
-                statement = conn.prepareStatement(query);
-                statement.setString(1,  titleStart + "%");
+            else if (c1 == 'R'){
+                if(titleStart.equals("*")){
+                    String query = "select m.title as 'title', m.id as 'movieID', m.year as 'year', m.director as 'director', r.rating as 'rating',\n" +
+                            "substring_index(group_concat(distinct g.name), ',', 3) 'genres',\n" +
+                            "substring_index(group_concat(distinct s.name), ',', 3) 'actors',\n" +
+                            "substring_index(group_concat(distinct s.id order by s.name), ',', 3) 'starId'\n" +
+                            "from genres g, genres_in_movies gim, stars s, stars_in_movies sim, movies m\n" +
+                            "left join ratings r on r.movieId = m.id\n" +
+                            "where m.id = gim.movieId AND gim.genreId = g.id AND m.id = sim.movieId AND sim.starId = s.id AND m.title regexp '^[^a-zA-Z0-9]'\n" +
+                            "group by title, movieID, year, director\n";
+
+                    if(sort1.equals("RA")){
+                        if(sort2.equals("TA")){
+                            query += "order by rating DESC, title ASC ";
+                        }
+                        else if (sort2.equals("TD")){
+                            query += "order by rating DESC, title DESC";
+                        }
+                        else{
+                            query += "order by rating DESC";
+                        }
+                    }
+                    else{
+                        if(sort2.equals("TA")){
+                            query += "order by rating ASC, title ASC";
+                        }
+                        else if(sort2.equals("TD")){
+                            query += "order by rating ASC, title DESC";
+                        }
+                        else{
+                            query += "order by rating ASC";
+                        }
+                    }
+
+                    //System.out.println(query);
+                    statement = conn.prepareStatement(query);
+                }
+                else {
+                    String query = "select m.title as 'title', m.id as 'movieID', m.year as 'year', m.director as 'director', r.rating as 'rating',\n" +
+                            "substring_index(group_concat(distinct g.name), ',', 3) 'genres',\n" +
+                            "substring_index(group_concat(distinct s.name), ',', 3) 'actors',\n" +
+                            "substring_index(group_concat(distinct s.id order by s.name), ',', 3) 'starId'\n" +
+                            "from genres g, genres_in_movies gim, stars s, stars_in_movies sim, movies m\n" +
+                            "left join ratings r on r.movieId = m.id\n" +
+                            "where m.id = gim.movieId AND gim.genreId = g.id AND m.id = sim.movieId AND sim.starId = s.id AND m.title like ?\n" +
+                            "group by title, movieID, year, director\n";
+
+                    if(sort1.equals("RA")){
+                        if(sort2.equals("TA")){
+                            query += "order by rating DESC, title ASC ";
+                        }
+                        else if (sort2.equals("TD")){
+                            query += "order by rating DESC, title DESC";
+                        }
+                        else{
+                            query += "order by rating DESC";
+                        }
+                    }
+                    else{
+                        if(sort2.equals("TA")){
+                            query += "order by rating ASC, title ASC";
+                        }
+                        else if(sort2.equals("TD")){
+                            query += "order by rating ASC, title DESC";
+                        }
+                        else{
+                            query += "order by rating ASC";
+                        }
+                    }
+                    //System.out.println(query);
+                    statement = conn.prepareStatement(query);
+                    statement.setString(1,  titleStart + "%");
+                }
             }
 
+            // General Case
+            else{
+                if(titleStart.equals("*")){
+                    String query = "select m.title as 'title', m.id as 'movieID', m.year as 'year', m.director as 'director', r.rating as 'rating',\n" +
+                            "substring_index(group_concat(distinct g.name), ',', 3) 'genres',\n" +
+                            "substring_index(group_concat(distinct s.name), ',', 3) 'actors',\n" +
+                            "substring_index(group_concat(distinct s.id order by s.name), ',', 3) 'starId'\n" +
+                            "from genres g, genres_in_movies gim, stars s, stars_in_movies sim, movies m\n" +
+                            "left join ratings r on r.movieId = m.id\n" +
+                            "where m.id = gim.movieId AND gim.genreId = g.id AND m.id = sim.movieId AND sim.starId = s.id AND m.title regexp '^[^a-zA-Z0-9]'\n" +
+                            "group by title, movieID, year, director\n";
+
+                    statement = conn.prepareStatement(query);
+                }
+                else {
+                    String query = "select m.title as 'title', m.id as 'movieID', m.year as 'year', m.director as 'director', r.rating as 'rating',\n" +
+                            "substring_index(group_concat(distinct g.name), ',', 3) 'genres',\n" +
+                            "substring_index(group_concat(distinct s.name), ',', 3) 'actors',\n" +
+                            "substring_index(group_concat(distinct s.id order by s.name), ',', 3) 'starId'\n" +
+                            "from genres g, genres_in_movies gim, stars s, stars_in_movies sim, movies m\n" +
+                            "left join ratings r on r.movieId = m.id\n" +
+                            "where m.id = gim.movieId AND gim.genreId = g.id AND m.id = sim.movieId AND sim.starId = s.id AND m.title like ?\n" +
+                            "group by title, movieID, year, director\n";
+
+                    statement = conn.prepareStatement(query);
+                    statement.setString(1,  titleStart + "%");
+                }
+            }
 
             // Perform the query
             ResultSet rs = statement.executeQuery();
@@ -110,7 +268,7 @@ public class TitleSearchServlet extends HttpServlet {
             statement.close();
 
             // For debugging purposes
-            System.out.println(jsonArray.toString());
+            //System.out.println(jsonArray.toString());
 
             // write JSON string to output
             out.write(jsonArray.toString());
