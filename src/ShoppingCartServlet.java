@@ -14,7 +14,7 @@ import java.io.IOException;
  * This IndexServlet is declared in the web annotation below,
  * which is mapped to the URL pattern /api/index.
  */
-@WebServlet(name = "IndexServlet", urlPatterns = "/api/index")
+@WebServlet(name = "IndexServlet", urlPatterns = "/api/shopping")
 public class ShoppingCartServlet extends HttpServlet {
 
     /**
@@ -38,7 +38,7 @@ public class ShoppingCartServlet extends HttpServlet {
             for (ShoppingCartItem movie : customerCart) {
                 responseJsonObject.addProperty("movieTitle", movie.getTitle());
                 responseJsonObject.addProperty("movieQuantity", movie.getQuantity());
-                responseJsonObject.addProperty("moviePrice", "1.00");
+                responseJsonObject.addProperty("moviePrice", "1.00"); // Check to make sure this is correct
 
                 previousItemsJsonArray.add(responseJsonObject);
             }

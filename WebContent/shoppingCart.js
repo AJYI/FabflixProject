@@ -11,12 +11,8 @@ function handleSessionData(resultDataString) {
     console.log(resultDataJson);
     console.log(resultDataJson["sessionID"]);
 
-    // show the session information
-    $("#sessionID").text("Session ID: " + resultDataJson["sessionID"]);
-    $("#lastAccessTime").text("Last access time: " + resultDataJson["lastAccessTime"]);
-
     // show cart information
-    handleCartArray(resultDataJson["previousItems"]);
+    handleCartArray(resultDataJson["Movies"]);
 }
 
 /**
