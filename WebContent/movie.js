@@ -102,7 +102,7 @@ function handleResult(resultData) {
   rowHTML += "<th>" +
       "<p>" +
       '<a href="placeOrder.html?id='
-      + resultData[i]["movie_id"]
+      + resultData[0]["movie_id"]
       + '">'
       + "Add To Cart"
       + "</a>"

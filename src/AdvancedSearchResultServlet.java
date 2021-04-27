@@ -56,6 +56,19 @@ public class AdvancedSearchResultServlet extends HttpServlet {
             String sort1 = request.getParameter("sort1");
             String sort2 = request.getParameter("sort2");
 
+            if(movieTitle.equals("null")) {
+                movieTitle = "";
+            }
+            if(movieYear.equals("null")){
+                movieYear = "";
+            }
+            if(movieDirector.equals("null")){
+                movieDirector = "";
+            }
+            if(movieStar.equals("null")){
+                movieStar = "";
+            }
+
             System.out.println("Movie Title: " + movieTitle + " Movie Director: " + movieDirector + " Movie Star: " + movieStar + " Movie Year: " + movieYear + " sort1:" + sort1 + " sort2:" + sort2);
 
             PreparedStatement statement;
