@@ -8,13 +8,13 @@ public class ShoppingCart {
     private Map<String, Integer> shoppingCart;
     private Map<String, Double> moviePrices;
 
-
-    ShoppingCart() {
-        shoppingCart = new HashMap<String, Integer>();
-        moviePrices = new HashMap<String, Integer>();
-        totalItems = 0;
-        totalPrice = 0;
-    }
+//
+//    ShoppingCart() {
+//        shoppingCart = new HashMap<String, Integer>();
+//        moviePrices = new HashMap<String, Integer>();
+//        totalItems = 0;
+//        totalPrice = 0;
+//    }
 
     void addToCart(String movie) {
         // Check to see if item exists within the map

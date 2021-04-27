@@ -23,18 +23,18 @@ public class User {
 
     }
 
-    int getMovieQuantity(String movie) {
-        return cart.getNumOfCopies(movie);
-    }
-
-    double getTotalMoviePrice(String movie) {
-        return cart.getMoviePriceSum(movie);
-    }
-
-    double getTotal() {
-        totalPrice = cart.getTotalCartPrice();
-        return totalPrice;
-    }
-
+//    int getMovieQuantity(String movie) {
+//        return cart.getNumOfCopies(movie);
+//    }
+//
+//    double getTotalMoviePrice(String movie) {
+//        return cart.getMoviePriceSum(movie);
+//    }
+//
+//    double getTotal() {
+//        totalPrice = cart.getTotalCartPrice();
+//        return totalPrice;
+//    }
+//
 
 }

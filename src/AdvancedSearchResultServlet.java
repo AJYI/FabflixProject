@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -40,6 +41,10 @@ public class AdvancedSearchResultServlet extends HttpServlet {
         // Output stream to STDOUT
         PrintWriter out = response.getWriter();
 
+        // Get a instance of current session on the request
+        SessionURL.printPreviousSession(request);
+        SessionURL.rememberSession(request);
+
         // Get a connection from dataSource and let resource manager close the connection after usage.
         try (Connection conn = dataSource.getConnection()) {
 
@@ -58,10 +63,10 @@ public class AdvancedSearchResultServlet extends HttpServlet {
             if(!sort1.equals(new String())){
                 c1 = sort1.charAt(0);
             }
-            System.out.println("c1");
+            //System.out.println("c1");
 
             if (c1 == 'T'){
-                System.out.println("in TTT");
+                //System.out.println("in TTT");
                 // When a year is not inputted
                 if(movieYear.equals(new String())){
                     String query = "select m.title as 'title', m.id as 'movieID', m.year as 'year', m.director as 'director', r.rating as 'rating',\n" +
@@ -149,7 +154,7 @@ public class AdvancedSearchResultServlet extends HttpServlet {
             }
 
             else if (c1 == 'R'){
-                System.out.println("in RRR");
+                //System.out.println("in RRR");
                 // When a year is not inputted
                 if(movieYear.equals(new String())){
                     String query = "select m.title as 'title', m.id as 'movieID', m.year as 'year', m.director as 'director', r.rating as 'rating',\n" +
@@ -234,7 +239,7 @@ public class AdvancedSearchResultServlet extends HttpServlet {
                 }
             }
             else {
-                System.out.println("In here!!!!!!!!");
+                //System.out.println("In here!!!!!!!!");
                 // When a year is not inputted
                 if(movieYear.equals(new String())){
                     String query = "select m.title as 'title', m.id as 'movieID', m.year as 'year', m.director as 'director', r.rating as 'rating',\n" +
@@ -271,7 +276,7 @@ public class AdvancedSearchResultServlet extends HttpServlet {
                 }
             }
 
-            System.out.println("reached here");
+            //System.out.println("reached here");
 
             // Perform the query
             ResultSet rs = statement.executeQuery();
