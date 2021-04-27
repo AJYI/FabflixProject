@@ -99,6 +99,16 @@ function handleResult(resultData) {
   }
   rowHTML += "<th>" + resultData[0]["movie_rating"] + "</th>" + "</tr>";
 
+  rowHTML += "<th>" +
+      "<p>" +
+      '<a href="placeOrder.html?id='
+      + resultData[i]["movie_id"]
+      + '">'
+      + "Add To Cart"
+      + "</a>"
+      + "</p>"
+      + "</th>";
+
   movieBody.append(rowHTML);
 }
 
