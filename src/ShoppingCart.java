@@ -12,14 +12,6 @@ public class ShoppingCart {
         shoppingCart = new ArrayList<ShoppingCartItem>();
     }
 
-    void addACopy(ShoppingCartItem movie) {
-        movie.incrementQuantity();
-    }
-
-    void removeACopy(ShoppingCartItem movie) {
-        movie.decrementQuantity();
-    }
-
     void changeNumOfCopies(ShoppingCartItem movie, int copies) {
         movie.updateQuantity(copies);
     }
