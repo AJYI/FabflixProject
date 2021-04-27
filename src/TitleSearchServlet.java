@@ -60,7 +60,7 @@ public class TitleSearchServlet extends HttpServlet {
             }
 
             if (c1 == 'T'){
-                if(titleStart.equals("*")){
+                if(titleStart.equals("star")){
                     String query = "select m.title as 'title', m.id as 'movieID', m.year as 'year', m.director as 'director', r.rating as 'rating',\n" +
                             "substring_index(group_concat(distinct g.name), ',', 3) 'genres',\n" +
                             "substring_index(group_concat(distinct s.name), ',', 3) 'actors',\n" +

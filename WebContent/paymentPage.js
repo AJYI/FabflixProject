@@ -1,5 +1,4 @@
-let credit_card_form = $("#credit_card_form");
-
+let credit_card_form = $("#credit_card");
 /**
  * Handle the data returned by LoginServlet
  * @param resultDataString jsonObject
@@ -19,7 +18,7 @@ function handleCCResult(resultDataString) {
         // error messages on <div> with id "login_error_message"
         console.log("show error message");
         console.log(resultDataJson["message"]);
-        $("#cc_error_message").text(resultDataJson["message"]);
+        $("#error").text(resultDataJson["message"]);
     }
 }
 
@@ -47,4 +46,4 @@ function submitCCForm(formSubmitEvent) {
 }
 
 // Bind the submit action of the form to a handler function
-login_form.submit(submitCCForm);
+credit_card_form.submit(submitCCForm);

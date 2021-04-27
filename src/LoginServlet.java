@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 import java.io.IOException;
 import java.sql.Connection;
@@ -43,9 +44,7 @@ public class LoginServlet extends HttpServlet {
         JsonObject jsonObject = new JsonObject();
 
         // Login Success
-        if(validateUser(email, password)){
-            request.getSession().setAttribute("user", new User(email));
-
+        if(validateUser(email, password, request)){
             jsonObject.addProperty("status", "success");
             jsonObject.addProperty("message", "success");
         }
@@ -62,16 +61,12 @@ public class LoginServlet extends HttpServlet {
         response.getWriter().write(jsonObject.toString());
     }
 
-    protected boolean validateUser(String email, String pass){
+    protected boolean validateUser(String email, String pass, HttpServletRequest request){
         boolean verified = false;
         try (Connection conn = dataSource.getConnection()){
-
-            //System.out.println(email + " " + pass);
-
             // Preparing the query
-            String query = "SELECT EXISTS (SELECT c.email, c.password\n" +
-                    "FROM customers c\n" +
-                    "WHERE c.email = ? AND c.password = ?) as findUser";
+            String query = "select c.firstName, c.lastName, c.id, c.email, c.password from customers c \n" +
+                    "where c.email = ? and c.password = ?";
 
             // Declare our statement
             PreparedStatement statement = conn.prepareStatement(query);
@@ -82,13 +77,17 @@ public class LoginServlet extends HttpServlet {
             // Perform the query
             ResultSet rs = statement.executeQuery();
 
-            // To get the 0/1
-            rs.next();
-
-            String findUser = rs.getString("findUser");
-
             // Means found
-            if(Integer.parseInt(findUser) == 1) {
+            if(rs.next()) {
+                String firstName = rs.getString("c.firstName");
+                String lastName = rs.getString("c.lastName");
+                String customerID = rs.getString("c.id");
+                request.getSession().setAttribute("user", new User(firstName, lastName, customerID));
+
+                HttpSession session = request.getSession(true);
+                User check = (User) session.getAttribute("user");
+                check.print();
+
                 verified = true;
             }
             // Not found

@@ -9,34 +9,34 @@
     <title>Payment Page</title>
   </head>
   <body>
-    <nav class="navbar">
-      <ul>
-        <li class="logo">FabFlix</li>
-        <div class="menu-items">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="browse.html">Browse</a></li>
-          <li><a href="advancedSearch.html">Advanced Search</a></li>
-          <li><a href="shoppingCart.html">Checkout</a></li>
-        </div>
-        <li class="search-bar">
-          <form action="movieList.html" method="GET">
-            <input
-              type="search"
-              placeholder="Explore Movies"
-              name="movieTitle"
-            />
-            <button type="submit"><i class="fas fa-search"></i></button>
-          </form>
-        </li>
-      </ul>
-    </nav>
+  <nav class="navbar">
+    <ul>
+      <li class="logo">FabFlix</li>
+      <div class="menu-items">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="browse.html">Browse</a></li>
+        <li><a href="advancedSearch.html">Advanced Search</a></li>
+        <li><a href="shoppingCart.html">Checkout</a></li>
+      </div>
+      <li class="search-bar">
+        <form action="advancedSearchResult.html" method="GET">
+          <input
+                  type="search"
+                  placeholder="Explore Movies"
+                  name="movieTitle"
+          />
+          <button type="submit"><i class="fas fa-search"></i></button>
+        </form>
+      </li>
+    </ul>
+  </nav>
 
     <h2 style="text-align: center">Enter Your Information:</h2>
-    <p class ="error" id ="#error"></p>
+    <p class ="error" id ="error"></p>
     <p class="totalPrompt">Total: <p id=#total> </p></p>
 
     <div class="center" style="text-align: center">
-      <form id="credit_card_form" method="POST" action="#">
+      <form id="credit_card" method="post" action="#">
         <table class="center">
           <tr>
             <td>First Name:</td>
@@ -91,7 +91,13 @@
 
       <div id="cc_error_message"></div>
     </div>
-
-    <script src="/api/payment"></script>
+  <script
+          src="https://kit.fontawesome.com/36cadc13cf.js"
+          crossorigin="anonymous"
+  ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="./paymentPage.js"></script>
   </body>
 </html>

@@ -29,20 +29,20 @@ public class ShoppingCartServlet extends HttpServlet {
         JsonObject responseJsonObject = new JsonObject();
         if (customer != null) {
             // Start adding items into JSON Object
-            for (String movieTitle : customer.showCart().shoppingCart.keySet()) {
-                responseJsonObject.addProperty("movieTitle", movieTitle);
-                responseJsonObject.addProperty("movieQuantity", customer.showCart().getNumOfCopies(movieTitle));
-                responseJsonObject.addProperty("moviePrice", customer.showCart().moviePrices.get(movieTitle));
-                previousItemsJsonArray.add(responseJsonObject);
+//            for (String movieTitle : customer.showCart().shoppingCart.keySet()) {
+//                responseJsonObject.addProperty("movieTitle", movieTitle);
+//                responseJsonObject.addProperty("movieQuantity", customer.showCart().getNumOfCopies(movieTitle));
+//                responseJsonObject.addProperty("moviePrice", customer.showCart().moviePrices.get(movieTitle));
+//                previousItemsJsonArray.add(responseJsonObject);
             }
-        }
-        else {
-            responseJsonObject.add("Movies", previousItemsJsonArray);
-        }
-
-
-        // write all the data into the jsonObject
-        response.getWriter().write(responseJsonObject.toString());
+        //}
+//        else {
+//            responseJsonObject.add("Movies", previousItemsJsonArray);
+//        }
+//
+//
+//        // write all the data into the jsonObject
+//        response.getWriter().write(responseJsonObject.toString());
     }
 
     /**

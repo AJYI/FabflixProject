@@ -59,7 +59,7 @@ function handleMovieResult(resultData) {
     rowHTML += "</th>";
     rowHTML += "<th>" + resultData[i]["movie_rating"] + "</th>";
     rowHTML +=
-      "<th>" + '<button onclick="addToCart()">Add To Cart</button>' + "</th>";
+        "<th>" + '<a href="AddedToCart.html?id=' + resultData[i]["movie_id"] + '"><button onclick="addToCart()">Add To Cart</button></a>' + "</th>";
     rowHTML += "</tr>";
 
     // Append the row created to the table body, which will refresh the page

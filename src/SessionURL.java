@@ -6,6 +6,8 @@ import javax.servlet.http.HttpSession;
 public class SessionURL {
     public static void rememberSession(HttpServletRequest request){
         HttpSession session = request.getSession(true);
+        String temp = request.getQueryString().toString();
+        System.out.println(".html?" + temp);
         session.setAttribute("sessionURL", request.getRequestURL().toString() + ".html?" + request.getQueryString().toString());
     }
 

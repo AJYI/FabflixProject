@@ -5,21 +5,28 @@
 import java.util.ArrayList;
 
 public class User {
-
-    private String username;
+    private String firstName;
+    private String lastName;
+    private String customerID;
     //private double totalPrice;
     private ArrayList<ShoppingCartItem> cart;
     //private ShoppingCart cart;
 
-    public User(String username) {
-        this.username = username;
-        cart = new ArrayList<ShoppingCartItem>;
-
-        //cart = new ShoppingCart();
-        //totalPrice = 0;
+    public User(String firstName, String lastName, String customerID) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.customerID = customerID;
+        cart = new ArrayList<ShoppingCartItem>();
     }
 
-    public void addItemToShoppingCart()
+    // For debugging purposes
+    public void print(){
+        System.out.println("firstName: " + firstName + "LastName: " + lastName + "customerID: " + customerID);
+    }
+
+
+
+//    public void addItemToShoppingCart()
 
 
 
