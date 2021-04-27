@@ -59,10 +59,22 @@ function handleResult(resultData) {
     "</th>" +
     "<th>" +
     resultData[0]["movie_director"] +
-    "</th>" +
-    "<th>" +
-    resultData[0]["movie_genres"] +
-    "</th>";
+    "</th>"; //+
+    // "<th>" +
+    // resultData[0]["movie_genres"] +
+    // "</th>";
+
+  // Need a way to split this
+  rowHTML += "<th>";
+  let movGen = resultData[0]["movie_genres"];
+  let movArr = movGen.split(",");
+
+  for (let j in movArr){
+    rowHTML +=
+        "<p>" +
+        '<a href="genreSearch.html?genre=' + movArr[j] + '">' + movArr[j] + "</a>" + "</p>";
+  }
+  rowHTML += "</th>";
 
   //Since query has been altered, changes have been made here.
 

@@ -50,20 +50,27 @@ public class MovieServlet extends HttpServlet {
             // Get a connection from dataSource
             
             // We append the id with the query for easier searching.
-            String query = "SELECT\n" +
-                    "\tm.title as 'title', m.year as 'year', m.director as 'director',\n" +
-                    "    group_concat(distinct g.name) 'genres',\n" +
-                    "    group_concat(distinct s.name order by s.name) 'actors',\n" +
-                    "    group_concat(distinct s.id order by s.name) 'starId',\n" +
-                    "    (select r.rating from ratings r, movies m where r.movieID = m.id AND m.id = '" + id +"') as 'rating'\n" +
-                    "FROM movies m, genres_in_movies gim, genres g, stars_in_movies sim, stars s\n" +
-                    "where m.id = '" + id + "' AND m.id = gim.movieId AND gim.genreId = g.id AND m.id = sim.movieId AND sim.starID = s.id";
+            String query = "select m.title as 'title', m.year as 'year', m.director as 'director', group_concat(distinct g.name) as genres ,tester.*, r.rating as 'rating'\n" +
+                    "from stars_in_movies sim, stars s, \n" +
+                    "(select group_concat(test.name) as \"actors\", group_concat(test.starzId) as \"starId\" from\n" +
+                    "(select s.id as 'starzId', s.name as 'name', count(s.name) as moviesStarredIn\n" +
+                    "from stars_in_movies sim, stars s, movies m,\n" +
+                    "(select sim.starId from stars_in_movies sim, stars s where sim.starId = s.id and sim.movieId = ?) as starIdentifier\n" +
+                    "where s.id = starIdentifier.starId and sim.starId = s.id and m.id = sim.movieId\n" +
+                    "group by s.name\n" +
+                    "order by moviesStarredIn desc) as test) as tester,\n" +
+                    "genres_in_movies gim, genres g , movies m\n" +
+                    "left join ratings r on r.movieId = m.id\n" +
+                    "where m.id = ? and m.id = sim.movieId and sim.starId = s.id and m.id = gim.movieId and g.id = gim.genreId\n" +
+                    "group by title";
 
             // Declare our statement
-            Statement statement = conn.createStatement();
+            PreparedStatement statement = conn.prepareStatement(query);
+            statement.setString(1,  id);
+            statement.setString(2,  id);
 
             // Perform the query
-            ResultSet rs = statement.executeQuery(query);
+            ResultSet rs = statement.executeQuery();
 
             JsonArray jsonArray = new JsonArray();
             rs.next();
