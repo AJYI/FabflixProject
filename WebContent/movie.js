@@ -41,10 +41,6 @@ function handleResult(resultData) {
   let moviePageTitle = jQuery("#movie_title_page");
   moviePageTitle.append(resultData[0]["movie_title"]);
 
-  // Setting the back to home page:
-  let movieListBack = jQuery("#back_to_movie_list");
-  movieListBack.append("<a href=index.html>Back to Movie List</a>");
-
   // Setting the title:
   let movieTitle = jQuery("#movie_title");
   movieTitle.append(resultData[0]["movie_title"]);

@@ -34,10 +34,6 @@ function handleStarResult(resultData) {
     let starTitleElement = jQuery("#star_title_page");
     starTitleElement.append(resultData[0]["star_name"]);
 
-    // Setting the back to home page:
-    let movieListBack = jQuery("#back_to_movie_list");
-    movieListBack.append("<a href=index.html>Back to Movie List</a>");
-
     //Setting the h1 element for the page
     let starNameElement = jQuery("#star_name");
     starNameElement.append(resultData[0]["star_name"]);
