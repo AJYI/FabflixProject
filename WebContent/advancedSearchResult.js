@@ -108,13 +108,6 @@ jQuery.ajax({
   dataType: "json", // Setting return data type
   method: "GET", // Setting request method
   url:
-    "advancedSearchResult?movieTitle=" +
-    movieTitle +
-    "&movieYear=" +
-    movieYear +
-    "&movieDirector=" +
-    movieDirector +
-    "&movieStar=" +
-    movieStar + "&sort1=" + sort1 + "&sort2=" + sort2,
+    "advancedSearchResult?movieTitle=" + movieTitle + "&movieYear=" + movieYear + "&movieDirector=" + movieDirector + "&movieStar=" + movieStar + "&sort1=" + sort1 + "&sort2=" + sort2,
   success: (resultData) => handleMovieResult(resultData), // Setting callback function to handle data returned successfully by the MovieListServlet
 });

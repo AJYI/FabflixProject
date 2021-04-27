@@ -51,7 +51,10 @@ public class GenreSearchServlet extends HttpServlet {
             System.out.println(sort1 + " " + sort2);
 
             PreparedStatement statement;
-            char c1 = sort1.charAt(0);
+            char c1 = ' ';
+            if(!sort1.equals(new String())){
+                c1 = sort1.charAt(0);
+            }
             if(c1 == 'T'){
                 String query = "select m.title as 'title', genID.movieId as 'movieID', m.year as 'year', m.director as 'director', r.rating as 'rating',\n" +
                         "substring_index(group_concat(distinct g.name), ',', 3) 'genres',\n" +

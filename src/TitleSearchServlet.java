@@ -50,7 +50,10 @@ public class TitleSearchServlet extends HttpServlet {
             //System.out.println("titleStart: " + titleStart + " sort1:" + sort1 + " sort2:" + sort2);
 
             PreparedStatement statement;
-            char c1 = sort1.charAt(0);
+            char c1 = ' ';
+            if(!sort1.equals(new String())){
+                c1 = sort1.charAt(0);
+            }
 
             if (c1 == 'T'){
                 if(titleStart.equals("*")){

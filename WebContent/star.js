@@ -57,10 +57,10 @@ function handleStarResult(resultData) {
 
 
     let starMovies = resultData[0]["movies"];
-    let starMoviesArray = starMovies.split(',');
+    let starMoviesArray = starMovies.split('|');
 
     let movieID = resultData[0]["movie_id"];
-    let moviesIDArray = movieID.split(',');
+    let moviesIDArray = movieID.split('|');
 
     rowHTML += "<th>";
     for (let j in starMoviesArray) {
