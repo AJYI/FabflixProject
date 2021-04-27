@@ -1,5 +1,7 @@
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import java.util.ArrayList;
+
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,11 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-/**
- * This IndexServlet is declared in the web annotation below,
- * which is mapped to the URL pattern /api/index.
- */
-@WebServlet(name = "IndexServlet", urlPatterns = "/api/index")
+@WebServlet(name = "ShoppingCartServlet", urlPatterns = "/api/shopping")
 public class ShoppingCartServlet extends HttpServlet {
 
     /**
@@ -25,6 +23,10 @@ public class ShoppingCartServlet extends HttpServlet {
         // Checks to see if a session has been set up --> this is done by the login filter
         HttpSession session = request.getSession();
         User customer = (User) session.getAttribute("user");
+
+        ArrayList<ShoppingCartItem> customerCart = new ArrayList<ShoppingCartItem>();
+        customerCart = customer.accessCart(); // check to make sure this is valid;
+
         JsonArray previousItemsJsonArray = new JsonArray();
         JsonObject responseJsonObject = new JsonObject();
         if (customer != null) {

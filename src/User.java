@@ -47,5 +47,6 @@ public class User {
 //        return totalPrice;
 //    }
 
+    ArrayList<ShoppingCartItem> accessCart() { return cart; }
 
 }
