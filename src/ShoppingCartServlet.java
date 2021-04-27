@@ -1,52 +1,45 @@
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Type;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
  * This IndexServlet is declared in the web annotation below,
  * which is mapped to the URL pattern /api/index.
  */
-@WebServlet(name = "ShoppingCartServlet", urlPatterns = "/api/shoppingCart")
+@WebServlet(name = "IndexServlet", urlPatterns = "/api/index")
 public class ShoppingCartServlet extends HttpServlet {
 
     /**
      * handles GET requests to store session information
      */
+
+    // Essentially takes all of the information and puts it into a JSON array
+    // and sends it back to the client
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        // Checks to see if a session has been set up --> this is done by the login filter
         HttpSession session = request.getSession();
-        String sessionId = session.getId();
-        long lastAccessTime = session.getLastAccessedTime();
-
+        User customer = (User) session.getAttribute("user");
+        JsonArray previousItemsJsonArray = new JsonArray();
         JsonObject responseJsonObject = new JsonObject();
-        responseJsonObject.addProperty("sessionID", sessionId);
-        responseJsonObject.addProperty("lastAccessTime", new Date(lastAccessTime).toString());
+        if (customer != null) {
+            // Start adding items into JSON Object
 
-        /**
-         * What we will do is create a map that will store the movie name and the number of copies the
-         * user ordered
-         */
-
-        HashMap<String, Integer> previousItems = (HashMap<String, Integer>) session.getAttribute("previousItems");
-        if (previousItems.isEmpty()) {
-            previousItems = new HashMap();
+        }
+        else {
+            responseJsonObject.add("Movies", previousItemsJsonArray);
         }
 
-        // Now here, we convert the map into a JsonObject
-        Gson gson = new Gson();
-        Type gsonType = new TypeToken<HashMap>(){}.getType();
-        String strResponseJsonObject = gson.toJson(previousItems, gsonType);
 
-        response.getWriter().write(strResponseJsonObject);
+        // write all the data into the jsonObject
+        response.getWriter().write(responseJsonObject.toString());
     }
 
     /**
@@ -57,30 +50,26 @@ public class ShoppingCartServlet extends HttpServlet {
         System.out.println(item);
         HttpSession session = request.getSession();
 
-        // get the previous items in a HashMap
-        HashMap<String, Integer> previousItems = (HashMap<String, Integer>) session.getAttribute("previousItems");
-        if (previousItems.isEmpty()) {
-            previousItems = new HashMap();
-            previousItems.put(item, 1);
+        // get the previous items in a ArrayList
+        ArrayList<String> previousItems = (ArrayList<String>) session.getAttribute("previousItems");
+        if (previousItems == null) {
+            previousItems = new ArrayList<>();
+            previousItems.add(item);
             session.setAttribute("previousItems", previousItems);
         } else {
             // prevent corrupted states through sharing under multi-threads
             // will only be executed by one thread at a time
             synchronized (previousItems) {
-                if(previousItems.containsKey(item)) {
-                    previousItems.put(item, previousItems.get(item) + 1);
-                } else {
-                    previousItems.put(item, 1);
-                }
+                previousItems.add(item);
             }
         }
 
-        // Now here, we convert the map into a JsonObject
-        Gson gson = new Gson();
-        Type gsonType = new TypeToken<HashMap>(){}.getType();
-        String strResponseJsonObject = gson.toJson(previousItems, gsonType);
+        JsonObject responseJsonObject = new JsonObject();
 
-        response.getWriter().write(strResponseJsonObject);
+        JsonArray previousItemsJsonArray = new JsonArray();
+        previousItems.forEach(previousItemsJsonArray::add);
+        responseJsonObject.add("previousItems", previousItemsJsonArray);
 
+        response.getWriter().write(responseJsonObject.toString());
     }
 }
