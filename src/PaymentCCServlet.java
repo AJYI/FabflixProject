@@ -50,16 +50,17 @@ public class PaymentCCServlet extends HttpServlet {
 
             // Only needed if we want to save user info for session
             // request.getSession().setAttribute("user", new User(email));
+            System.out.println("Hello Sucess");
 
             jsonObject.addProperty("status", "success");
             jsonObject.addProperty("message", "success");
         }
         else{
+            System.out.println("Hello Fail");
             //We had a login fail
             jsonObject.addProperty("status", "fail");
             // We don't want to notify the user if it's either id or password for security reasons
             jsonObject.addProperty("message", "Incorrect information; please enter again");
-
         }
 
         // set response status to 200 (OK)

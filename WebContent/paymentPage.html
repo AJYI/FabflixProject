@@ -1,93 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="shoppingCart.css" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Payment Page</title>
-</head>
-<body>
-<nav class="navbar">
-  <ul>
-    <li class="logo">FabFlix</li>
-    <div class="menu-items">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="browse.html">Browse</a></li>
-      <li><a href="advancedSearch.html">Advanced Search</a></li>
-      <li><a href="shoppingCart.html">Checkout</a></li>
-    </div>
-    <li class="search-bar">
-      <form action="movieList.html" method="GET">
-        <input
-                type="search"
-                placeholder="Explore Movies"
-                name="movieTitle"
-        />
-        <button type="submit"><i class="fas fa-search"></i></button>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="paymentPage.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Payment Page</title>
+  </head>
+  <body>
+    <nav class="navbar">
+      <ul>
+        <li class="logo">FabFlix</li>
+        <div class="menu-items">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="browse.html">Browse</a></li>
+          <li><a href="advancedSearch.html">Advanced Search</a></li>
+          <li><a href="shoppingCart.html">Checkout</a></li>
+        </div>
+        <li class="search-bar">
+          <form action="movieList.html" method="GET">
+            <input
+              type="search"
+              placeholder="Explore Movies"
+              name="movieTitle"
+            />
+            <button type="submit"><i class="fas fa-search"></i></button>
+          </form>
+        </li>
+      </ul>
+    </nav>
+
+    <h2 style="text-align: center">Enter Your Information:</h2>
+    <p class ="error" id ="#error"></p>
+    <p class="totalPrompt">Total: <p id=#total> </p></p>
+
+    <div class="center" style="text-align: center">
+      <form id="credit_card_form" method="POST" action="#">
+        <table class="center">
+          <tr>
+            <td>First Name:</td>
+            <td>
+              <input
+                type="text"
+                name="firstName"
+                id="firstName"
+                placeholder="firstName"
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>Last Name:</td>
+            <td>
+              <input
+                type="text"
+                name="lastName"
+                id="lastName"
+                placeholder="lastName"
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>Credit Card Number:</td>
+            <td>
+              <input
+                type="text"
+                name="creditCard"
+                id="creditCard"
+                placeholder="creditCard"
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>Expiration Date (yyyy-mm-dd):</td>
+            <td>
+              <input
+                type="text"
+                name="expDate"
+                id="expDate"
+                placeholder="expDate"
+              />
+            </td>
+          </tr>
+        </table>
+
+        <div class="button">
+          <input type="submit" value="Place Order" class="button" />
+        </div>
       </form>
-    </li>
-  </ul>
-</nav>
 
-<h2 style="text-align: center">Please Enter Your Information:</h2>
+      <div id="cc_error_message"></div>
+    </div>
 
-  <div class="center" style="text-align: center">
-    <form id="credit_card_form" method="post" action="#">
-      <table class="center">
-        <tr>
-          <td>First Name: </td>
-          <td>
-            <input
-                    type="text"
-                    name="firstName"
-                    id="firstName"
-                    placeholder="firstName"
-            />
-          </td>
-        </tr>
-        <tr>
-          <td>Last Name: </td>
-          <td>
-            <input
-                    type="text"
-                    name="lastName"
-                    id="lastName"
-                    placeholder="lastName"
-            />
-          </td>
-        </tr>
-        <tr>
-          <td>Credit Card Number: </td>
-          <td>
-            <input
-                    type="text"
-                    name="creditCard"
-                    id="creditCard"
-                    placeholder="creditCard"
-            />
-          </td>
-        </tr>
-        <tr>
-          <td>Expiration Date (yyyy-mm-dd): </td>
-          <td>
-            <input
-                    type="text"
-                    name="expDate"
-                    id="expDate"
-                    placeholder="expDate"
-            />
-          </td>
-      </table>
-      <div class="button">
-        <input type="submit" value="Submit" class="button" />
-      </div>
-    </form>
-
-    <div id="cc_error_message"></div>
-  </div>
-
-<script src="/api/payment"></script>
-</body>
+    <script src="/api/payment"></script>
+  </body>
 </html>

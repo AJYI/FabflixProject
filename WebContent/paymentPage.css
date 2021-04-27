@@ -1,13 +1,25 @@
 .center {
-    margin-right: auto;
-    margin-left: auto;
+  margin-right: auto;
+  margin-left: auto;
 }
 
-
 h2 {
-    text-align: center;
+  text-align: center;
 }
 
 .button {
-    text-align: center;
+  text-align: center;
+}
+
+.totalPrompt {
+  text-align: center;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.error {
+  text-align: center;
+  color: red;
+  margin-right: auto;
+  margin-left: auto;
 }
