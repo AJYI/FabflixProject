@@ -14,7 +14,7 @@ import java.io.IOException;
  * This IndexServlet is declared in the web annotation below,
  * which is mapped to the URL pattern /api/index.
  */
-@WebServlet(name = "IndexServlet", urlPatterns = "/api/shopping")
+@WebServlet(name = "ShoppingCartServlet", urlPatterns = "/api/shopping")
 public class ShoppingCartServlet extends HttpServlet {
 
     /**
