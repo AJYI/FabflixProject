@@ -97,7 +97,7 @@ function handleResult(resultData) {
   if (resultData[0]["movie_rating"] == null) {
     resultData[0]["movie_rating"] = "No Rating";
   }
-  rowHTML += "<th>" + resultData[0]["movie_rating"] + "</th>" + "</tr>";
+  rowHTML += "<th>" + resultData[0]["movie_rating"] + "</th>";
 
   rowHTML += "<th>" +
       "<p>" +
@@ -107,7 +107,9 @@ function handleResult(resultData) {
       + "Add To Cart"
       + "</a>"
       + "</p>"
-      + "</th>";
+      + "</th>"
+
+  rowHTML += "</tr>";
 
   movieBody.append(rowHTML);
 }
