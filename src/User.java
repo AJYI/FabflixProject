@@ -33,6 +33,6 @@ public class User {
 //        totalPrice = cart.getTotalCartPrice();
 //        return totalPrice;
 //    }
-//
+
 
 }
