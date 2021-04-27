@@ -10,10 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-/**
- * This IndexServlet is declared in the web annotation below,
- * which is mapped to the URL pattern /api/index.
- */
 @WebServlet(name = "ShoppingCartServlet", urlPatterns = "/api/shopping")
 public class ShoppingCartServlet extends HttpServlet {
 
