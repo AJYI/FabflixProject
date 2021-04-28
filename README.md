@@ -6,7 +6,7 @@ This project is a movie list web application. This application is made up of thr
 
 This video is a recording of a demonstration of our project on Amazon Web Services (AWS). In the video, we clone our git repository to our AWS instance, then build and populate our MySQL database with the the movie-data.sql file. Our web application is then deployed on an AWS instance. We then demonstrate how our web application works by navigating through the site.
 Video URL PROJECT 1: [Video Link](https://drive.google.com/file/d/1s6JTrQert-9AaPNvnPzMKgnN08Rd1UaK/view?usp=sharing)
-Video URL PROJECT 2: [Video Link]()
+Video URL PROJECT 2: [Video Link](https://www.youtube.com/watch?v=oDBuBBeYzPM)
 
 ### How to deploy the application using Tomcat
 
