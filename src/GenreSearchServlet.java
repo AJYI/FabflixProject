@@ -69,7 +69,7 @@ public class GenreSearchServlet extends HttpServlet {
                         "left join ratings r on r.movieId = m.id\n" +
                         "where genID.movieId = m.id AND m.id = sim.movieId AND sim.starId = s.id AND gim.movieId = genId.movieId AND gim.genreId = g.id\n" +
                         "group by title\n";
-                System.out.println("Hi");
+
                 if(sort1.equals("TA")){
                     System.out.println("HI I AM HERE"+ sort2);
                     if(sort2.equals("RA")){

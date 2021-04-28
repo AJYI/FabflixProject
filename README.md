@@ -5,7 +5,8 @@ This project is a movie list web application. This application is made up of thr
 ### Demo Video URL
 
 This video is a recording of a demonstration of our project on Amazon Web Services (AWS). In the video, we clone our git repository to our AWS instance, then build and populate our MySQL database with the the movie-data.sql file. Our web application is then deployed on an AWS instance. We then demonstrate how our web application works by navigating through the site.
-Video URL: [Video Link](https://drive.google.com/file/d/1s6JTrQert-9AaPNvnPzMKgnN08Rd1UaK/view?usp=sharing)
+Video URL PROJECT 1: [Video Link](https://drive.google.com/file/d/1s6JTrQert-9AaPNvnPzMKgnN08Rd1UaK/view?usp=sharing)
+Video URL PROJECT 2: [Video Link]()
 
 ### How to deploy the application using Tomcat
 
@@ -17,3 +18,15 @@ Video URL: [Video Link](https://drive.google.com/file/d/1s6JTrQert-9AaPNvnPzMKgn
 ### Each member's contribution to Project 1
 
 Due to finding out that we were supposed to git push our progress right after we finished the project, we got an old copy of our workspace and pushed our new workspace on it. While doing that, we tried to mimic how we incrementally worked on this project. Hopefully this doesn't become an issue. On the next project, we will make sure we git push our progress. In terms of contribution, the project was well balanced and fair for both team members.
+
+### Each member's contribution to Project 2
+
+Although this project has not been completed even after using the 24 hr grace period, our group contribution was still 50-50. Currently the parts that are NOT WORKING is pagination with N results, and adding into shopping cart (However, most of the shpping cart is implemented).
+
+### Substring matching design:
+
+Within title search: All of the queries that were prepared statement were in the format of "Letter%" because since we're finding movies based on title, the only thing important is the first character.
+
+Within Genre search: There was no search based on substring
+
+Within Advanced Search: All of the queries withing search is "%string%. This is because when users search for movies, they might forget some keywords. For example, if someone searched Batman, and were expecting the results of "The Batman", then there would be not results for that. Same applies for the movie star and movie director.

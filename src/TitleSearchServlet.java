@@ -138,7 +138,7 @@ public class TitleSearchServlet extends HttpServlet {
             }
 
             else if (c1 == 'R'){
-                if(titleStart.equals("*")){
+                if(titleStart.equals("Star")){
                     String query = "select m.title as 'title', m.id as 'movieID', m.year as 'year', m.director as 'director', r.rating as 'rating',\n" +
                             "substring_index(group_concat(distinct g.name), ',', 3) 'genres',\n" +
                             "substring_index(group_concat(distinct s.name), ',', 3) 'actors',\n" +
@@ -214,7 +214,7 @@ public class TitleSearchServlet extends HttpServlet {
 
             // General Case
             else{
-                if(titleStart.equals("*")){
+                if(titleStart.equals("Star")){
                     String query = "select m.title as 'title', m.id as 'movieID', m.year as 'year', m.director as 'director', r.rating as 'rating',\n" +
                             "substring_index(group_concat(distinct g.name), ',', 3) 'genres',\n" +
                             "substring_index(group_concat(distinct s.name), ',', 3) 'actors',\n" +

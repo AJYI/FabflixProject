@@ -73,6 +73,9 @@ function handleMovieResult(resultData) {
         "</p>";
     }
     rowHTML += "</th>";
+    if (resultData[i]["movie_rating"] === null){
+      resultData[i]["movie_rating"] = "N/A";
+    }
     rowHTML += "<th>" + resultData[i]["movie_rating"] + "</th>";
 
     rowHTML +=
