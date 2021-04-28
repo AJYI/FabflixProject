@@ -67,7 +67,7 @@ public class GenreSearchServlet extends HttpServlet {
                         "from genres g, genres_in_movies gim, (select distinct gim.movieId from genres g, genres_in_movies gim where g.id = gim.genreId and g.name = ?) as genID, \n" +
                         "stars_in_movies sim, stars s, movies m\n" +
                         "left join ratings r on r.movieId = m.id\n" +
-                        "where genID.movieId = m.id AND m.id = sim.movieId AND sim.starId = s.id AND gim.movieId = genId.movieId AND gim.genreId = g.id\n" +
+                        "where genID.movieId = m.id AND m.id = sim.movieId AND sim.starId = s.id AND gim.movieID = genId.movieId AND gim.genreId = g.id\n" +
                         "group by title\n";
 
                 if(sort1.equals("TA")){
@@ -106,7 +106,7 @@ public class GenreSearchServlet extends HttpServlet {
                         "from genres g, genres_in_movies gim, (select distinct gim.movieId from genres g, genres_in_movies gim where g.id = gim.genreId and g.name = ?) as genID, \n" +
                         "stars_in_movies sim, stars s, movies m\n" +
                         "left join ratings r on r.movieId = m.id\n" +
-                        "where genID.movieId = m.id AND m.id = sim.movieId AND sim.starId = s.id AND gim.movieId = genId.movieId AND gim.genreId = g.id\n" +
+                        "where genID.movieId = m.id AND m.id = sim.movieId AND sim.starId = s.id AND gim.movieID = genId.movieId AND gim.genreId = g.id\n" +
                         "group by title\n";
 
                 if(sort1.equals("RA")){
@@ -143,7 +143,7 @@ public class GenreSearchServlet extends HttpServlet {
                         "from genres g, genres_in_movies gim, (select distinct gim.movieId from genres g, genres_in_movies gim where g.id = gim.genreId and g.name = ?) as genID, \n" +
                         "stars_in_movies sim, stars s, movies m\n" +
                         "left join ratings r on r.movieId = m.id\n" +
-                        "where genID.movieId = m.id AND m.id = sim.movieId AND sim.starId = s.id AND gim.movieId = genId.movieId AND gim.genreId = g.id\n" +
+                        "where genID.movieId = m.id AND m.id = sim.movieId AND sim.starId = s.id AND gim.movieId = genID.movieId AND gim.genreId = g.id\n" +
                         "group by title\n";
 
                 statement = conn.prepareStatement(query);
