@@ -47,16 +47,14 @@ public class MainPageServlet extends HttpServlet {
             Statement statement = conn.createStatement();
 
             // prepare query
-            String query = "SELECT m.title as 'title', m.id as 'movieId', m.year as 'year', m.director as 'director', r.rating as 'rating',\n" +
-                    "        substring_index(group_concat(distinct g.name), ',', 3) 'genres',\n" +
-                    "        substring_index(group_concat(distinct s.name), ',', 3) 'actors',\n" +
-                    "        substring_index(group_concat(distinct s.id order by s.name), ',', 3) 'starId'\n" +
-                    "        FROM (SELECT r.rating, r.movieId from ratings r order by r.rating desc limit 20) as r,\n" +
-                    "        movies m, genres_in_movies gim, genres g, stars_in_movies sim, stars s\n" +
-                    "        where r.movieId = m.id AND m.id = gim.movieId AND gim.genreId = g.id AND m.id = sim.movieId AND sim.starID = s.id\n" +
-                    "        group by m.title\n" +
-                    "        order by r.rating desc, m.title asc\n" +
-                    "        limit 20";
+            String query = "select m.title as 'title', m.year as 'year', m.director as 'director', r.rating as 'rating',\n" +
+                    "group_concat(distinct g.name) as 'genres',\n" +
+                    "group_concat(distinct s.name) as 'actors'\n" +
+                    "From (select r.rating, r.movieId from ratings r order by r.rating desc limit 20) r,movies m, genres_in_movies gim, genres g, stars_in_movies sim, stars s\n" +
+                    "where r.movieId = m.id AND m.id = gim.movieId and gim.genreId = g.id AND m.id = sim.movieId AND sim.starId = s.id\n" +
+                    "group by m.title\n" +
+                    "order by r.rating desc\n" +
+                    "limit 20";
 
             // Perform the query
             ResultSet rs = statement.executeQuery(query);
@@ -65,25 +63,25 @@ public class MainPageServlet extends HttpServlet {
 
             // Iterate through each row of rs
             while (rs.next()) {
-                String movieID = rs.getString("movieId");
+                //String movieID = rs.getString("movieId");
                 String movieTitle = rs.getString("title");
                 String movieYear = rs.getString("year");
                 String movieDirector = rs.getString("director");
                 String movieGenre = rs.getString("genres");
                 String movieActors = rs.getString("actors");
                 String movieRating = rs.getString("rating");
-                String starID = rs.getString("starId");
+                //String starID = rs.getString("starId");
 
                 // Create a JsonObject based on the data we retrieve from rs
                 JsonObject jsonObject = new JsonObject();
-                jsonObject.addProperty("movie_id", movieID);
+                //jsonObject.addProperty("movie_id", movieID);
                 jsonObject.addProperty("movie_title", movieTitle);
                 jsonObject.addProperty("movie_year", movieYear);
                 jsonObject.addProperty("movie_director", movieDirector);
                 jsonObject.addProperty("movie_genre", movieGenre);
                 jsonObject.addProperty("movie_actors", movieActors);
                 jsonObject.addProperty("movie_rating", movieRating);
-                jsonObject.addProperty("star_id", starID);
+                //jsonObject.addProperty("star_id", starID);
 
                 jsonArray.add(jsonObject);
             }

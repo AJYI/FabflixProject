@@ -17,7 +17,7 @@ import java.sql.ResultSet;
 import java.sql.PreparedStatement;
 
 
-@WebServlet(name = "advancedSearchResultServlet", urlPatterns = "/advancedSearchResult")
+@WebServlet(name = "advancedSearchResultServlet", urlPatterns = "/AdvancedSearchPages/advancedSearchResult")
 public class AdvancedSearchResultServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -42,8 +42,8 @@ public class AdvancedSearchResultServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
 
         // Get a instance of current session on the request
-        SessionURL.printPreviousSession(request);
         SessionURL.rememberSession(request);
+        SessionURL.printCurrentSession(request);
 
         // Get a connection from dataSource and let resource manager close the connection after usage.
         try (Connection conn = dataSource.getConnection()) {
@@ -345,6 +345,5 @@ public class AdvancedSearchResultServlet extends HttpServlet {
         } finally {
             out.close();
         }
-        // always remember to close db connection after usage. Here it's done by try-with-resources
     }
 }

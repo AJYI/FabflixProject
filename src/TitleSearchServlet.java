@@ -15,7 +15,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
 
-@WebServlet(name = "titleSearchServlet", urlPatterns = "/titleSearch")
+@WebServlet(name = "titleSearchServlet", urlPatterns = "/BrowsePages/titleSearch")
 public class TitleSearchServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -40,8 +40,8 @@ public class TitleSearchServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
 
         // Get a instance of current session on the request
-        SessionURL.printPreviousSession(request);
         SessionURL.rememberSession(request);
+        SessionURL.printCurrentSession(request);
 
         // Get a connection from dataSource and let resource manager close the connection after usage.
         try (Connection conn = dataSource.getConnection()) {

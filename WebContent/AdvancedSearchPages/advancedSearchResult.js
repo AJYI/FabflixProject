@@ -44,8 +44,7 @@ function handleMovieResult(resultData) {
       "<th>" +
       // Adding a link to the movie
       '<a href=' +
-      resultData[i]["movie_id"] +
-      '"MovieInformation/movie.html?id=">' +
+      '../MovieInformation/movie.html?id=' + resultData[i]["movie_id"] + '>' +
       resultData[i]["movie_title"] +
       "</a>" +
       "</th>";
@@ -66,8 +65,7 @@ function handleMovieResult(resultData) {
         "<p>" +
         // Adding a link to the movie
         '<a href=' +
-        actorIdArr[j] +
-        '"MovieInformation/star.html?id=">' +
+        '../MovieInformation/star.html?id=' + actorIdArr[j] + '>' +
         movieActorArr[j] +
         "</a>" +
         "</p>";
@@ -102,7 +100,7 @@ let sort2 = getParameterByName("sort2");
 jQuery.ajax({
   dataType: "json", // Setting return data type
   method: "GET", // Setting request method
-  url:
-    "advancedSearchResult?movieTitle=" + movieTitle + "&movieYear=" + movieYear + "&movieDirector=" + movieDirector + "&movieStar=" + movieStar + "&sort1=" + sort1 + "&sort2=" + sort2,
+  url: // Calls the AdvancedSearchResultSevlet
+    "./advancedSearchResult?movieTitle=" + movieTitle + "&movieYear=" + movieYear + "&movieDirector=" + movieDirector + "&movieStar=" + movieStar + "&sort1=" + sort1 + "&sort2=" + sort2,
   success: (resultData) => handleMovieResult(resultData), // Setting callback function to handle data returned successfully by the MovieListServlet
 });

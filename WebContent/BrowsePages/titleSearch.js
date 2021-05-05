@@ -41,14 +41,14 @@ function handleMovieResult(resultData) {
     let rowHTML = "";
     rowHTML += "<tr>";
     rowHTML +=
-      "<th>" +
-      // Adding a link to the movie
-      '<a href="movie.html?id=' +
-      resultData[i]["movie_id"] +
-      '">' +
-      resultData[i]["movie_title"] +
-      "</a>" +
-      "</th>";
+        "<th>" +
+        // Adding a link to the movie
+        '<a href=' +
+        "../MovieInformation/movie.html?id=" + resultData[i]["movie_id"] + '>' +
+        resultData[i]["movie_title"] +
+        "</a>" +
+        "</th>";
+
     rowHTML += "<th>" + resultData[i]["movie_year"] + "</th>";
     rowHTML += "<th>" + resultData[i]["movie_director"] + "</th>";
     //rowHTML += "<th>" + resultData[i]["movie_genre"] + "</th>";
@@ -60,8 +60,9 @@ function handleMovieResult(resultData) {
 
     for (let j in movArr){
       rowHTML +=
-          "<a>" +
-          '<a href="genreSearch.html?genre=' + movArr[j] + '">' + movArr[j] + "</a>" + "</p>";
+          "<p>" +
+          '<a href=genreSearch.html?genre=' + movArr[j] + '>' + movArr[j] + "</a>" +
+          "</p>";
     }
     rowHTML += "</th>";
 
@@ -73,14 +74,14 @@ function handleMovieResult(resultData) {
 
     for (let j in actorIdArr) {
       rowHTML +=
-        "<p>" +
-        // Adding a link to the movie
-        '<a href="star.html?id=' +
-        actorIdArr[j] +
-        '">' +
-        movieActorArr[j] +
-        "</a>" +
-        "</p>";
+          "<p>" +
+          // Adding a link to the movie
+          '<a href=' +
+          '../MovieInformation/star.html?id=' +  actorIdArr[i] +
+          '>' +
+          movieActorArr[j] +
+          "</a>" +
+          "</p>";
     }
     rowHTML += "</th>";
 
@@ -110,6 +111,6 @@ let sort2 = getParameterByName("sort2");
 jQuery.ajax({
   dataType: "json", // Setting return data type
   method: "GET", // Setting request method
-  url: "titleSearch?titleStart=" + titleStart + "&sort1=" + sort1 + "&sort2=" + sort2, // Setting request url, which is mapped by MovieListServlet in MovieListServlet.java
+  url: "./titleSearch?titleStart=" + titleStart + "&sort1=" + sort1 + "&sort2=" + sort2, // Setting request url, which is mapped by MovieListServlet in MovieListServlet.java
   success: (resultData) => handleMovieResult(resultData), // Setting callback function to handle data returned successfully by the MovieListServlet
 });

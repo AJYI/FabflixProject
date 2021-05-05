@@ -15,7 +15,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
 
-@WebServlet(name = "genreServlet", urlPatterns = "/genreSearch")
+@WebServlet(name = "genreServlet", urlPatterns = "/BrowsePages/genreSearch")
 public class GenreSearchServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -40,8 +40,8 @@ public class GenreSearchServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
 
         // Get a instance of current session on the request
-        SessionURL.printPreviousSession(request);
         SessionURL.rememberSession(request);
+        SessionURL.printCurrentSession(request);
 
         // Get a connection from dataSource and let resource manager close the connection after usage.
         try (Connection conn = dataSource.getConnection()) {
@@ -52,7 +52,7 @@ public class GenreSearchServlet extends HttpServlet {
             String sort1 = request.getParameter("sort1");
             String sort2 = request.getParameter("sort2");
 
-            System.out.println(sort1 + " " + sort2);
+            System.out.println(movieGenre + sort1 + " " + sort2);
 
             PreparedStatement statement;
             char c1 = ' ';

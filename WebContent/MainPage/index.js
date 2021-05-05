@@ -35,17 +35,24 @@ function handleMovieResult(resultData) {
       "</th>";
     rowHTML += "<th>" + resultData[i]["movie_year"] + "</th>";
     rowHTML += "<th>" + resultData[i]["movie_director"] + "</th>";
-    rowHTML += "<th>" + resultData[i]["movie_genre"] + "</th>";
+
+    //Splitting movie genres
+    //rowHTML += "<th>" + resultData[i]["movie_genre"] + "</th>";
+    rowHTML += "<th>";
+    let genres = resultData[i]["movie_genre"];
+    let genresArr = genres.split(",");
+    for (let j in genresArr){
+      rowHTML += "<p>" + genresArr[j] + "</p>";
+    }
+    rowHTML += "</th>";
 
     // Need a way to split this
 
     rowHTML += "<th>";
-    let starIds = resultData[i]["star_id"];
-    let actorIdArr = starIds.split(",");
     let movieActors = resultData[i]["movie_actors"];
     let movieActorArr = movieActors.split(",");
 
-    for (let j in actorIdArr) {
+    for (let j in movieActorArr) {
       rowHTML +=
         "<p>" +
         // Adding a link to the movie
@@ -59,7 +66,7 @@ function handleMovieResult(resultData) {
     rowHTML += "</th>";
     rowHTML += "<th>" + resultData[i]["movie_rating"] + "</th>";
     rowHTML +=
-        "<th>" + '<a href="AddedToCart.html?id=' + resultData[i]["movie_id"] + '"><button onclick="addToCart()">Add To Cart</button></a>' + "</th>";
+        "<th>" + '<a href=' + resultData[i]["movie_id"] + '"../AddedToCart.html?id="><button onclick="addToCart()">Add To Cart</button></a>' + "</th>";
     rowHTML += "</tr>";
 
     // Append the row created to the table body, which will refresh the page

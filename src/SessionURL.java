@@ -25,4 +25,10 @@ public class SessionURL {
         }
         return sessionURL;
     }
+
+    public static void printCurrentSession(HttpServletRequest request){
+        HttpSession session = request.getSession(true);
+        String sessionURL = (String) session.getAttribute("sessionURL");
+        System.out.println("current sessionURL= "+ sessionURL);
+    }
 }

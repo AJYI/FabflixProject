@@ -68,7 +68,7 @@ function handleResult(resultData) {
   for (let j in movArr){
     rowHTML +=
         "<p>" +
-        '<a href=' + movArr[j] + '"BrowsePages/genreSearch.html?genre=">' + movArr[j] + "</a>" + "</p>";
+        '<a href=../BrowsePages/genreSearch.html?genre=' + movArr[j] +'>' + movArr[j] + "</a>" + "</p>";
   }
   rowHTML += "</th>";
 
@@ -85,9 +85,7 @@ function handleResult(resultData) {
   for (let i in starsArr) {
     rowHTML +=
       "<p>" +
-      '<a href=' +
-      starIdArr[i] +
-      '"MovieInformation/star.html?id=">' +
+      '<a href=star.html?id=' + starIdArr[i] + '>' +
       starsArr[i] +
       "</a>" +
       "</p>";
@@ -125,6 +123,6 @@ let movieId = getParameterByName("id");
 jQuery.ajax({
   dataType: "json", // Setting return data type
   method: "GET", // Setting request method
-  url: "api/movie?id=" + movieId, // Setting request url, which is mapped by StarsServlet in Stars.java
+  url: "./movie?id=" + movieId, // Setting request url, which is mapped by StarsServlet in Stars.java
   success: (resultData) => handleResult(resultData), // Setting callback function to handle data returned successfully by the SingleStarServlet
 });

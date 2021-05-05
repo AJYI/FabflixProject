@@ -1,18 +1,23 @@
 .center {
-     margin-left: auto;
-     margin-right: auto;
- }
-
-main div h1 {
-    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
 }
-
 th a {
-     text-decoration: none;
-     color: #30475e;
- }
+    text-decoration: none;
+    color: #30475e;
+}
 
 th a:hover{
     text-decoration: underline;
     color: #f05454;
+}
+
+main div h1{
+    padding-top:10px;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+tr th{
+    padding:10px;
 }

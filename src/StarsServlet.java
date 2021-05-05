@@ -16,7 +16,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-@WebServlet(name = "StarsServlet", urlPatterns = "/api/star")
+@WebServlet(name = "StarsServlet", urlPatterns = "/MovieInformation/star")
 public class StarsServlet extends HttpServlet {
     private static final long serialVersionUID = 2L;
 
@@ -99,8 +99,5 @@ public class StarsServlet extends HttpServlet {
         } finally {
             out.close();
         }
-
-        // always remember to close db connection after usage. Here it's done by try-with-resources
     }
-
 }
