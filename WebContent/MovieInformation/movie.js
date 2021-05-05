@@ -68,7 +68,7 @@ function handleResult(resultData) {
   for (let j in movArr){
     rowHTML +=
         "<p>" +
-        '<a href="genreSearch.html?genre=' + movArr[j] + '">' + movArr[j] + "</a>" + "</p>";
+        '<a href=' + movArr[j] + '"BrowsePages/genreSearch.html?genre=">' + movArr[j] + "</a>" + "</p>";
   }
   rowHTML += "</th>";
 
@@ -85,9 +85,9 @@ function handleResult(resultData) {
   for (let i in starsArr) {
     rowHTML +=
       "<p>" +
-      '<a href="star.html?id=' +
+      '<a href=' +
       starIdArr[i] +
-      '">' +
+      '"MovieInformation/star.html?id=">' +
       starsArr[i] +
       "</a>" +
       "</p>";

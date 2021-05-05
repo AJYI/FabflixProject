@@ -20,7 +20,6 @@ function handleLoginResult(resultDataString) {
         console.log("show error message");
         console.log(resultDataJson["message"]);
         $("#login_error_message").text(resultDataJson["message"]);
-        $("#login_error_message").css('color','red');
     }
 }
 

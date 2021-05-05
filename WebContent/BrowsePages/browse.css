@@ -1,6 +1,5 @@
 .title {
   text-align: center;
-  text-decoration: underline;
   padding: 50px 0px 20px 0px;
 }
 
@@ -22,4 +21,9 @@
 .center-table tr th a:hover {
   color: #f05454;
   text-decoration: underline;
+}
+
+.horizontalLine{
+  width:75%;
+  margin:auto;
 }

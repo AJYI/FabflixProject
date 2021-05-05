@@ -43,9 +43,9 @@ function handleMovieResult(resultData) {
     rowHTML +=
       "<th>" +
       // Adding a link to the movie
-      '<a href="movie.html?id=' +
+      '<a href=' +
       resultData[i]["movie_id"] +
-      '">' +
+      '"MovieInformation/movie.html?id=">' +
       resultData[i]["movie_title"] +
       "</a>" +
       "</th>";
@@ -65,9 +65,9 @@ function handleMovieResult(resultData) {
       rowHTML +=
         "<p>" +
         // Adding a link to the movie
-        '<a href="star.html?id=' +
+        '<a href=' +
         actorIdArr[j] +
-        '">' +
+        '"MovieInformation/star.html?id=">' +
         movieActorArr[j] +
         "</a>" +
         "</p>";
