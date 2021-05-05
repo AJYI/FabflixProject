@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <title>FabFlix - Log in</title>
     <link rel="stylesheet" href="LOGIN/login.css" />
+    <script src='https://www.google.com/recaptcha/api.js'></script>
   </head>
 
   <body>
@@ -21,7 +22,7 @@
 
       <div>
         <!--    Gotta change to post soon because of security-->
-        <form id="login_form" method="post" action="#">
+        <form id="login_form" method="post" action="form-recaptcha">
           <table class="credentialCenter">
             <tr>
               <td>Enter Email:</td>
@@ -46,6 +47,9 @@
               </td>
             </tr>
           </table>
+          <div class="outerCaptcha">
+            <div class="g-recaptcha" data-sitekey="6LcfU8caAAAAABXVt9Py5fl4zUdbfXjExlme2wrS"></div>
+          </div>
           <div class="button">
             <input type="submit" value="Log In" class="button" />
           </div>

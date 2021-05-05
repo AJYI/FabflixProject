@@ -79,3 +79,13 @@ nav ul div.menu-items a:hover {
 .button {
   text-align: center;
 }
+
+.g-recaptcha{
+  display:inline-block;
+}
+
+.outerCaptcha{
+  text-align: center;
+  margin-top:15px;
+  margin-bottom:15px;
+}

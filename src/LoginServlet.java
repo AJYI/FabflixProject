@@ -3,15 +3,13 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.servlet.ServletConfig;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 import javax.sql.DataSource;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 
 @WebServlet(name = "LoginServlet", urlPatterns = "/login")
@@ -37,6 +35,16 @@ public class LoginServlet extends HttpServlet {
         /*
         Fetching the id and pass from the url
          */
+        String gRecaptchaResponse = request.getParameter("g-recaptcha-response");
+
+
+        try {
+            RecaptchaVerifyUtils.verify(gRecaptchaResponse);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
         String email = request.getParameter("email");
         String password = request.getParameter("pass");
 
@@ -45,6 +53,9 @@ public class LoginServlet extends HttpServlet {
 
         // Login Success
         if(validateUser(email, password, request)){
+            Cookie c = new Cookie("check", "blah");
+            response.addCookie(c);
+
             jsonObject.addProperty("status", "success");
             jsonObject.addProperty("message", "success");
         }
@@ -79,13 +90,26 @@ public class LoginServlet extends HttpServlet {
 
             // Means found
             if(rs.next()) {
+
+                /*
+                ###########################
+                We set the user here
+                ###########################
+                 */
                 String firstName = rs.getString("c.firstName");
                 String lastName = rs.getString("c.lastName");
                 String customerID = rs.getString("c.id");
-                request.getSession().setAttribute("user", new User(firstName, lastName, customerID));
+                request.getSession().setAttribute("user", new SessionUser(firstName, lastName, customerID));
+
+                /*
+                ###############################################
+                We create the shopping cart session object here
+                ################################################
+                 */
+                SessionCart.initializeCart(request);
 
                 HttpSession session = request.getSession(true);
-                User check = (User) session.getAttribute("user");
+                SessionUser check = (SessionUser) session.getAttribute("user");
                 check.print();
 
                 verified = true;
@@ -105,5 +129,4 @@ public class LoginServlet extends HttpServlet {
         }
         return verified;
     }
-
 }
