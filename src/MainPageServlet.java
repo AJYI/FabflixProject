@@ -12,6 +12,7 @@ import javax.sql.DataSource;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
@@ -43,9 +44,6 @@ public class MainPageServlet extends HttpServlet {
         // Get a connection from dataSource and let resource manager close the connection after usage.
         try (Connection conn = dataSource.getConnection()) {
 
-            // Declare our statement
-            Statement statement = conn.createStatement();
-
             // prepare query
             String query = "select m.title as 'title', m.year as 'year', m.director as 'director', r.rating as 'rating',\n" +
                     "group_concat(distinct g.name) as 'genres',\n" +
@@ -55,6 +53,9 @@ public class MainPageServlet extends HttpServlet {
                     "group by m.title\n" +
                     "order by r.rating desc\n" +
                     "limit 20";
+
+            // Declare our statement
+            PreparedStatement statement = conn.prepareStatement(query);
 
             // Perform the query
             ResultSet rs = statement.executeQuery(query);
