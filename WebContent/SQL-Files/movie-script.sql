@@ -9,8 +9,8 @@ CREATE TABLE IF NOT EXISTS movies (
 CREATE TABLE IF NOT EXISTS stars (
     id VARCHAR(10) NOT NULL,
     name VARCHAR(100) NOT NULL,
-    birthYear INT, 
-    PRIMARY KEY(id) 
+    birthYear INT,
+    PRIMARY KEY(id)
 );
 
 CREATE TABLE IF NOT EXISTS stars_in_movies (
@@ -68,4 +68,10 @@ CREATE TABLE IF NOT EXISTS ratings(
     FOREIGN KEY(movieId) REFERENCES movies(id),
     rating FLOAT NOT NULL,
     numVotes INT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS EMAIL(
+    email  VARCHAR(50) primary key,
+    passs varchar(20) not null,
+    fullname varchar(100)
 );
