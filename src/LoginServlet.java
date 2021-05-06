@@ -1,4 +1,6 @@
 import com.google.gson.JsonObject;
+import org.jasypt.util.password.StrongPasswordEncryptor;
+
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.servlet.ServletConfig;
@@ -77,42 +79,52 @@ public class LoginServlet extends HttpServlet {
         try (Connection conn = dataSource.getConnection()){
             // Preparing the query
             String query = "select c.firstName, c.lastName, c.id, c.email, c.password from customers c \n" +
-                    "where c.email = ? and c.password = ?";
+                    "where c.email = ?";
 
             // Declare our statement
             PreparedStatement statement = conn.prepareStatement(query);
 
             statement.setString(1, email);
-            statement.setString(2, pass);
 
             // Perform the query
             ResultSet rs = statement.executeQuery();
 
-            // Means found
+            boolean success = false;
+            // Means a result has been given
             if(rs.next()) {
+                String encryptedPassword = rs.getString("password");
+                System.out.println(encryptedPassword);
+                success = new StrongPasswordEncryptor().checkPassword(pass, encryptedPassword);
+                System.out.println(success);
 
-                /*
-                ###########################
-                We set the user here
-                ###########################
-                 */
-                String firstName = rs.getString("c.firstName");
-                String lastName = rs.getString("c.lastName");
-                String customerID = rs.getString("c.id");
-                request.getSession().setAttribute("user", new SessionUser(firstName, lastName, customerID));
+                if(success){
+                    /*
+                    ###########################
+                    We set the user here
+                    ###########################
+                     */
+                    String firstName = rs.getString("c.firstName");
+                    String lastName = rs.getString("c.lastName");
+                    String customerID = rs.getString("c.id");
+                    request.getSession().setAttribute("user", new SessionUser(firstName, lastName, customerID));
 
-                /*
-                ###############################################
-                We create the shopping cart session object here
-                ################################################
-                 */
-                SessionCart.initializeCart(request);
+                    /*
+                    ###############################################
+                    We create the shopping cart session object here
+                    ################################################
+                     */
+                    SessionCart.initializeCart(request);
 
-                HttpSession session = request.getSession(true);
-                SessionUser check = (SessionUser) session.getAttribute("user");
-                check.print();
+                    HttpSession session = request.getSession(true);
+                    SessionUser check = (SessionUser) session.getAttribute("user");
+                    check.print();
 
-                verified = true;
+                    verified = true;
+                }
+                else{
+                    verified = false;
+                }
+
             }
             // Not found
             else{
