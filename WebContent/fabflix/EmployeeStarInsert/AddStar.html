@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add a Star</title>
+  </head>
+  <body>
+    <main>
+      <a href="/cs122b_spring21_project1_war/fabflix/employeeDashboard.html">Back To Dashboard</a>
+
+      <form
+        id="AddStarSubmitForm"
+        method="get"
+        action="#"
+      >
+        <table>
+          <tr>
+            <th>Enter the star's name:</th>
+            <th>
+              <input
+                type="text"
+                id="ActorName"
+                name="ActorName"
+                placeholder="John Doe"
+              />
+            </th>
+          </tr>
+          <tr>
+            <th>Enter star's birth year (optional):</th>
+            <th>
+              <input
+                type="text"
+                id="BirthYear"
+                name="BirthYear"
+                placeholder="1990"
+              />
+            </th>
+          </tr>
+        </table>
+        <input type="submit" value="Submit" />
+      </form>
+    </main>
+
+    <script
+      src="https://kit.fontawesome.com/36cadc13cf.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="AddStar.js"></script>
+  </body>
+</html>

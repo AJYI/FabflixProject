@@ -34,6 +34,7 @@ public class LoginServlet extends HttpServlet {
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        System.out.println("in here");
         /*
         Fetching the id and pass from the url
          */
@@ -41,7 +42,7 @@ public class LoginServlet extends HttpServlet {
 
 
         try {
-            RecaptchaVerifyUtils.verify(gRecaptchaResponse);
+            RecaptchaVerifyUtils.verify(gRecaptchaResponse, 0);
         } catch (Exception e) {
             e.printStackTrace();
         }

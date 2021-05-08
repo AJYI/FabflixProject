@@ -70,8 +70,8 @@ CREATE TABLE IF NOT EXISTS ratings(
     numVotes INT NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS EMAIL(
+CREATE TABLE IF NOT EXISTS employees(
     email  VARCHAR(50) primary key,
-    passs varchar(20) not null,
+    password varchar(20) not null,
     fullname varchar(100)
 );

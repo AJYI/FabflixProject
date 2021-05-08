@@ -13,7 +13,7 @@ public class RecaptchaVerifyUtils {
 
     public static final String SITE_VERIFY_URL = "https://www.google.com/recaptcha/api/siteverify";
 
-    public static void verify( String gRecaptchaResponse) throws Exception {
+    public static void verify( String gRecaptchaResponse, int num) throws Exception {
         if (gRecaptchaResponse == null || gRecaptchaResponse.length() == 0) {
             throw new Exception("recaptcha verification failed: gRecaptchaResponse is null or empty");
         }
@@ -29,9 +29,14 @@ public class RecaptchaVerifyUtils {
         conn.setRequestProperty("User-Agent", "Mozilla/5.0");
         conn.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
 
-
+        String postParams;
         // Data will be sent to the server.
-        String postParams = "secret=" + RecaptchaConstants.SECRET_KEY + "&response=" + gRecaptchaResponse;
+        if(num == 0){
+            postParams = "secret=" + RecaptchaConstants.SECRET_KEY + "&response=" + gRecaptchaResponse;
+        }
+        else{
+            postParams = "secret=" + RecaptchaConstants.SECRET_KEY2 + "&response=" + gRecaptchaResponse;
+        }
 
         // Send Request
         conn.setDoOutput(true);

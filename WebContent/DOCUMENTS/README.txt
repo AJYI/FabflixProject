@@ -8,5 +8,5 @@ as color files, or anything that doesn't relate to coding.
 We will use database to hold shopping cart
 https://stackoverflow.com/questions/2827764/ecommerceshopping-cartwhere-should-i-store-shopping-cart-data-in-session-or
 
-For Running UpdateSecurePassword.java:
+For Running :
 https://www.quora.com/How-can-I-run-a-single-file-in-IntelliJ-Java
