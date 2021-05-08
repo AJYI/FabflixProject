@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Employee Log In</title>
+    <link rel="stylesheet" href="employeeLogin.css" />
+    <script src="https://www.google.com/recaptcha/api.js"></script>
+  </head>
+
+  <body>
+    <nav class="navbar">
+      <ul>
+        <li class="logo">Employee Log in</li>
+      </ul>
+    </nav>
+
+    <main>
+      <div class="loginIntro">
+        <h1>Login</h1>
+        <p id="login_error_message"></p>
+      </div>
+
+      <div>
+        <!--    Gotta change to post soon because of security-->
+        <form id="login_form" method="post" action="form-recaptcha">
+          <table class="credentialCenter">
+            <tr>
+              <td>Enter Email:</td>
+              <td>
+                <input
+                  type="text"
+                  name="email"
+                  id="email"
+                  placeholder="Email"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>Enter Password:</td>
+              <td>
+                <input
+                  type="password"
+                  name="pass"
+                  id="password"
+                  placeholder="Password"
+                />
+              </td>
+            </tr>
+          </table>
+          <div class="outerCaptcha">
+            <div
+              class="g-recaptcha"
+              data-sitekey="6LcfU8caAAAAABXVt9Py5fl4zUdbfXjExlme2wrS"
+            ></div>
+          </div>
+          <div class="button">
+            <input type="submit" value="Log In" class="button" />
+          </div>
+        </form>
+      </div>
+    </main>
+
+    <!-- include jQuery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- include our own JS file -->
+    <script src="employeeLogin.js"></script>
+  </body>
+</html>
