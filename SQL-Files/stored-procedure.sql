@@ -1,4 +1,5 @@
 -- some stored procedures here
+-- This procedure gets the largest star ID within the star database
 -- DELIMITER $$
 --
 -- CREATE PROCEDURE getLargestStarId()
@@ -9,3 +10,4 @@
 -- DELIMITER ;
 
 -- call getLargestStarId()
+
