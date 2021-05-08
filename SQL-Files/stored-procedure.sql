@@ -1,0 +1,11 @@
+-- some stored procedures here
+-- DELIMITER $$
+--
+-- CREATE PROCEDURE getLargestStarId()
+-- BEGIN
+-- 	select MAX(s.id) as maxID from stars s;
+-- END $$
+--
+-- DELIMITER ;
+
+-- call getLargestStarId()
