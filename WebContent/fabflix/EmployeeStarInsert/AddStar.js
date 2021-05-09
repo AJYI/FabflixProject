@@ -10,7 +10,8 @@ function handleEmployeeResult(resultDataString) {
 
   // If login succeeds, it will redirect the user to index.html
   if (resultDataJson["status"] === "success") {
-    alert("Sucessfully added to the database");
+    alert("Successfully added to the database\n" +
+    "New starID: " + resultDataJson["id"]);
   } else {
     // If login fails, the web page will display
     // error messages on <div> with id "login_error_message"

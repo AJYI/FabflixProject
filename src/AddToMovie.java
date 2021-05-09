@@ -18,7 +18,7 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.Random;
 
-@WebServlet(name = "AddToStar", urlPatterns = "/fabflix/NewMovie/addMovie")
+@WebServlet(name = "AddToMovie", urlPatterns = "/fabflix/NewMovie/addMovie")
 public class AddToMovie extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -39,7 +39,7 @@ public class AddToMovie extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        System.out.println("HI");
+        //.out.println("HI");
 
         response.setContentType("application/json"); // Response mime type
 
@@ -65,10 +65,10 @@ public class AddToMovie extends HttpServlet {
             statement.setString(3, movieTitle);
             statement.setInt(4, Integer.parseInt(movieYear));
             statement.setString(5, directorName);
-            System.out.println("in here2");
+            //System.out.println("in here2");
             ResultSet rs = statement.executeQuery();
 
-            System.out.println("in here");
+            //System.out.println("in here");
             // Getting ResultSet
             rs.next();
             JsonObject jsonObject = new JsonObject();
@@ -110,8 +110,6 @@ public class AddToMovie extends HttpServlet {
             response.setStatus(200);
             response.getWriter().write(jsonObject.toString());
         }
-
         // always remember to close db connection after usage. Here it's done by try-with-resources
     }
-
 }

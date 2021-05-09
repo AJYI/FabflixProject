@@ -103,6 +103,7 @@ public class AddToStar extends HttpServlet {
 
             jsonObject.addProperty("status", "success");
             jsonObject.addProperty("message", "success");
+            jsonObject.addProperty("id", newID);
 
             // set response status to 200 (OK)
             response.setStatus(200);
