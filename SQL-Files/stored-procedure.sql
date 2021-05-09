@@ -186,3 +186,18 @@ DELIMITER ;
 -- END
 -- $$
 -- DELIMITER ;
+
+
+
+-- Stored procedure for adding single star
+DROP PROCEDURE IF EXISTS createNewStarID
+DELIMITER $$
+CREATE PROCEDURE createNewStarID(IN s_name varchar(100), IN s_year INT)
+BEGIN
+    DECLARE maxID varchar(10);
+    SET maxID := (select REPLACE(max(s.id), SUBSTRING(max(s.id), 4), CONVERT(SUBSTRING(max(s.id), 4),UNSIGNED INTEGER) + 1) from stars s);
+    INSERT INTO stars VALUES(maxID, s_name, s_year);
+    select maxID;
+END
+$$
+DELIMITER ;
