@@ -52,7 +52,10 @@ public class StarsServlet extends HttpServlet {
             String query = "select s.name as 'starName', s.birthYear as 'birthYear',\n" +
                     "group_concat(m.title order by m.year DESC separator '|') as 'movies',\n" +
                     "group_concat(m.id order by m.year DESC separator '|') as 'movieID'\n" +
-                    "from movies m, stars s, stars_in_movies sim where sim.starId = s.id and s.id = ? and m.id = sim.movieId\n" +
+                    "from stars s\n" +
+                    "left join stars_in_movies sim on sim.starId = s.id\n" +
+                    "left join movies m on m.id = sim.movieId\n" +
+                    "where s.id = ?\n" +
                     "order by m.year desc";
 
             // Declare our statement

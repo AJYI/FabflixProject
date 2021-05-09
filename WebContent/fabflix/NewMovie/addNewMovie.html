@@ -1,10 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add a Movie</title>
+  </head>
+  <body>
+    <main>
+      <div class="backToDashboard">
+        <a href="/cs122b_spring21_project1_war/fabflix/employeeDashboard.html"
+          >Back To Dashboard</a
+        >
+      </div>
+
+      <form id="AddMovieSubmitForm" method="get" action="#">
+        <table>
+          <tr>
+            <th>Enter the movie title:</th>
+            <th>
+              <input
+                type="text"
+                id="movieTitle"
+                name="movieTitle"
+                placeholder="Title"
+              />
+            </th>
+          </tr>
+          <tr>
+            <th>Enter the director of the movie:</th>
+            <th>
+              <input
+                type="text"
+                id="directorName"
+                name="directorName"
+                placeholder="John Doe"
+              />
+            </th>
+          </tr>
+          <tr>
+            <th>Enter the year the movie was made:</th>
+            <th>
+              <input
+                type="text"
+                id="movieYear"
+                name="movieYear"
+                placeholder="1996"
+              />
+            </th>
+          </tr>
+          <tr>
+            <th>Enter the genre of the movie:</th>
+            <th>
+              <input type="text" id="genre" name="genre" placeholder="Drama" />
+            </th>
+          </tr>
+          <tr>
+            <th>Enter the star's name:</th>
+            <th>
+              <input type="text" id="star" name="star" placeholder="John Doe" />
+            </th>
+          </tr>
+        </table>
+        <input type="submit" value="Submit" />
+      </form>
+    </main>
+
+    <script
+      src="https://kit.fontawesome.com/36cadc13cf.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="addNewMovie.js"></script>
+  </body>
 </html>
