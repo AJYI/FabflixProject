@@ -16,7 +16,6 @@ public class MoviesParser extends DefaultHandler {
     private Movies tempMovie;
     private DirectorFilms tempDirFilms;
     List<DirectorFilms> directorFilms;
-    List<String> inconsistencies;
 
     public MoviesParser() {
         directorFilms = new ArrayList<DirectorFilms>();
