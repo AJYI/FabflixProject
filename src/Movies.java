@@ -51,19 +51,20 @@ public class Movies {
     public String toString() {
         StringBuffer sb = new StringBuffer();
         sb.append("Movie Details - ");
+        sb.append("\n");
         sb.append("Movie ID:" + getId());
-        sb.append(", ");
+        sb.append("\n");
         sb.append("Movie Title:" + getTitle());
-        sb.append(", ");
+        sb.append("\n");
         sb.append("Movie Year:" + getYear());
-        sb.append(", ");
+        sb.append("\n");
         sb.append("Movie Genre: " + getGenre());
-        sb.append(", ");
-        sb.append("Movie Actors: ");
-        for(Actors actor : getActors()){
-            sb.append(actor.toString());
-            sb.append("\n");
-        }
+        sb.append("\n");
+//        sb.append("Movie Actors: ");
+//        for(Actors actor : getActors()){
+//            sb.append(actor.toString());
+//            sb.append("\n");
+//        }
 
         return sb.toString();
     }

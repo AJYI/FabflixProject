@@ -3,6 +3,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+
 public class MoviesCast {
     String title, id;
     //List<String> actors;
@@ -38,11 +39,13 @@ public class MoviesCast {
     public String toString() {
         StringBuffer sb = new StringBuffer();
         sb.append("Movie Cast Details - ");
+        sb.append("\n");
         sb.append("Movie ID: " + getId());
-        sb.append(", ");
+        sb.append("\n");
         sb.append("Movie Title:" + getTitle());
-        sb.append(", ");
+        sb.append("\n");
         sb.append("Movie Actors: ");
+        sb.append("\n");
         for(String actor : getActors()){
             sb.append(actor.toString());
             sb.append("\n");
