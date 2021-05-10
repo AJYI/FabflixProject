@@ -17,13 +17,15 @@ public class ActorsParser extends DefaultHandler {
     List<Actors> actorsList;
     private Actors tempActor;
     private String tempVal;
+    List<String> listOfInconsistencies;
 
     public ActorsParser() {
         actorsList = new ArrayList<Actors>();
+        listOfInconsistencies = new ArrayList<String>();
     }
 
     private void parseDocument(){
-        //get a factory
+        // get a factory
         SAXParserFactory spf = SAXParserFactory.newInstance();
         try {
             //get a new instance of parser
@@ -46,8 +48,16 @@ public class ActorsParser extends DefaultHandler {
         System.out.println("No of Actors '" + actorsList.size() + "'.");
 
         Iterator<Actors> it = actorsList.iterator();
+        Iterator<String> incons = listOfInconsistencies.iterator();
+
         while (it.hasNext()) {
             System.out.println(it.next().toString());
+        }
+
+        System.out.println("All inconsistencies found: ");
+
+        while (incons.hasNext()) {
+            System.out.println(incons.next().toString());
         }
     }
 
@@ -74,7 +84,7 @@ public class ActorsParser extends DefaultHandler {
             // Add the directorFilm object to the List of directorFilms
             try {
                 actorsList.add(tempActor);
-                System.out.println("Added another Actor to actorsList");
+//                System.out.println("Added another Actor to actorsList");
             } catch (Exception e) {
                 System.out.println("Error in adding Actors to actorsList");
             }
@@ -83,6 +93,7 @@ public class ActorsParser extends DefaultHandler {
             try {
                 tempActor.setName(tempVal);
             } catch (Exception e) {
+                listOfInconsistencies.add("Actor Name (<stagename>): " + tempVal);
                 System.out.println("Error in setting actor's name - tempVal " + tempVal);
             }
         } else if (qName.equalsIgnoreCase("dob")) {
@@ -90,11 +101,13 @@ public class ActorsParser extends DefaultHandler {
             try {
                 tempActor.setBirthYear(Integer.parseInt(tempVal));
             } catch (Exception e) {
+                if (!tempVal.isEmpty()) {
+                    listOfInconsistencies.add("Actor Year Of Birth (<dob>): " + tempVal);
+                }
+//                tempActor.setBirthYear(null);
                 System.out.println("Error in setting actor's year of birth - tempVal " + tempVal);
             }
         }
-
-
     }
 
     public static void main(String[] args) {

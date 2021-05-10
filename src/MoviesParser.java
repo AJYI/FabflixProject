@@ -16,9 +16,11 @@ public class MoviesParser extends DefaultHandler {
     private Movies tempMovie;
     private DirectorFilms tempDirFilms;
     List<DirectorFilms> directorFilms;
+    List<String> listOfInconsistencies;
 
     public MoviesParser() {
         directorFilms = new ArrayList<DirectorFilms>();
+        listOfInconsistencies = new ArrayList<String>();
     }
 
     // SAX Parser
@@ -46,8 +48,16 @@ public class MoviesParser extends DefaultHandler {
         System.out.println("No of DirectorFilms '" + directorFilms.size() + "'.");
 
         Iterator<DirectorFilms> it = directorFilms.iterator();
+        Iterator<String> incons = listOfInconsistencies.iterator();
+
         while (it.hasNext()) {
             System.out.println(it.next().toString());
+        }
+
+        System.out.println("All inconsistencies found: ");
+
+        while (incons.hasNext()) {
+            System.out.println(incons.next().toString());
         }
     }
 
@@ -81,7 +91,7 @@ public class MoviesParser extends DefaultHandler {
             // Add the directorFilm object to the List of directorFilms
             try {
                 directorFilms.add(tempDirFilms);
-                System.out.println("Added another tempDirFilms to directorFilms");
+                // System.out.println("Added another tempDirFilms to directorFilms");
             } catch (Exception e) {
                 System.out.println("Error in adding tempDirFilms to list of directorFilms");
             }
@@ -98,6 +108,7 @@ public class MoviesParser extends DefaultHandler {
             try {
                 tempDirFilms.setDirectorName(tempVal);
             } catch (Exception e) {
+                listOfInconsistencies.add("Director Name (<dirname>): " + tempVal);
                 System.out.println("Error in adding tempFilm to tempDirectorFilms - tempVal: " + tempVal);
             }
         } else if (qName.equalsIgnoreCase("fid")) {
@@ -105,6 +116,7 @@ public class MoviesParser extends DefaultHandler {
             try {
                 tempMovie.setId(tempVal);
             } catch (Exception e) {
+                listOfInconsistencies.add("ID (<id>): " + tempVal);
                 System.out.println("Error in adding tempFilm to tempDirectorFilms - tempVal: " + tempVal);
             }
         } else if (qName.equalsIgnoreCase("t")) {
@@ -112,6 +124,7 @@ public class MoviesParser extends DefaultHandler {
             try {
                 tempMovie.setTitle(tempVal);
             } catch (Exception e) {
+                listOfInconsistencies.add("Movie Title (<t>): " + tempVal);
                 System.out.println("Error in adding tempFilm to tempDirectorFilms - tempVal: " + tempVal);
             }
         } else if (qName.equalsIgnoreCase("year")) {
@@ -119,6 +132,7 @@ public class MoviesParser extends DefaultHandler {
             try {
                 tempMovie.setYear(Integer.parseInt(tempVal));
             } catch (Exception e) {
+                listOfInconsistencies.add("Movie Year (<year>): " + tempVal);
                 tempMovie.setYear(null);
                 System.out.println("Error in adding tempFilm to tempDirectorFilms - tempVal: " + tempVal);
             }
@@ -126,6 +140,7 @@ public class MoviesParser extends DefaultHandler {
             try {
                 tempMovie.setGenre(tempVal);
             } catch (Exception e) {
+                listOfInconsistencies.add("Movie Genre (<cat>): " + tempVal);
                 System.out.println("Error in adding tempFilm to tempDirectorFilms - tempVal: " + tempVal);
             }
         }
