@@ -45,7 +45,7 @@ public class MoviesParser extends DefaultHandler {
 
     private void printData(){
 
-        System.out.println("No of DirectorFilms '" + directorFilms.size() + "'.");
+        System.out.println("Number of Movies Inserted '" + directorFilms.size() + "'.");
 
         Iterator<DirectorFilms> it = directorFilms.iterator();
         Iterator<String> incons = listOfInconsistencies.iterator();
@@ -54,8 +54,8 @@ public class MoviesParser extends DefaultHandler {
             System.out.println(it.next().toString());
         }
 
-        System.out.println("All inconsistencies found: ");
-
+        System.out.println("Number of inconsistencies found in mains243.xml: '" + listOfInconsistencies.size() + "'.");
+        System.out.println("All inconsistencies found in mains243.xml: ");
         while (incons.hasNext()) {
             System.out.println(incons.next().toString());
         }

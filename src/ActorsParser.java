@@ -45,7 +45,7 @@ public class ActorsParser extends DefaultHandler {
 
     private void printData(){
 
-        System.out.println("No of Actors '" + actorsList.size() + "'.");
+        System.out.println("Number of Actors Inserted: '" + actorsList.size() + "'.");
 
         Iterator<Actors> it = actorsList.iterator();
         Iterator<String> incons = listOfInconsistencies.iterator();
@@ -54,8 +54,8 @@ public class ActorsParser extends DefaultHandler {
             System.out.println(it.next().toString());
         }
 
-        System.out.println("All inconsistencies found: ");
-
+        System.out.println("Number of inconsistencies found in actors63.xml: '" + listOfInconsistencies.size() + "'.");
+        System.out.println("All inconsistencies found in actors63.xml: ");
         while (incons.hasNext()) {
             System.out.println(incons.next().toString());
         }
