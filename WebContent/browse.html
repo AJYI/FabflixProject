@@ -99,89 +99,98 @@
 
         <div class="movie-genre-table">
           <!-- Id "star_table" is useful for jQuery to find the html element with id, class here is mapping to Bootstrap defined class CSS -->
-          <table class="center-table">
+          <table class="center-table" id ="genreListBody">
             <!-- Create a table header -->
-            <tr>
-              <!-- Titles of each column-->
-              <th>
-                <a href="BrowsePages/genreSearch.html?genre=Action">Action</a>
-              </th>
-              <th>
-                <a href="BrowsePages/genreSearch.html?genre=Adult">Adult</a>
-              </th>
-              <th>
-                <a href="BrowsePages/genreSearch.html?genre=Adventure">Adventure</a>
-              </th>
-              <th>
-                <a href="BrowsePages/genreSearch.html?genre=Animation">Animation</a>
-              </th>
-              <th>
-                <a href="BrowsePages/genreSearch.html?genre=Biography">Biography</a>
-              </th>
-              <th>
-                <a href="BrowsePages/genreSearch.html?genre=Comedy">Comedy</a>
-              </th>
-            </tr>
-            <tr>
-              <th>
-                <a href="BrowsePages/genreSearch.html?genre=Crime">Crime</a>
-              </th>
-              <th>
-                <a href="BrowsePages/genreSearch.html?genre=Documentary">Documentary</a>
-              </th>
-              <th>
-                <a href="BrowsePages/genreSearch.html?genre=Drama">Drama</a>
-              </th>
-              <th>
-                <a href="BrowsePages/genreSearch.html?genre=Family">Family</a>
-              </th>
-              <th>
-                <a href="BrowsePages/genreSearch.html?genre=Fantasy">Fantasy</a>
-              </th>
-              <th>
-                <a href="BrowsePages/genreSearch.html?genre=History">History</a>
-              </th>
-            </tr>
-            <tr>
-              <th>
-                <a href="BrowsePages/genreSearch.html?genre=Horror">Horror</a>
-              </th>
-              <th>
-                <a href="BrowsePages/genreSearch.html?genre=Music">Music</a>
-              </th>
-              <th>
-                <a href="BrowsePages/genreSearch.html?genre=Musical">Musical</a>
-              </th>
-              <th>
-                <a href="BrowsePages/genreSearch.html?genre=Mystery">Mystery</a>
-              </th>
-              <th>
-                <a href="BrowsePages/genreSearch.html?genre=Reality-TV">Reality-TV</a>
-              </th>
-              <th>
-                <a href="BrowsePages/genreSearch.html?genre=Romance">Romance</a>
-              </th>
-            </tr>
-            <tr>
-              <th>
-                <a href="BrowsePages/genreSearch.html?genre=Sci-Fi">Sci-Fi</a>
-              </th>
-              <th>
-                <a href="BrowsePages/genreSearch.html?genre=Sport">Sport</a>
-              </th>
-              <th>
-                <a href="BrowsePages/genreSearch.html?genre=Thriller">Thriller</a>
-              </th>
-              <th>
-                <a href="BrowsePages/genreSearch.html?genre=War">War</a>
-              </th>
-              <th>
-                <a href="BrowsePages/genreSearch.html?genre=Western">Western</a>
-              </th>
-            </tr>
+
+<!--            <tr>-->
+<!--              &lt;!&ndash; Titles of each column&ndash;&gt;-->
+<!--              <th>-->
+<!--                <a href="BrowsePages/genreSearch.html?genre=Action">Action</a>-->
+<!--              </th>-->
+<!--              <th>-->
+<!--                <a href="BrowsePages/genreSearch.html?genre=Adult">Adult</a>-->
+<!--              </th>-->
+<!--              <th>-->
+<!--                <a href="BrowsePages/genreSearch.html?genre=Adventure">Adventure</a>-->
+<!--              </th>-->
+<!--              <th>-->
+<!--                <a href="BrowsePages/genreSearch.html?genre=Animation">Animation</a>-->
+<!--              </th>-->
+<!--              <th>-->
+<!--                <a href="BrowsePages/genreSearch.html?genre=Biography">Biography</a>-->
+<!--              </th>-->
+<!--              <th>-->
+<!--                <a href="BrowsePages/genreSearch.html?genre=Comedy">Comedy</a>-->
+<!--              </th>-->
+<!--            </tr>-->
+<!--            <tr>-->
+<!--              <th>-->
+<!--                <a href="BrowsePages/genreSearch.html?genre=Crime">Crime</a>-->
+<!--              </th>-->
+<!--              <th>-->
+<!--                <a href="BrowsePages/genreSearch.html?genre=Documentary">Documentary</a>-->
+<!--              </th>-->
+<!--              <th>-->
+<!--                <a href="BrowsePages/genreSearch.html?genre=Drama">Drama</a>-->
+<!--              </th>-->
+<!--              <th>-->
+<!--                <a href="BrowsePages/genreSearch.html?genre=Family">Family</a>-->
+<!--              </th>-->
+<!--              <th>-->
+<!--                <a href="BrowsePages/genreSearch.html?genre=Fantasy">Fantasy</a>-->
+<!--              </th>-->
+<!--              <th>-->
+<!--                <a href="BrowsePages/genreSearch.html?genre=History">History</a>-->
+<!--              </th>-->
+<!--            </tr>-->
+<!--            <tr>-->
+<!--              <th>-->
+<!--                <a href="BrowsePages/genreSearch.html?genre=Horror">Horror</a>-->
+<!--              </th>-->
+<!--              <th>-->
+<!--                <a href="BrowsePages/genreSearch.html?genre=Music">Music</a>-->
+<!--              </th>-->
+<!--              <th>-->
+<!--                <a href="BrowsePages/genreSearch.html?genre=Musical">Musical</a>-->
+<!--              </th>-->
+<!--              <th>-->
+<!--                <a href="BrowsePages/genreSearch.html?genre=Mystery">Mystery</a>-->
+<!--              </th>-->
+<!--              <th>-->
+<!--                <a href="BrowsePages/genreSearch.html?genre=Reality-TV">Reality-TV</a>-->
+<!--              </th>-->
+<!--              <th>-->
+<!--                <a href="BrowsePages/genreSearch.html?genre=Romance">Romance</a>-->
+<!--              </th>-->
+<!--            </tr>-->
+<!--            <tr>-->
+<!--              <th>-->
+<!--                <a href="BrowsePages/genreSearch.html?genre=Sci-Fi">Sci-Fi</a>-->
+<!--              </th>-->
+<!--              <th>-->
+<!--                <a href="BrowsePages/genreSearch.html?genre=Sport">Sport</a>-->
+<!--              </th>-->
+<!--              <th>-->
+<!--                <a href="BrowsePages/genreSearch.html?genre=Thriller">Thriller</a>-->
+<!--              </th>-->
+<!--              <th>-->
+<!--                <a href="BrowsePages/genreSearch.html?genre=War">War</a>-->
+<!--              </th>-->
+<!--              <th>-->
+<!--                <a href="BrowsePages/genreSearch.html?genre=Western">Western</a>-->
+<!--              </th>-->
+<!--            </tr>-->
+
+
           </table>
         </div>
       </div>
     </main>
+    <!-- Load jQuery and Bootstrap JS -->
+    <script src="https://kit.fontawesome.com/36cadc13cf.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="BrowsePages/browse.js"></script>
   </body>
 </html>
