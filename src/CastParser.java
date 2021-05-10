@@ -44,7 +44,7 @@ public class CastParser extends DefaultHandler {
 
     private void printData(){
 
-        System.out.println("No of Movies '" + moviesList.size() + "'.");
+        System.out.println("Number of Movies Inserted: '" + moviesList.size() + "'.");
 
         Iterator<MoviesCast> it = moviesList.iterator();
         Iterator<String> incons = listOfInconsistencies.iterator();
@@ -53,7 +53,8 @@ public class CastParser extends DefaultHandler {
             System.out.println(it.next().toString());
         }
 
-        System.out.println("All inconsistencies found: ");
+        System.out.println("Number of inconsistencies found in casts124.xml: '" + listOfInconsistencies.size() + "'.");
+        System.out.println("All inconsistencies found in casts124.xml: ");
 
         while (incons.hasNext()) {
             System.out.println(incons.next().toString());
