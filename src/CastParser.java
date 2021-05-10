@@ -10,6 +10,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import java.io.FileWriter;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 
 public class CastParser extends DefaultHandler {
 
@@ -17,6 +22,8 @@ public class CastParser extends DefaultHandler {
     private MoviesCast tempMovieCast;
     List<MoviesCast> moviesList;
     List<String> listOfInconsistencies;
+    FileWriter fw;
+    // FileWriter errors;
 
     public CastParser() {
         moviesList = new ArrayList<MoviesCast>();
@@ -26,7 +33,12 @@ public class CastParser extends DefaultHandler {
     private void parseDocument(){
         //get a factory
         SAXParserFactory spf = SAXParserFactory.newInstance();
+
         try {
+            // Set up file to write into
+            fw = new FileWriter("FinalResults.txt");
+            // errors = new FileWriter("Inconsistencies.txt");
+
             //get a new instance of parser
             SAXParser sp = spf.newSAXParser();
 
@@ -42,23 +54,30 @@ public class CastParser extends DefaultHandler {
         }
     }
 
-    private void printData(){
+    private void printData() {
 
         System.out.println("Number of Movies Inserted: '" + moviesList.size() + "'.");
 
         Iterator<MoviesCast> it = moviesList.iterator();
         Iterator<String> incons = listOfInconsistencies.iterator();
 
-        while (it.hasNext()) {
-            System.out.println(it.next().toString());
+        try {
+            while (it.hasNext()) {
+                fw.write(it.next().toString());
+                System.out.println(it.next().toString());
+            }
+
+            System.out.println("Number of inconsistencies found in casts124.xml: '" + listOfInconsistencies.size() + "'.");
+            System.out.println("All inconsistencies found in casts124.xml: ");
+
+            while (incons.hasNext()) {
+                // errors.write(incons.next().toString());
+                System.out.println(incons.next().toString());
+            }
+        } catch (Exception e) {
+            System.out.println("Error in writing data");
         }
 
-        System.out.println("Number of inconsistencies found in casts124.xml: '" + listOfInconsistencies.size() + "'.");
-        System.out.println("All inconsistencies found in casts124.xml: ");
-
-        while (incons.hasNext()) {
-            System.out.println(incons.next().toString());
-        }
     }
 
     public void runExample() {
@@ -79,6 +98,10 @@ public class CastParser extends DefaultHandler {
     }
 
     public void endElement(String uri, String localName, String qName) throws SAXException {
+        Pattern pattern = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
+        Matcher matcher;
+        boolean foundSpec;
+
         if(qName.equalsIgnoreCase("filmc")) {
             try {
                 moviesList.add(tempMovieCast);
@@ -87,23 +110,39 @@ public class CastParser extends DefaultHandler {
             }
         } else if (qName.equalsIgnoreCase("f")) {
             try {
-                tempMovieCast.setId(tempVal);
+                matcher = pattern.matcher(tempVal);
+                foundSpec = matcher.find();
+                if(!foundSpec) {
+                    tempMovieCast.setId(tempVal);
+                }
             } catch (Exception e) {
                 listOfInconsistencies.add("Movie ID (<f>): " + tempVal);
+                tempMovieCast.setId(null);
                 System.out.println("Error in adding Id to tempMoviesCast - tempVal: " + tempVal);
             }
         } else if (qName.equalsIgnoreCase("t")) {
             try {
-                tempMovieCast.setTitle(tempVal);
+                matcher = pattern.matcher(tempVal);
+                foundSpec = matcher.find();
+                if(!foundSpec) {
+                    tempMovieCast.setTitle(tempVal);
+                }
             } catch (Exception e) {
                 listOfInconsistencies.add("Movie Title(<t>): " + tempVal);
+                tempMovieCast.setTitle(null);
                 System.out.println("Error in adding Title to tempMoviesCast - tempVal: " + tempVal);
             }
         } else if (qName.equalsIgnoreCase("a")) {
             try {
-                tempMovieCast.addActor(tempVal);
+                matcher = pattern.matcher(tempVal);
+                foundSpec = matcher.find();
+                if(!foundSpec) {
+                    tempMovieCast.addActor(tempVal);
+                }
             } catch (Exception e) {
                 listOfInconsistencies.add("Movie Actor (<a>): " + tempVal);
+                tempMovieCast.addActor(null);
+                System.out.println("Special character found. Setting actor to null");
                 System.out.println("Failure in adding Actor to tempMoviesCast - tempVal: " + tempVal);
             }
         }
