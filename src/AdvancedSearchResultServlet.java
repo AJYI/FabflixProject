@@ -118,7 +118,7 @@ public class AdvancedSearchResultServlet extends HttpServlet {
 
                     statement = conn.prepareStatement(query);
                     statement.setString(1, "%" + movieStar + "%");
-                    statement.setString(2,  "%" + movieTitle + "%");
+                    statement.setString(2,  movieTitle + "%");
                     statement.setString(3,  "%" + movieDirector + "%");
 
                 }
@@ -160,7 +160,7 @@ public class AdvancedSearchResultServlet extends HttpServlet {
                     statement = conn.prepareStatement(query);
 
                     statement.setString(1, "%" + movieStar + "%");
-                    statement.setString(2,  "%" + movieTitle + "%");
+                    statement.setString(2,  movieTitle + "%");
                     statement.setString(3,  "%" + movieDirector + "%");
                     statement.setString(4,  movieYear);
                 }
@@ -205,7 +205,7 @@ public class AdvancedSearchResultServlet extends HttpServlet {
 
                     statement = conn.prepareStatement(query);
                     statement.setString(1, "%" + movieStar + "%");
-                    statement.setString(2,  "%" + movieTitle + "%");
+                    statement.setString(2,  movieTitle + "%");
                     statement.setString(3,  "%" + movieDirector + "%");
 
                 }
@@ -246,7 +246,7 @@ public class AdvancedSearchResultServlet extends HttpServlet {
                     statement = conn.prepareStatement(query);
 
                     statement.setString(1, "%" + movieStar + "%");
-                    statement.setString(2,  "%" + movieTitle + "%");
+                    statement.setString(2,  movieTitle + "%");
                     statement.setString(3,  "%" + movieDirector + "%");
                     statement.setString(4,  movieYear);
                 }
@@ -266,7 +266,7 @@ public class AdvancedSearchResultServlet extends HttpServlet {
                             "group by title\n";
                     statement = conn.prepareStatement(query);
                     statement.setString(1, "%" + movieStar + "%");
-                    statement.setString(2,  "%" + movieTitle + "%");
+                    statement.setString(2,  movieTitle + "%");
                     statement.setString(3,  "%" + movieDirector + "%");
 
                 }
@@ -283,7 +283,7 @@ public class AdvancedSearchResultServlet extends HttpServlet {
                     statement = conn.prepareStatement(query);
 
                     statement.setString(1, "%" + movieStar + "%");
-                    statement.setString(2,  "%" + movieTitle + "%");
+                    statement.setString(2,  movieTitle + "%");
                     statement.setString(3,  "%" + movieDirector + "%");
                     statement.setString(4,  movieYear);
                 }
