@@ -101,7 +101,7 @@ public class ActorsParser extends DefaultHandler {
             try {
                 tempActor.setBirthYear(Integer.parseInt(tempVal));
             } catch (Exception e) {
-                if (!tempVal.equals(null)) {
+                if (!tempVal.isEmpty()) {
                     listOfInconsistencies.add("Actor Year Of Birth (<dob>): " + tempVal);
                 }
 //                tempActor.setBirthYear(null);
