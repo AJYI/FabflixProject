@@ -38,35 +38,36 @@ public class EmployeeLoginServlet extends HttpServlet {
         /*
         Fetching the id and pass from the url
          */
+        JsonObject jsonObject = new JsonObject();
         String gRecaptchaResponse = request.getParameter("g-recaptcha-response");
-
 
         try {
             RecaptchaVerifyUtils.verify(gRecaptchaResponse, 1);
+            String email = request.getParameter("email");
+            String password = request.getParameter("pass");
+
+            // Will be used in either login success/fail
+
+
+            System.out.println("Up to here");
+
+            // Login Success
+            if(validateUser(email, password, request)){
+                jsonObject.addProperty("status", "success");
+                jsonObject.addProperty("message", "success");
+            }
+            else{
+                //We had a login fail
+                jsonObject.addProperty("status", "fail");
+                // We don't want to notify the user if it's either id or password for security reasons
+                jsonObject.addProperty("message", "Incorrect credentials!");
+
+            }
         } catch (Exception e) {
             e.printStackTrace();
-        }
-
-
-        String email = request.getParameter("email");
-        String password = request.getParameter("pass");
-
-        // Will be used in either login success/fail
-        JsonObject jsonObject = new JsonObject();
-
-        System.out.println("Up to here");
-
-        // Login Success
-        if(validateUser(email, password, request)){
-            jsonObject.addProperty("status", "success");
-            jsonObject.addProperty("message", "success");
-        }
-        else{
-            //We had a login fail
-            jsonObject.addProperty("status", "fail");
+            jsonObject.addProperty("status", "ReCaptchaFail");
             // We don't want to notify the user if it's either id or password for security reasons
-            jsonObject.addProperty("message", "Incorrect credentials!");
-
+            jsonObject.addProperty("message", "Verify ReCaptcha");
         }
 
         // set response status to 200 (OK)
