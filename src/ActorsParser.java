@@ -1,7 +1,5 @@
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -14,14 +12,18 @@ import org.xml.sax.helpers.DefaultHandler;
 
 public class ActorsParser extends DefaultHandler {
 
-    List<Actors> actorsList;
+//    List<Actors> actorsList;
+    Set<Actors> actorsList;
     private Actors tempActor;
     private String tempVal;
     List<String> listOfInconsistencies;
+    Set<String> dupes;
 
     public ActorsParser() {
-        actorsList = new ArrayList<Actors>();
+        //actorsList = new ArrayList<Actors>();
+        actorsList = new HashSet<Actors>();
         listOfInconsistencies = new ArrayList<String>();
+        dupes = new HashSet<String>();
     }
 
     private void parseDocument(){
@@ -51,7 +53,8 @@ public class ActorsParser extends DefaultHandler {
         Iterator<String> incons = listOfInconsistencies.iterator();
 
         while (it.hasNext()) {
-            System.out.println(it.next().toString());
+            Actors temp = it.next();
+            System.out.println("NAME: " + temp.getName() + " |BIRTHYEAR: " + temp.getBirthYear());
         }
 
         System.out.println("All inconsistencies found: ");
@@ -83,6 +86,13 @@ public class ActorsParser extends DefaultHandler {
         if (qName.equalsIgnoreCase("actor")) {
             // Add the directorFilm object to the List of directorFilms
             try {
+                if(dupes.contains(tempActor.getName())){
+                    System.out.println("###############WARNING############################\n"
+                            + tempActor.getName());
+                }
+
+                dupes.add(tempActor.getName());
+
                 actorsList.add(tempActor);
 //                System.out.println("Added another Actor to actorsList");
             } catch (Exception e) {

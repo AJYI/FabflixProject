@@ -1,13 +1,14 @@
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class MoviesCast {
     String title, id;
-    List<String> actors;
+    //List<String> actors;
+    Set<String> actors;
 
-    public MoviesCast() {
-        actors = new ArrayList<String>();
-    }
+    public MoviesCast() { actors = new HashSet<String>(); }
 
     void setId(String id) {
         this.id = id;
@@ -26,7 +27,8 @@ public class MoviesCast {
     }
 
     List<String> getActors() {
-        return actors;
+        List<String> tempList = new ArrayList<>(actors);
+        return tempList;
     }
 
     void addActor(String actor) {
