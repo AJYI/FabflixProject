@@ -10,6 +10,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import java.io.FileWriter;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class MoviesParser extends DefaultHandler {
 
     private String tempVal;
@@ -17,6 +22,8 @@ public class MoviesParser extends DefaultHandler {
     private DirectorFilms tempDirFilms;
     List<DirectorFilms> directorFilms;
     List<String> listOfInconsistencies;
+    FileWriter fw;
+    FileWriter errorWriter;
 
     public MoviesParser() {
         directorFilms = new ArrayList<DirectorFilms>();
@@ -28,6 +35,9 @@ public class MoviesParser extends DefaultHandler {
         //get a factory
         SAXParserFactory spf = SAXParserFactory.newInstance();
         try {
+
+            fw = new FileWriter("Mains243Output.txt");
+            errorWriter = new FileWriter("Mains243Inconsistencies.txt");
             //get a new instance of parser
             SAXParser sp = spf.newSAXParser();
 
@@ -50,14 +60,21 @@ public class MoviesParser extends DefaultHandler {
         Iterator<DirectorFilms> it = directorFilms.iterator();
         Iterator<String> incons = listOfInconsistencies.iterator();
 
-        while (it.hasNext()) {
-            System.out.println(it.next().toString());
-        }
+        try {
+            while (it.hasNext()) {
+                System.out.println(it.next().toString());
+                fw.write(it.next().toString());
+            }
 
-        System.out.println("Number of inconsistencies found in mains243.xml: '" + listOfInconsistencies.size() + "'.");
-        System.out.println("All inconsistencies found in mains243.xml: ");
-        while (incons.hasNext()) {
-            System.out.println(incons.next().toString());
+            System.out.println("Number of inconsistencies found in mains243.xml: '" + listOfInconsistencies.size() + "'.");
+            System.out.println("All inconsistencies found in mains243.xml: ");
+
+            while (incons.hasNext()) {
+                errorWriter.write(incons.next());
+                System.out.println(incons.next());
+            }
+        } catch (Exception e) {
+            System.out.println("Error in writing data to file");
         }
     }
 
@@ -86,6 +103,9 @@ public class MoviesParser extends DefaultHandler {
     }
 
     public void endElement(String uri, String localName, String qName) throws SAXException {
+        Pattern pattern = Pattern.compile("[^a-z0-9,:'+.!/]", Pattern.CASE_INSENSITIVE);
+        Matcher matcher;
+        boolean foundSpec;
 
         if (qName.equalsIgnoreCase("directorfilms")) {
             // Add the directorFilm object to the List of directorFilms
@@ -106,7 +126,11 @@ public class MoviesParser extends DefaultHandler {
         else if(qName.equalsIgnoreCase("dirname")) {
             // Set the name of the director
             try {
-                tempDirFilms.setDirectorName(tempVal);
+                matcher = pattern.matcher(tempVal);
+                foundSpec = matcher.find();
+                if(!foundSpec) {
+                    tempDirFilms.setDirectorName(tempVal);
+                }
             } catch (Exception e) {
                 listOfInconsistencies.add("Director Name (<dirname>): " + tempVal);
                 System.out.println("Error in adding tempFilm to tempDirectorFilms - tempVal: " + tempVal);
@@ -122,7 +146,11 @@ public class MoviesParser extends DefaultHandler {
         } else if (qName.equalsIgnoreCase("t")) {
             // Set the title of the movie
             try {
-                tempMovie.setTitle(tempVal);
+                matcher = pattern.matcher(tempVal);
+                foundSpec = matcher.find();
+                if(!foundSpec) {
+                    tempMovie.setTitle(tempVal);
+                }
             } catch (Exception e) {
                 listOfInconsistencies.add("Movie Title (<t>): " + tempVal);
                 System.out.println("Error in adding tempFilm to tempDirectorFilms - tempVal: " + tempVal);

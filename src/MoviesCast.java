@@ -51,6 +51,7 @@ public class MoviesCast {
             sb.append("\n");
         }
 
+        sb.append("\n");
         return sb.toString();
     }
 

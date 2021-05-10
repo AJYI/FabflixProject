@@ -23,7 +23,7 @@ public class CastParser extends DefaultHandler {
     List<MoviesCast> moviesList;
     List<String> listOfInconsistencies;
     FileWriter fw;
-    // FileWriter errors;
+    FileWriter castErrors;
 
     public CastParser() {
         moviesList = new ArrayList<MoviesCast>();
@@ -36,8 +36,8 @@ public class CastParser extends DefaultHandler {
 
         try {
             // Set up file to write into
-            fw = new FileWriter("FinalResults.txt");
-            // errors = new FileWriter("Inconsistencies.txt");
+            fw = new FileWriter("CastResults.txt");
+            castErrors = new FileWriter("CastInconsistencies.txt");
 
             //get a new instance of parser
             SAXParser sp = spf.newSAXParser();
@@ -71,8 +71,8 @@ public class CastParser extends DefaultHandler {
             System.out.println("All inconsistencies found in casts124.xml: ");
 
             while (incons.hasNext()) {
-                // errors.write(incons.next().toString());
-                System.out.println(incons.next().toString());
+                castErrors.write(incons.next());
+                System.out.println(incons.next());
             }
         } catch (Exception e) {
             System.out.println("Error in writing data");
