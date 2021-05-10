@@ -98,8 +98,10 @@ public class CastParser extends DefaultHandler {
     }
 
     public void endElement(String uri, String localName, String qName) throws SAXException {
-        Pattern pattern = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
+        Pattern pattern = Pattern.compile("[^a-z0-9,:'+.!/]-", Pattern.CASE_INSENSITIVE);
+        Pattern namePattern = Pattern.compile("[^a-z]-", Pattern.CASE_INSENSITIVE);
         Matcher matcher;
+        Matcher nameMatcher;
         boolean foundSpec;
 
         if(qName.equalsIgnoreCase("filmc")) {
@@ -134,8 +136,8 @@ public class CastParser extends DefaultHandler {
             }
         } else if (qName.equalsIgnoreCase("a")) {
             try {
-                matcher = pattern.matcher(tempVal);
-                foundSpec = matcher.find();
+                nameMatcher = namePattern.matcher(tempVal);
+                foundSpec = nameMatcher.find();
                 if(!foundSpec) {
                     tempMovieCast.addActor(tempVal);
                 }

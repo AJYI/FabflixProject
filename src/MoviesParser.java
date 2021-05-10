@@ -103,7 +103,7 @@ public class MoviesParser extends DefaultHandler {
     }
 
     public void endElement(String uri, String localName, String qName) throws SAXException {
-        Pattern pattern = Pattern.compile("[^a-z0-9,:'+.!/]", Pattern.CASE_INSENSITIVE);
+        Pattern pattern = Pattern.compile("[^a-z0-9,:'+.!/]-", Pattern.CASE_INSENSITIVE);
         Matcher matcher;
         boolean foundSpec;
 
