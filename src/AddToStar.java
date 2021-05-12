@@ -54,7 +54,7 @@ public class AddToStar extends HttpServlet {
         try (Connection conn = dataSource.getConnection()) {
             // Get a connection from dataSource
 
-            String query = "call getLargestStarId();";
+            String query = "select s.id as 'maxID' from stars s order by s.id desc limit 1;";
 
             // Perform the query
             PreparedStatement statement = conn.prepareStatement(query);

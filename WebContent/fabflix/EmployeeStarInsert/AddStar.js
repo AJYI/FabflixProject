@@ -27,7 +27,7 @@ function handleEmployeeResult(resultDataString) {
 * @param formSubmitEvent
 */
 function submitForm(formSubmitEvent) {
-  console.log("submit login form");
+  console.log("submit form!");
   /**
    * When users click the submit button, the browser will not direct
    * users to the url defined in HTML form. Instead, it will call this

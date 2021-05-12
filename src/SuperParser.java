@@ -239,5 +239,9 @@ public class SuperParser extends DefaultHandler {
         MoviesParser spe2 = new MoviesParser();
         spe2.runExample();
         spe2.addStarsToDatabase();
+
+        CastParser castParser = new CastParser();
+        castParser.runExample();
+        castParser.addStarsToDatabase();
     }
 }
