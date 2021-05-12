@@ -28,21 +28,24 @@ public class UpdateSecurePassword {
         String loginPasswd = "My6$Password";
         String loginUrl = "jdbc:mysql://localhost:3306/moviedb";
 
+
         Class.forName("com.mysql.jdbc.Driver").newInstance();
         Connection connection = DriverManager.getConnection(loginUrl, loginUser, loginPasswd);
         Statement statement = connection.createStatement();
+
 
         // change the customers table password column from VARCHAR(20) to VARCHAR(128)
         String alterQuery = "ALTER TABLE customers MODIFY COLUMN password VARCHAR(128)";
         int alterResult = statement.executeUpdate(alterQuery);
         System.out.println("altering customers table schema completed, " + alterResult + " rows affected");
 
+
         // get the ID and password for each customer
         String query = "SELECT id, password from customers";
 
         ResultSet rs = statement.executeQuery(query);
 
-        // we use the StrongPasswordEncryptor from jasypt library (Java Simplified Encryption) 
+        // we use the StrongPasswordEncryptor from jasypt library (Java Simplified Encryption)
         //  it internally use SHA-256 algorithm and 10,000 iterations to calculate the encrypted password
         PasswordEncryptor passwordEncryptor = new StrongPasswordEncryptor();
 
