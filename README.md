@@ -43,8 +43,10 @@ out of the database.
 
 
 ### Inconsistent Data Reporting
-All of our inconsistent data was written out to a separate file, found here: InconsistenciesAndDuplicates.txt
+All of our inconsistent data was written out to a separate file, found here: Inconsistencies.txt, CastInconsistencies.txt, and MoviesInconsistencies.txt
 
+### Location of SQL Files
+All SQL files can be found in the folder SQL-Files in the GitHub repository. 
 
 ### Substring matching design:
 
