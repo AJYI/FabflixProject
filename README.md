@@ -13,7 +13,7 @@ Video URL PROJECT 3: [Video Link] ()
 
 1. Clone this repository using `git clone https://github.com/UCI-Chenli-teaching/cs122b-spring21-team-22.git`
 2. Import the project using intellij and choose Maven as the external model
-3. edit the configurations for the tomcat server. Refer to ([canvas](https://canvas.eee.uci.edu/courses/36596/pages/intellij-idea-tomcat-configuration))
+3. Edit the configurations for the tomcat server. Refer to ([canvas](https://canvas.eee.uci.edu/courses/36596/pages/intellij-idea-tomcat-configuration))
 4. Run the server.
 
 ### Each member's contribution to Project 1
@@ -29,15 +29,17 @@ Although this project has not been completed even after using the 24 hr grace pe
 
 
 ### Project 3 Queries W/ Prepared Statements
-These are the file names and links (from GitHub) for our queries with Prepared Statements:
-
-
+This is the file name and link (from GitHub) of the file containing our queries using PreparedStatement:
+- File Name: SuperParser.java
+- GitHub Link: 
 
 
 ### Project 3 Parsing Time Optimization Strategies
-Our first strategy was to create a parser class that could be used to parse all three XML files. We first fetched all data information from the XML files regarding a particular table in our database (e.g., pulling all information regarding actors for the stars table), and stored all information for each table inside a separate hashmap. Before inserting into our database, we checked with the hash table
-to see if the actor or movie already exists inside. If it exists, then we do not insert; if it does, then we insert using batch. Compared to the naive approach, which to us was creating a parsing class for each file, this was much simpler to understand and implement, and made it easier to keep duplicates
-out of the database. 
+Our first strategy was to create a parser class that could be used to parse all three XML files. Even though it was longer, it was better for optimization
+compared to creating a separate parser class tailored for each specific XML file. The parser class we made helped us in our second optimization strategy, in pulling in and inserting information from and to the database.
+
+Our second strategy was to optimize the runtime of our data insertion into the database. In our database insertion function, we first fetched all data information from the XML files regarding a particular table in our database (e.g., pulling all information regarding actors for the stars table), and stored all information for each table inside a separate hashmap. Before inserting into our database, we checked with the hash table to see if the actor or movie already exists inside. If it exists, then we do not insert; if it does, then we insert using batch. Compared to the naive approach, which to us was creating a parsing class for each file, this was much simpler to understand and implement, and made it easier to keep duplicates
+out of the database.
 
 
 ### Inconsistent Data Reporting
