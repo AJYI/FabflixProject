@@ -43,7 +43,7 @@ out of the database.
 
 
 ### Inconsistent Data Reporting
-All of our inconsistent data was written out to a separate file, found here: inconsistencies.txt
+All of our inconsistent data was written out to a separate file, found here: InconsistenciesAndDuplicates.txt
 
 
 ### Substring matching design:
