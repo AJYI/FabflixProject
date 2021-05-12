@@ -28,10 +28,23 @@ Although this project has not been completed even after using the 24 hr grace pe
 For contribution, both members contributed 50-50, with tasks being worked on together.
 
 
-### Project 3 Queries W/ Prepared Statements
-This is the file name and link (from GitHub) of the file containing our queries using PreparedStatement:
-- File Name: SuperParser.java
-- GitHub Link: 
+### List of Files Containing Queries W/ Prepared Statements
+This is a list of all of the files containing queries using PreparedStatement, and links (from GitHub) for each file:
+- SuperParser.java, https://github.com/UCI-Chenli-teaching/cs122b-spring21-team-22/blob/main/src/SuperParser.java
+- CastParser.java, https://github.com/UCI-Chenli-teaching/cs122b-spring21-team-22/blob/main/src/CastParser.java
+- MoviesParser.java, https://github.com/UCI-Chenli-teaching/cs122b-spring21-team-22/blob/main/src/MoviesParser.java
+- AddToStar.java, https://github.com/UCI-Chenli-teaching/cs122b-spring21-team-22/blob/main/src/AddToStar.java
+- AdvancedSearchResultServlet.java, https://github.com/UCI-Chenli-teaching/cs122b-spring21-team-22/blob/main/src/AdvancedSearchResultServlet.java
+- browseGenreListServlet.java, https://github.com/UCI-Chenli-teaching/cs122b-spring21-team-22/blob/main/src/browseGenreListServlet.java
+- EmployeeLoginServlet.java, https://github.com/UCI-Chenli-teaching/cs122b-spring21-team-22/blob/main/src/EmployeeLoginServlet.java
+- GenreSearchServlet.java, https://github.com/UCI-Chenli-teaching/cs122b-spring21-team-22/blob/main/src/GenreSearchServlet.java
+- LoginServlet.java, https://github.com/UCI-Chenli-teaching/cs122b-spring21-team-22/blob/main/src/LoginServlet.java
+- MainPageServlet.java, https://github.com/UCI-Chenli-teaching/cs122b-spring21-team-22/blob/main/src/MainPageServlet.java
+- MovieServlet.java, https://github.com/UCI-Chenli-teaching/cs122b-spring21-team-22/blob/main/src/MovieServlet.java
+- PaymentCCServlet.java, https://github.com/UCI-Chenli-teaching/cs122b-spring21-team-22/blob/main/src/PaymentCCServlet.java
+- StarsServlet.java, https://github.com/UCI-Chenli-teaching/cs122b-spring21-team-22/blob/main/src/StarsServlet.java
+- TitleSearchServlet.java, https://github.com/UCI-Chenli-teaching/cs122b-spring21-team-22/blob/main/src/TitleSearchServlet.java
+- 
 
 
 ### Project 3 Parsing Time Optimization Strategies
@@ -43,10 +56,12 @@ out of the database.
 
 
 ### Inconsistent Data Reporting
-All of our inconsistent data was written out to a separate file, found here: Inconsistencies.txt, CastInconsistencies.txt, and MoviesInconsistencies.txt
+All of our inconsistent data was written out to a separate file, found here: Inconsistencies.txt
+
 
 ### Location of SQL Files
 All SQL files can be found in the folder SQL-Files in the GitHub repository. 
+
 
 ### Substring matching design:
 
