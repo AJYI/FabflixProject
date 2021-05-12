@@ -39,7 +39,7 @@ public class SuperParser extends DefaultHandler {
         SAXParserFactory spf = SAXParserFactory.newInstance();
         try {
             // Set up filewriter
-            fw = new FileWriter("InconsistenciesAndDuplicates.txt");
+            fw = new FileWriter("Inconsistencies.txt");
             //get a new instance of parser
             SAXParser sp = spf.newSAXParser();
 

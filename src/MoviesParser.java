@@ -24,7 +24,6 @@ public class MoviesParser extends DefaultHandler {
     private DirectorFilms tempDirFilms;
     List<DirectorFilms> directorFilms;
     List<String> listOfInconsistencies;
-    FileWriter fw;
     FileWriter errorWriter;
 
     public MoviesParser() {
@@ -37,9 +36,7 @@ public class MoviesParser extends DefaultHandler {
         //get a factory
         SAXParserFactory spf = SAXParserFactory.newInstance();
         try {
-
-            fw = new FileWriter("Mains243Output.txt");
-            errorWriter = new FileWriter("Mains243Inconsistencies.txt");
+            errorWriter = new FileWriter("MoviesInconsistencies.txt");
             //get a new instance of parser
             SAXParser sp = spf.newSAXParser();
 
@@ -65,7 +62,6 @@ public class MoviesParser extends DefaultHandler {
         try {
             while (it.hasNext()) {
                 System.out.println(it.next().toString());
-                fw.write(it.next().toString());
             }
 
             System.out.println("Number of inconsistencies found in mains243.xml: '" + listOfInconsistencies.size() + "'.");
@@ -75,8 +71,10 @@ public class MoviesParser extends DefaultHandler {
                 errorWriter.write(incons.next());
                 System.out.println(incons.next());
             }
+
+            errorWriter.close();
         } catch (Exception e) {
-            System.out.println("Error in writing data to file");
+            System.out.println("Error in writing movie inconsistencies to file");
         }
 
 
