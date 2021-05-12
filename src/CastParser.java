@@ -24,6 +24,7 @@ public class CastParser extends DefaultHandler {
     private MoviesCast tempMovieCast;
     List<MoviesCast> moviesList;
     List<String> listOfInconsistencies;
+    FileWriter fw;
     FileWriter castErrors;
 
     public CastParser() {
@@ -37,6 +38,7 @@ public class CastParser extends DefaultHandler {
 
         try {
             // Set up file to write into
+            fw = new FileWriter("CastResults.txt");
             castErrors = new FileWriter("CastInconsistencies.txt");
 
             //get a new instance of parser
@@ -59,28 +61,24 @@ public class CastParser extends DefaultHandler {
         System.out.println("Number of Movies Inserted: '" + moviesList.size() + "'.");
 
         Iterator<MoviesCast> it = moviesList.iterator();
-        Iterator<String> incons = listOfInconsistencies.iterator();
 
-        try {
-            while (it.hasNext()) {
-                MoviesCast temp = it.next();
-                List<String> actors = temp.getActors();
+        while (it.hasNext()) {
+            MoviesCast temp = it.next();
+            List<String> actors = temp.getActors();
 
-                for(int i = 0; i < actors.size(); i++){
-                    System.out.println("Title: " + temp.getTitle() + " | Actors: " + actors.get(i));
-                }
-
+            for(int i = 0; i < actors.size(); i++){
+                System.out.println("Title: " + temp.getTitle() + " | Actors: " + actors.get(i));
             }
+            //System.out.println(it.next().toString());
 
-            while (incons.hasNext()) {
-                castErrors.write(incons.next());
-                System.out.println(incons.next().toString());
-            }
-
-            castErrors.close();
-        } catch (Exception e) {
-            System.out.println("Error in writing inconsistencies in for actors/stars");
         }
+
+//        System.out.println("Number of inconsistencies found in casts124.xml: '" + listOfInconsistencies.size() + "'.");
+//        System.out.println("All inconsistencies found in casts124.xml: ");
+
+//        while (incons.hasNext()) {
+//            System.out.println(incons.next().toString());
+//        }
     }
 
     public void runExample() {
@@ -138,13 +136,13 @@ public class CastParser extends DefaultHandler {
                 System.out.println("Error in adding Title to tempMoviesCast - tempVal: " + tempVal);
             }
         } else if (qName.equalsIgnoreCase("a")) {
-            try {
-                tempMovieCast.addActor(tempVal);
-            } catch (Exception e) {
-                listOfInconsistencies.add("Movie Actor (<a>): " + tempVal);
-                System.out.println("Failure in adding Actor to tempMoviesCast - tempVal: " + tempVal);
-            }
+        try {
+            tempMovieCast.addActor(tempVal);
+        } catch (Exception e) {
+            listOfInconsistencies.add("Movie Actor (<a>): " + tempVal);
+            System.out.println("Failure in adding Actor to tempMoviesCast - tempVal: " + tempVal);
         }
+    }
 
     }
 
