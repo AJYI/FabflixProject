@@ -249,12 +249,18 @@ public class SuperParser extends DefaultHandler {
     }
 
     public static void main(String[] args) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
-        SuperParser spe = new SuperParser();
+        SuperParser spe1 = new SuperParser();
+        spe1.runExample("actors63.xml");
+        spe1.runExample("casts124.xml");
+        spe1.printData();
+        spe1.addStarsToDatabase();
 
-        // This is to just create the actors within the database (They are all unique) based on hash set
-        spe.runExample("actors63.xml");
-        spe.runExample("casts124.xml");
-        spe.printData();
-        spe.addStarsToDatabase();
+        MoviesParser spe2 = new MoviesParser();
+        spe2.runExample();
+        spe2.addStarsToDatabase();
+
+        CastParser castParser = new CastParser();
+        castParser.runExample();
+        castParser.addStarsToDatabase();
     }
 }
