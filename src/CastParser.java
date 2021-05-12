@@ -12,6 +12,11 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import java.io.FileWriter;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 
 public class CastParser extends DefaultHandler {
 
@@ -19,6 +24,8 @@ public class CastParser extends DefaultHandler {
     private MoviesCast tempMovieCast;
     List<MoviesCast> moviesList;
     List<String> listOfInconsistencies;
+    FileWriter fw;
+    FileWriter castErrors;
 
     public CastParser() {
         moviesList = new ArrayList<MoviesCast>();
@@ -28,7 +35,12 @@ public class CastParser extends DefaultHandler {
     private void parseDocument(){
         //get a factory
         SAXParserFactory spf = SAXParserFactory.newInstance();
+
         try {
+            // Set up file to write into
+            fw = new FileWriter("CastResults.txt");
+            castErrors = new FileWriter("CastInconsistencies.txt");
+
             //get a new instance of parser
             SAXParser sp = spf.newSAXParser();
 
@@ -44,7 +56,7 @@ public class CastParser extends DefaultHandler {
         }
     }
 
-    private void printData(){
+    private void printData() {
 
         System.out.println("Number of Movies Inserted: '" + moviesList.size() + "'.");
 
@@ -87,6 +99,12 @@ public class CastParser extends DefaultHandler {
     }
 
     public void endElement(String uri, String localName, String qName) throws SAXException {
+        Pattern pattern = Pattern.compile("[^a-z0-9,:'+.!/]-", Pattern.CASE_INSENSITIVE);
+        Pattern namePattern = Pattern.compile("[^a-z]-", Pattern.CASE_INSENSITIVE);
+        Matcher matcher;
+        Matcher nameMatcher;
+        boolean foundSpec;
+
         if(qName.equalsIgnoreCase("filmc")) {
             try {
                 moviesList.add(tempMovieCast);
@@ -95,26 +113,36 @@ public class CastParser extends DefaultHandler {
             }
         } else if (qName.equalsIgnoreCase("f")) {
             try {
-                tempMovieCast.setId(tempVal);
+                matcher = pattern.matcher(tempVal);
+                foundSpec = matcher.find();
+                if(!foundSpec) {
+                    tempMovieCast.setId(tempVal);
+                }
             } catch (Exception e) {
                 listOfInconsistencies.add("Movie ID (<f>): " + tempVal);
+                tempMovieCast.setId(null);
                 System.out.println("Error in adding Id to tempMoviesCast - tempVal: " + tempVal);
             }
         } else if (qName.equalsIgnoreCase("t")) {
             try {
-                tempMovieCast.setTitle(tempVal);
+                matcher = pattern.matcher(tempVal);
+                foundSpec = matcher.find();
+                if(!foundSpec) {
+                    tempMovieCast.setTitle(tempVal);
+                }
             } catch (Exception e) {
                 listOfInconsistencies.add("Movie Title(<t>): " + tempVal);
+                tempMovieCast.setTitle(null);
                 System.out.println("Error in adding Title to tempMoviesCast - tempVal: " + tempVal);
             }
         } else if (qName.equalsIgnoreCase("a")) {
-        try {
-            tempMovieCast.addActor(tempVal);
-        } catch (Exception e) {
-            listOfInconsistencies.add("Movie Actor (<a>): " + tempVal);
-            System.out.println("Failure in adding Actor to tempMoviesCast - tempVal: " + tempVal);
+            try {
+                tempMovieCast.addActor(tempVal);
+            } catch (Exception e) {
+                listOfInconsistencies.add("Movie Actor (<a>): " + tempVal);
+                System.out.println("Failure in adding Actor to tempMoviesCast - tempVal: " + tempVal);
+            }
         }
-    }
 
     }
 

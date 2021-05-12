@@ -28,12 +28,15 @@ public class DirectorFilms {
     public String toString() {
         StringBuffer sb = new StringBuffer();
         sb.append("Director Films Details - ");
+        sb.append("\n");
         sb.append("Director Name:" + getDirectorName());
-        sb.append(": ");
+        sb.append("\n");
         for(Movies movie : getMovies()){
             sb.append(movie.toString());
             sb.append("\n");
         }
+
+        sb.append("\n");
         return sb.toString();
     }
 }
