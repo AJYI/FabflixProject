@@ -16,6 +16,8 @@ import org.xml.sax.helpers.DefaultHandler;
 import javax.sql.DataSource;
 import java.io.IOException;
 
+import java.io.FileWriter;
+
 public class SuperParser extends DefaultHandler {
 
     //List<Actors> actorsList;
@@ -24,6 +26,7 @@ public class SuperParser extends DefaultHandler {
     private String tempVal;
     List<String> listOfInconsistencies;
     HashSet<String> dupesActors;
+    FileWriter fw;
 
     public SuperParser() {
         actorsList = new HashSet<Actors>();
@@ -35,6 +38,8 @@ public class SuperParser extends DefaultHandler {
         // get a factory
         SAXParserFactory spf = SAXParserFactory.newInstance();
         try {
+            // Set up filewriter
+            fw = new FileWriter("InconsistenciesAndDuplicates.txt");
             //get a new instance of parser
             SAXParser sp = spf.newSAXParser();
 
@@ -57,22 +62,36 @@ public class SuperParser extends DefaultHandler {
         Iterator<Actors> it = actorsList.iterator();
         Iterator<String> incons = listOfInconsistencies.iterator();
 
-        while (it.hasNext()) {
-            Actors temp = it.next();
-            System.out.println("NAME: " + temp.getName() + " |BIRTHYEAR: " + temp.getBirthYear());
+        try {
+            while (it.hasNext()) {
+                Actors temp = it.next();
+                System.out.println("NAME: " + temp.getName() + " |BIRTHYEAR: " + temp.getBirthYear());
+            }
+
+            System.out.println("Number of inconsistencies found: '" + listOfInconsistencies.size() + "'.");
+            System.out.println("All inconsistencies found: ");
+
+            fw.write("List of Inconsistencies: ");
+            while (incons.hasNext()) {
+                fw.write(incons.next().toString());
+                System.out.println(incons.next().toString());
+            }
+
+            // fw.write("\nList of duplicates: ");
+
+            System.out.println("Number of dupes found: " + dupesActors.size() + ".");
+            System.out.println("Here are the dupe actors:");
+            for (String s : dupesActors){
+                // fw.write(s);
+                System.out.println(s);
+            }
+
+            fw.close();
+        } catch (IOException e) {
+            System.out.println("Error in writing to file");
         }
 
-        System.out.println("Number of inconsistencies found in actors63.xml: '" + listOfInconsistencies.size() + "'.");
-        System.out.println("All inconsistencies found in actors63.xml: ");
-        while (incons.hasNext()) {
-            System.out.println(incons.next().toString());
-        }
 
-        System.out.println("Number of dupes found: " + dupesActors.size() + ".");
-        System.out.println("Here are the dupe actors:");
-        for (String s : dupesActors){
-            System.out.println(s);
-        }
     }
 
     public void runExample(String file) {
@@ -192,7 +211,7 @@ public class SuperParser extends DefaultHandler {
                     if (hashTable.contains(a)){
                         // Means we dont have to do anything because it already exists
                         System.out.println("Found a match -------------> " +a.getName());
-                       continue;
+                        continue;
                     }
                     // means that actor doesnt exist
                     else{
@@ -230,18 +249,12 @@ public class SuperParser extends DefaultHandler {
     }
 
     public static void main(String[] args) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
-        SuperParser spe1 = new SuperParser();
-        spe1.runExample("actors63.xml");
-        spe1.runExample("casts124.xml");
-        spe1.printData();
-        spe1.addStarsToDatabase();
+        SuperParser spe = new SuperParser();
 
-        MoviesParser spe2 = new MoviesParser();
-        spe2.runExample();
-        spe2.addStarsToDatabase();
-
-        CastParser castParser = new CastParser();
-        castParser.runExample();
-        castParser.addStarsToDatabase();
+        // This is to just create the actors within the database (They are all unique) based on hash set
+        spe.runExample("actors63.xml");
+        spe.runExample("casts124.xml");
+        spe.printData();
+        spe.addStarsToDatabase();
     }
 }
