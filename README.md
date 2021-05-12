@@ -25,26 +25,26 @@ Due to finding out that we were supposed to git push our progress right after we
 Although this project has not been completed even after using the 24 hr grace period, our group contribution was still 50-50. Currently the parts that are NOT WORKING is pagination with N results, and adding into shopping cart (However, most of the shpping cart is implemented).
 
 ### Each member's contribution to Project 3
-For contribution, both members contributed 50-50, with tasks being worked on together.
+For contribution, both members contributed 50-50, with tasks being worked on together, and completed successfully. However, we were unable to do the demo video due to an error in running the updateSecurePassword.java file; because of this, we could not demo our successful parsing of the XML files and insertion into the database.
 
 
 ### List of Files Containing Queries W/ Prepared Statements
 This is a list of all of the files containing queries using PreparedStatement, and links (from GitHub) for each file:
-- SuperParser.java, https://github.com/UCI-Chenli-teaching/cs122b-spring21-team-22/blob/main/src/SuperParser.java
-- CastParser.java, https://github.com/UCI-Chenli-teaching/cs122b-spring21-team-22/blob/main/src/CastParser.java
-- MoviesParser.java, https://github.com/UCI-Chenli-teaching/cs122b-spring21-team-22/blob/main/src/MoviesParser.java
-- AddToStar.java, https://github.com/UCI-Chenli-teaching/cs122b-spring21-team-22/blob/main/src/AddToStar.java
-- AdvancedSearchResultServlet.java, https://github.com/UCI-Chenli-teaching/cs122b-spring21-team-22/blob/main/src/AdvancedSearchResultServlet.java
-- browseGenreListServlet.java, https://github.com/UCI-Chenli-teaching/cs122b-spring21-team-22/blob/main/src/browseGenreListServlet.java
-- EmployeeLoginServlet.java, https://github.com/UCI-Chenli-teaching/cs122b-spring21-team-22/blob/main/src/EmployeeLoginServlet.java
-- GenreSearchServlet.java, https://github.com/UCI-Chenli-teaching/cs122b-spring21-team-22/blob/main/src/GenreSearchServlet.java
-- LoginServlet.java, https://github.com/UCI-Chenli-teaching/cs122b-spring21-team-22/blob/main/src/LoginServlet.java
-- MainPageServlet.java, https://github.com/UCI-Chenli-teaching/cs122b-spring21-team-22/blob/main/src/MainPageServlet.java
-- MovieServlet.java, https://github.com/UCI-Chenli-teaching/cs122b-spring21-team-22/blob/main/src/MovieServlet.java
-- PaymentCCServlet.java, https://github.com/UCI-Chenli-teaching/cs122b-spring21-team-22/blob/main/src/PaymentCCServlet.java
-- StarsServlet.java, https://github.com/UCI-Chenli-teaching/cs122b-spring21-team-22/blob/main/src/StarsServlet.java
-- TitleSearchServlet.java, https://github.com/UCI-Chenli-teaching/cs122b-spring21-team-22/blob/main/src/TitleSearchServlet.java
-- 
+
+SuperParser.java, https://github.com/UCI-Chenli-teaching/cs122b-spring21-team-22/blob/main/src/SuperParser.java
+CastParser.java, https://github.com/UCI-Chenli-teaching/cs122b-spring21-team-22/blob/main/src/CastParser.java
+MoviesParser.java, https://github.com/UCI-Chenli-teaching/cs122b-spring21-team-22/blob/main/src/MoviesParser.java
+AddToStar.java, https://github.com/UCI-Chenli-teaching/cs122b-spring21-team-22/blob/main/src/AddToStar.java
+AdvancedSearchResultServlet.java, https://github.com/UCI-Chenli-teaching/cs122b-spring21-team-22/blob/main/src/AdvancedSearchResultServlet.java
+browseGenreListServlet.java, https://github.com/UCI-Chenli-teaching/cs122b-spring21-team-22/blob/main/src/browseGenreListServlet.java
+EmployeeLoginServlet.java, https://github.com/UCI-Chenli-teaching/cs122b-spring21-team-22/blob/main/src/EmployeeLoginServlet.java
+GenreSearchServlet.java, https://github.com/UCI-Chenli-teaching/cs122b-spring21-team-22/blob/main/src/GenreSearchServlet.java
+LoginServlet.java, https://github.com/UCI-Chenli-teaching/cs122b-spring21-team-22/blob/main/src/LoginServlet.java
+MainPageServlet.java, https://github.com/UCI-Chenli-teaching/cs122b-spring21-team-22/blob/main/src/MainPageServlet.java
+MovieServlet.java, https://github.com/UCI-Chenli-teaching/cs122b-spring21-team-22/blob/main/src/MovieServlet.java
+PaymentCCServlet.java, https://github.com/UCI-Chenli-teaching/cs122b-spring21-team-22/blob/main/src/PaymentCCServlet.java
+StarsServlet.java, https://github.com/UCI-Chenli-teaching/cs122b-spring21-team-22/blob/main/src/StarsServlet.java
+TitleSearchServlet.java, https://github.com/UCI-Chenli-teaching/cs122b-spring21-team-22/blob/main/src/TitleSearchServlet.java
 
 
 ### Project 3 Parsing Time Optimization Strategies
