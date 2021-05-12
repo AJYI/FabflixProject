@@ -42,6 +42,8 @@ public class MovieServlet extends HttpServlet {
         // Retrieve parameter id from url request.
         String id = request.getParameter("id");
 
+        System.out.println("Here");
+
         // Output stream to STDOUT
         PrintWriter out = response.getWriter();
 

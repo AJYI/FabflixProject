@@ -1,6 +1,9 @@
 import java.io.IOException;
+import java.sql.*;
 import java.util.*;
 
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -10,20 +13,22 @@ import org.xml.sax.SAXException;
 
 import org.xml.sax.helpers.DefaultHandler;
 
+import javax.sql.DataSource;
+import java.io.IOException;
+
 public class ActorsParser extends DefaultHandler {
 
-//    List<Actors> actorsList;
-    Set<Actors> actorsList;
+    //List<Actors> actorsList;
+    HashSet<Actors> actorsList;
     private Actors tempActor;
     private String tempVal;
     List<String> listOfInconsistencies;
-    Set<String> dupes;
+    HashSet<String> dupesActors;
 
     public ActorsParser() {
-        //actorsList = new ArrayList<Actors>();
         actorsList = new HashSet<Actors>();
         listOfInconsistencies = new ArrayList<String>();
-        dupes = new HashSet<String>();
+        dupesActors = new HashSet<String>();
     }
 
     private void parseDocument(){
@@ -62,6 +67,12 @@ public class ActorsParser extends DefaultHandler {
         while (incons.hasNext()) {
             System.out.println(incons.next().toString());
         }
+
+        System.out.println("Number of dupes found: " + dupesActors.size() + ".");
+        System.out.println("Here are the dupe actors:");
+        for (String s : dupesActors){
+            System.out.println(s);
+        }
     }
 
     public void runExample() {
@@ -86,15 +97,14 @@ public class ActorsParser extends DefaultHandler {
         if (qName.equalsIgnoreCase("actor")) {
             // Add the directorFilm object to the List of directorFilms
             try {
-                if(dupes.contains(tempActor.getName())){
-                    System.out.println("###############WARNING############################\n"
-                            + tempActor.getName());
+                // When dupes are found
+                if(actorsList.contains(tempActor)){
+                    dupesActors.add(tempActor.getName());
                 }
-
-                dupes.add(tempActor.getName());
-
-                actorsList.add(tempActor);
-//                System.out.println("Added another Actor to actorsList");
+                // Else the good case
+                else{
+                    actorsList.add(tempActor);
+                }
             } catch (Exception e) {
                 System.out.println("Error in adding Actors to actorsList");
             }
@@ -104,7 +114,6 @@ public class ActorsParser extends DefaultHandler {
                 tempActor.setName(tempVal);
             } catch (Exception e) {
                 listOfInconsistencies.add("Actor Name (<stagename>): " + tempVal);
-                System.out.println("Error in setting actor's name - tempVal " + tempVal);
             }
         } else if (qName.equalsIgnoreCase("dob")) {
             // If all required info from movie is gotten, then add the movie to the arraylist
@@ -114,16 +123,52 @@ public class ActorsParser extends DefaultHandler {
                 if (!tempVal.isEmpty()) {
                     listOfInconsistencies.add("Actor Year Of Birth (<dob>): " + tempVal);
                 }
-//                tempActor.setBirthYear(null);
-                System.out.println("Error in setting actor's year of birth - tempVal " + tempVal);
             }
         }
     }
 
-    public static void main(String[] args) {
+//    public void addToDatabase() throws ClassNotFoundException, IllegalAccessException, InstantiationException {
+//        try {
+//            String url = "jdbc:mysql://localhost:3306/moviedb";
+//            String user = "mytestuser";
+//            String password = "My6$Password";
+//
+//            try (Connection conn = DriverManager.getConnection(url, user, password)) {
+//                // We want to do some prepared statement
+//                //String executeQuery = "BEGIN;\nuse moviedb;\n";
+//
+//                // Preparing the query
+//                String query = "call addXMLStar(?, ?)";
+//
+//                conn.setAutoCommit(false);
+//                PreparedStatement statement = conn.prepareStatement(query);
+//
+//                for (int i = 0; i < actorsList.size(); i++) {
+//                    // Print Statement
+//                    //System.out.println("Adding the entry " + actorsList.get(i).getName() + "," + actorsList.get(i).getBirthYear() + " to the stars database");
+//
+//                    // Declare our statement
+//                    statement.setString(1, actorsList.get(i).getName());
+//
+//                    if (actorsList.get(i).getBirthYear() == null) {
+//                        statement.setNull(2, Types.INTEGER);
+//                    } else {
+//                        statement.setInt(2, actorsList.get(i).getBirthYear());
+//                    }
+//                    statement.addBatch();
+//                }
+//                statement.executeBatch();
+//                conn.commit();
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//
+//    }
+
+    public static void main(String[] args) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
         ActorsParser spe = new ActorsParser();
         spe.runExample();
+        //spe.addToDatabase();
     }
-
-
 }
