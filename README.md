@@ -25,7 +25,7 @@ Due to finding out that we were supposed to git push our progress right after we
 Although this project has not been completed even after using the 24 hr grace period, our group contribution was still 50-50. Currently the parts that are NOT WORKING is pagination with N results, and adding into shopping cart (However, most of the shpping cart is implemented).
 
 ### Each member's contribution to Project 3
-
+For contribution, both members contributed 50-50, with tasks being worked on together.
 
 
 ### Project 3 Queries W/ Prepared Statements
@@ -43,7 +43,7 @@ out of the database.
 
 
 ### Inconsistent Data Reporting
-All of our inconsistent data was written out to a separate file, found here: 
+All of our inconsistent data was written out to a separate file, found here: inconsistencies.txt
 
 
 ### Substring matching design:
