@@ -7,6 +7,7 @@ This project is a movie list web application. This application is made up of thr
 This video is a recording of a demonstration of our project on Amazon Web Services (AWS). In the video, we clone our git repository to our AWS instance, then build and populate our MySQL database with the the movie-data.sql file. Our web application is then deployed on an AWS instance. We then demonstrate how our web application works by navigating through the site.
 Video URL PROJECT 1: [Video Link](https://drive.google.com/file/d/1s6JTrQert-9AaPNvnPzMKgnN08Rd1UaK/view?usp=sharing)
 Video URL PROJECT 2: [Video Link](https://www.youtube.com/watch?v=oDBuBBeYzPM)
+Video URL PROJECT 3: [Video Link] ()
 
 ### How to deploy the application using Tomcat
 
@@ -22,6 +23,26 @@ Due to finding out that we were supposed to git push our progress right after we
 ### Each member's contribution to Project 2
 
 Although this project has not been completed even after using the 24 hr grace period, our group contribution was still 50-50. Currently the parts that are NOT WORKING is pagination with N results, and adding into shopping cart (However, most of the shpping cart is implemented).
+
+### Each member's contribution to Project 3
+
+
+
+### Project 3 Queries W/ Prepared Statements
+These are the file names and links (from GitHub) for our queries with Prepared Statements:
+
+
+
+
+### Project 3 Parsing Time Optimization Strategies
+Our first strategy was to create a parser class that could be used to parse all three XML files. We first fetched all data information from the XML files regarding a particular table in our database (e.g., pulling all information regarding actors for the stars table), and stored all information for each table inside a separate hashmap. Before inserting into our database, we checked with the hash table
+to see if the actor or movie already exists inside. If it exists, then we do not insert; if it does, then we insert using batch. Compared to the naive approach, which to us was creating a parsing class for each file, this was much simpler to understand and implement, and made it easier to keep duplicates
+out of the database. 
+
+
+### Inconsistent Data Reporting
+All of our inconsistent data was written out to a separate file, found here: 
+
 
 ### Substring matching design:
 
