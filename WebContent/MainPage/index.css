@@ -1,3 +1,32 @@
+.autocomplete-suggestions {
+    border: 1px solid #999;
+    background: #FFF;
+    overflow: auto;
+}
+
+.autocomplete-suggestion {
+    padding: 2px 5px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.autocomplete-selected {
+    background: #F0F0F0;
+}
+.autocomplete-suggestions strong {
+    font-weight: normal;
+    color: #3399FF;
+}
+
+.autocomplete-group {
+    padding: 2px 5px;
+}
+
+.autocomplete-group strong {
+    display: block;
+    border-bottom: 1px solid #000;
+}
+
 .center {
     margin-left: auto;
     margin-right: auto;
@@ -7,7 +36,7 @@ th a {
     color: #30475e;
 }
 
-th a:hover{
+button:hover{
     text-decoration: underline;
     color: #f05454;
 }
@@ -20,4 +49,29 @@ main div h1{
 
 tr th{
     padding:10px;
+}
+
+div.search-bar form{
+    margin-top:25px;
+    margin-left:30px;
+    margin-right:30px;
+}
+
+div.search-bar form input[type=text] {
+    padding: 10px;
+    font-size: 17px;
+    border: 1px solid grey;
+    float: left;
+    width: 80%;
+}
+
+div.search-bar form button {
+    float: left;
+    width: 20%;
+    padding: 10px;
+
+    font-size: 17px;
+    border: 1px solid grey;
+    border-left: none;
+    cursor: pointer;
 }

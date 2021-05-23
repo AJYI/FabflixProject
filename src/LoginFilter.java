@@ -31,8 +31,8 @@ public class LoginFilter implements Filter {
 
         // Redirect to login page if the "user" attribute doesn't exist in session
         if (httpRequest.getSession().getAttribute("user") == null) {
-            httpResponse.sendRedirect(httpRequest.getContextPath() + "/login.html");
-            //httpResponse.sendRedirect("login.html");
+            //httpResponse.sendRedirect(httpRequest.getContextPath() + "/login.html");
+            httpResponse.sendRedirect("login.html");
         } else {
             chain.doFilter(request, response);
         }
@@ -44,13 +44,14 @@ public class LoginFilter implements Filter {
          Always allow your own login related requests(html, js, servlet, etc..)
          You might also want to allow some CSS files, etc..
          */
-        return allowedURIs.stream().anyMatch(requestURI.toLowerCase()::endsWith);
+        return allowedURIs.stream().anyMatch(requestURI.toLowerCase()::endsWith) || requestURI.endsWith("loginAndroid");
     }
 
     public void init(FilterConfig fConfig) {
         allowedURIs.add("login.html");
         allowedURIs.add("login.js");
-        allowedURIs.add("/login");
+        allowedURIs.add("login");
+        allowedURIs.add("loginAndroid");
         allowedURIs.add("login.css");
         allowedURIs.add("styles.css");
     }
