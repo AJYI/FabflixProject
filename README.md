@@ -8,6 +8,7 @@ This video is a recording of a demonstration of our project on Amazon Web Servic
 Video URL PROJECT 1: [Video Link](https://drive.google.com/file/d/1s6JTrQert-9AaPNvnPzMKgnN08Rd1UaK/view?usp=sharing)
 Video URL PROJECT 2: [Video Link](https://www.youtube.com/watch?v=oDBuBBeYzPM)
 Video URL PROJECT 3: [Video Link](https://www.youtube.com/watch?v=2kSnEB26E5g)
+Video URL PROJECT 4: [Video Link](https://www.youtube.com/watch?v=tmT0AC4gMrE)
 
 ### How to deploy the application using Tomcat
 
@@ -27,6 +28,10 @@ Although this project has not been completed even after using the 24 hr grace pe
 ### Each member's contribution to Project 3
 
 For contribution, both members contributed 50-50, with tasks being worked on together.
+
+### Each member's contribution to Project 3
+
+For contribution, both members contributed 50-50, since we had problems with project 3 submission, we couldnt upload to github. However, we worked on the project together on zoom call.
 
 ### List of Files Containing Queries W/ Prepared Statements
 
@@ -71,3 +76,8 @@ Within title search: All of the queries that were prepared statement were in the
 Within Genre search: There was no search based on substring
 
 Within Advanced Search: All of the queries withing search is "%string%. This is because when users search for movies, they might forget some keywords. For example, if someone searched Batman, and were expecting the results of "The Batman", then there would be not results for that. Same applies for the movie star and movie director.
+
+### Project 4 conditions:
+
+For project 4, we decided to make a java file to make and create a full text search table. To run it, use the command: mvn exec:java -Dexec.cleanupDaemonThreads=false -Dexec.mainClass="FullTextSearch".
+To run the android file, we zipped it up withing .\cs122b-spring21-team-22\Android. So to run it, you must unzip it and have the server running in the background.
