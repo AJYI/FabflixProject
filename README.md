@@ -29,7 +29,7 @@ Although this project has not been completed even after using the 24 hr grace pe
 
 For contribution, both members contributed 50-50, with tasks being worked on together.
 
-### Each member's contribution to Project 3
+### Each member's contribution to Project 4
 
 For contribution, both members contributed 50-50, since we had problems with project 3 submission, we couldnt upload to github. However, we worked on the project together on zoom call.
 
