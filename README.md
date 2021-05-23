@@ -80,4 +80,4 @@ Within Advanced Search: All of the queries withing search is "%string%. This is 
 ### Project 4 conditions:
 
 For project 4, we decided to make a java file to make and create a full text search table. To run it, use the command: mvn exec:java -Dexec.cleanupDaemonThreads=false -Dexec.mainClass="FullTextSearch".
-To run the android file, we zipped it up withing .\cs122b-spring21-team-22\Android. So to run it, you must unzip it and have the server running in the background.
+To run the android file, we zipped it up withing .\cs122b-spring21-team-22\Android. So to run it, you must unzip it and have the server running in the background (LOCAL SERVER).
