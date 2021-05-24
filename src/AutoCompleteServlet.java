@@ -1,4 +1,3 @@
-
 import java.io.IOException;
 import java.sql.*;
 import java.util.HashMap;
@@ -21,24 +20,47 @@ public class AutoCompleteServlet extends HttpServlet {
      * populate the Super hero hash map.
      * Key is hero ID. Value is hero name.
      */
-    public static HashMap<String, String> actorMap = new HashMap<>();
+    public static HashMap<String, String> actorMap;
 
-    static {
+    void getDb(HttpServletRequest request, JsonArray jsonArray) {
         String url = "jdbc:mysql://localhost:3306/moviedb?rewriteBatchedStatements=true";
         String user = "mytestuser";
         String password = "My6$Password";
 
+        actorMap = new HashMap<>();
+
         try (Connection conn = DriverManager.getConnection(url, user, password)) {
             System.out.println("Getting Results from the database");
-            String query = "Select * from ft";
+            String q = request.getParameter("query");
+            System.out.println(q);
+            String[] movieTitleArr = q.split("[-+*/= ]");
+            String query = "SELECT * FROM ft WHERE MATCH(movieTitle) AGAINST (? IN BOOLEAN MODE);";
+
+            String actualQuery = new String();
+            for(int i = 0; i < movieTitleArr.length; i++){
+                actualQuery += movieTitleArr[i];
+                if(i != movieTitleArr.length-1){
+                    actualQuery += "* ";
+                }
+                else{
+                    actualQuery += "*";
+                }
+            }
             PreparedStatement statement = conn.prepareStatement(query);
+            statement.setString(1, actualQuery);
+            System.out.println(statement);
             ResultSet rs = statement.executeQuery();
+            System.out.println("something");
+
 
             System.out.println("Entering into the hashMap");
             while(rs.next()){
+                if(jsonArray.size() >= 10) {
+                    break;
+                }
                 String ID = rs.getString("movieID");
                 String movieTitle = rs.getString("movieTitle");
-                actorMap.put(ID, movieTitle);
+                jsonArray.add(generateJsonObject(ID, movieTitle));
             }
 
             rs.close();
@@ -111,9 +133,11 @@ public class AutoCompleteServlet extends HttpServlet {
      *
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("Hi");
         try {
             // setup the response json arrray
             JsonArray jsonArray = new JsonArray();
+            getDb(request, jsonArray);
 
             // get the query string from parameter
             String query = request.getParameter("query");
@@ -128,15 +152,14 @@ public class AutoCompleteServlet extends HttpServlet {
             // this example only does a substring match
             // TODO: in project 4, you should do full text search with MySQL to find the matches on movies and stars
 
-            for (String id : actorMap.keySet()) {
-                if(jsonArray.size() >= 10){
-                    break;
-                }
-                String title = actorMap.get(id);
-                if (title.toLowerCase().contains(query.toLowerCase())) {
-                    jsonArray.add(generateJsonObject(id, title));
-                }
-            }
+//            for (String id : actorMap.keySet()) {
+//                if(jsonArray.size() >= 10){
+//                    break;
+//                }
+//                String title = actorMap.get(id);
+//                jsonArray.add(generateJsonObject(id, title));
+//            }
+            System.out.println(jsonArray.toString());
             response.getWriter().write(jsonArray.toString());
             return;
         } catch (Exception e) {
