@@ -8,7 +8,7 @@ This video is a recording of a demonstration of our project on Amazon Web Servic
 Video URL PROJECT 1: [Video Link](https://drive.google.com/file/d/1s6JTrQert-9AaPNvnPzMKgnN08Rd1UaK/view?usp=sharing)
 Video URL PROJECT 2: [Video Link](https://www.youtube.com/watch?v=oDBuBBeYzPM)
 Video URL PROJECT 3: [Video Link](https://www.youtube.com/watch?v=2kSnEB26E5g)
-Video URL PROJECT 4: [Video Link](https://www.youtube.com/watch?v=tmT0AC4gMrE)
+Video URL PROJECT 4: [Video Link](https://www.youtube.com/watch?v=5Uu7biVHK1M)
 
 ### How to deploy the application using Tomcat
 
@@ -29,9 +29,9 @@ Although this project has not been completed even after using the 24 hr grace pe
 
 For contribution, both members contributed 50-50, with tasks being worked on together.
 
-### Each member's contribution to Project 3
+### Each member's contribution to Project 4
 
-For contribution, both members contributed 50-50, since we had problems with project 3 submission, we couldnt upload to github. However, we worked on the project together on zoom call.
+For contribution, both members contributed 50-50, since we had problems with project 3 submission, we couldnt upload to github. However, we worked on the project together on zoom call/discord.
 
 ### List of Files Containing Queries W/ Prepared Statements
 
