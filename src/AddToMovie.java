@@ -39,7 +39,7 @@ public class AddToMovie extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        //.out.println("HI");
+
 
         response.setContentType("application/json"); // Response mime type
 

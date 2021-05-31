@@ -16,6 +16,9 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
 
+/*
+For the advance search part of our html
+ */
 
 @WebServlet(name = "advancedSearchResultServlet", urlPatterns = "/AdvancedSearchPages/advancedSearchResult")
 public class AdvancedSearchResultServlet extends HttpServlet {

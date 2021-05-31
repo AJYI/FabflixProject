@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import org.jasypt.util.password.PasswordEncryptor;
 import org.jasypt.util.password.StrongPasswordEncryptor;
 
+/*
+Not a servlet
+ */
 public class UpdateEmployeePassword {
 
     /*

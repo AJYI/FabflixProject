@@ -17,6 +17,7 @@ import java.io.FileWriter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+// Not a servlet
 public class MoviesParser extends DefaultHandler {
 
     private String tempVal;

@@ -1,5 +1,8 @@
 import java.util.*;
 
+/*
+A object class for full text search
+ */
 public class FullTextSearchMovies {
     private String id;
     private String title;

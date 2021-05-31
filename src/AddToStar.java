@@ -18,6 +18,12 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.Random;
 
+
+/*
+This class inserted to the star class through the employee login
+ */
+
+
 @WebServlet(name = "AddToStar", urlPatterns = "/fabflix/EmployeeStarInsert/addStar")
 public class AddToStar extends HttpServlet {
     private static final long serialVersionUID = 1L;
