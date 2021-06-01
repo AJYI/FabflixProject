@@ -18,6 +18,10 @@ import java.io.IOException;
 
 import java.io.FileWriter;
 
+/*
+Not a servlet
+ */
+
 public class SuperParser extends DefaultHandler {
 
     //List<Actors> actorsList;

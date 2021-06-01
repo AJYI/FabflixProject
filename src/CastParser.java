@@ -2,6 +2,10 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.servlet.ServletConfig;
+import javax.sql.DataSource;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -30,6 +34,17 @@ public class CastParser extends DefaultHandler {
     public CastParser() {
         moviesList = new ArrayList<MoviesCast>();
         listOfInconsistencies = new ArrayList<String>();
+    }
+
+    // Create a dataSource which registered in web.xml
+    private DataSource dataSource;
+
+    public void init(ServletConfig config) {
+        try {
+            dataSource = (DataSource) new InitialContext().lookup("java:comp/env/jdbc/moviedb");
+        } catch (NamingException e) {
+            e.printStackTrace();
+        }
     }
 
     private void parseDocument(){
@@ -69,16 +84,9 @@ public class CastParser extends DefaultHandler {
             for(int i = 0; i < actors.size(); i++){
                 System.out.println("Title: " + temp.getTitle() + " | Actors: " + actors.get(i));
             }
-            //System.out.println(it.next().toString());
 
         }
 
-//        System.out.println("Number of inconsistencies found in casts124.xml: '" + listOfInconsistencies.size() + "'.");
-//        System.out.println("All inconsistencies found in casts124.xml: ");
-
-//        while (incons.hasNext()) {
-//            System.out.println(incons.next().toString());
-//        }
     }
 
     public void runExample() {
@@ -152,7 +160,7 @@ public class CastParser extends DefaultHandler {
             String user = "mytestuser";
             String password = "My6$Password";
 //
-            try (Connection conn = DriverManager.getConnection(url, user, password)) {
+            try (Connection conn = dataSource.getConnection()) {
                 String listQuery = "select m.title, m.id from movies m;";
                 PreparedStatement statement = conn.prepareStatement(listQuery);
                 ResultSet rs = statement.executeQuery();
@@ -215,129 +223,11 @@ public class CastParser extends DefaultHandler {
                 }
 
                 System.out.println(statement1);
-
-
-
-
-
-
-
-
-
-
-
-
                 System.out.println("Entering into the database");
                 statement1.executeBatch();
                 conn.commit();
                 statement1.close();
 
-
-//
-//                HashSet<MovieHashData> hashTable = new HashSet<MovieHashData>();
-//
-//                while(rs.next()){
-//                    String title = rs.getString("title");
-//                    String director = rs.getString("director");
-//                    Integer year = rs.getInt("year");
-//                    if(year == 0){
-//                        year = null;
-//                    }
-//
-//                    MovieHashData temp = new MovieHashData();
-//                    temp.setDirectorName(director);
-//                    temp.setTitle(title);
-//                    temp.setYear(year);
-//                    hashTable.add(temp);
-//                }
-//
-//                for (MovieHashData a: hashTable){
-//                    System.out.println("HashTable Entry " + a.getTitle() + " " + a.getDirectorName() + " " + a.getYear());
-//                }
-//
-//                // To get the max starID
-//                String maxQuery = "select m.id from movies m order by m.id desc limit 1;";
-//                statement = conn.prepareStatement(maxQuery);
-//                rs = statement.executeQuery();
-//                rs.next();
-//                String currentMax = rs.getString("id");
-//                int currentId = Integer.parseInt(currentMax.substring(2));
-//
-//                //Format = tt0499469
-//
-//                //Using a convertor class
-//                HashSet<MovieHashData> movieSet = new HashSet<MovieHashData>();
-//                Iterator<DirectorFilms> it = directorFilms.iterator();
-//                while(it.hasNext()){
-//                    DirectorFilms temp = it.next();
-//                    List<Movies> movieTemp = temp.getMovies();
-//
-//                    for (int i = 0; i < movieTemp.size(); i++){
-//                        MovieHashData temp2 = new MovieHashData();
-//                        temp2.setDirectorName(temp.getDirectorName());
-//                        temp2.setTitle(movieTemp.get(i).getTitle());
-//                        temp2.setYear(movieTemp.get(i).getYear());
-//                        movieSet.add(temp2);
-//                    }
-//                }
-//
-//                conn.setAutoCommit(false);
-//                // INSERT INTO movies VALUES('tt0351795','Ripoux 3',2003,'Claude Zidi');
-//                String query1 = "INSERT INTO movies VALUES(?,?,?,?)";
-//                String query2 = "INSERT INTO genres_in_movies VALUES(1,?)";
-//                PreparedStatement statement1 = conn.prepareStatement(query1);
-//                PreparedStatement statement2 = conn.prepareStatement(query2);
-//
-//                // Gotta process the movie now
-//                // some for loop in here
-//                for (MovieHashData a : movieSet){
-//                    // If the hash table already contains a
-//                    String id;
-//                    if (hashTable.contains(a)){
-//                        // Means we dont have to do anything because it already exists
-//                        System.out.println("Found a match -------------> " +a.getDirectorName());
-//                        continue;
-//                    }
-//                    // means that actor doesnt exist
-//                    else{
-//                        currentId++;
-//                        id = "tt" + currentId;
-//                    }
-//                    System.out.println("Adding movies: " + id + " |DirectorName " +a.getDirectorName() + " |MovieTitle: " + a.getTitle() + " |MovieYear: " + a.getYear());
-//
-//                    if(a.getYear() == null){
-//                        continue;
-//                    }
-//                    if(a.getTitle() == null){
-//                        continue;
-//                    }
-//                    if(a.getDirectorName() == null){
-//                        continue;
-//                    }
-//
-//                    // For query 2
-//                    statement2.setString(1, id);
-//                    // For query 1
-//                    statement1.setString(1, id);
-//                    statement1.setString(2, a.getTitle());
-//                    statement1.setInt(3, a.getYear());
-//                    statement1.setString(4, a.getDirectorName());
-//
-//                    // Adding the batches
-//                    statement1.addBatch();
-//                    statement2.addBatch();
-//                }
-//
-//
-//                System.out.println("Entering into the database");
-//                System.out.println("Inserting " + movieSet.size() + " entries");
-//                statement1.executeBatch();
-//                statement2.executeBatch();
-//                conn.commit();
-//
-//                statement.close();
-//                statement1.close();
-//                statement2.close();
             }
         } catch (SQLException e) {
             e.printStackTrace();
