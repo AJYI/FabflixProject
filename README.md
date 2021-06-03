@@ -43,8 +43,9 @@
             cs122b-spring21-team-22/src/browseGenreListServlet.java
 
   - #### Explain how Connection Pooling is utilized in the Fabflix code.
-
+    Within all the filename/path from above and excluding the context.xml file, these servlets all connected to to a datasource that is defined in the "public void init(ServletConfig config)" function. From there it looks within the context xml file and has connection pooling enabled within it. In other words, whenever the above files calls the init function, it then would utilize connection pooling. After the servlet finishes, these connections can be resued during future requests.
   - #### Explain how Connection Pooling works with two backend SQL.
+    Since we have two back end servers(Master and the slave SQL), we would have two pools. When a servlet is called, it would use the pooled connections from the cache and after the servlet ends, it would return that used connection back to the pool for future requests. If more connections are needed, then the pool will grow larger.
 
 - # Master/Slave
 
@@ -74,6 +75,10 @@
             cs122b-spring21-team-22/src/browseGenreListServlet.java
 
   - #### How read/write requests were routed to Master/Slave SQL?
+
+    Within context xml, we used two resources. Their names were "jdbc/moviedb" and "jdbc/master". Whenever we accessed the servlets that would write, it would be routed to "jdbc/master". If that was the case, then whenever we needed to access the servlet that would read, it would read using the "jdbc/moviedb". Thus master would read/write and slave would only read.
+
+    NOTE: We had to do the command: "RENAME USER 'mytestuser'@'localhost' TO 'mytestuser'@'%';" to be able to access databases remotely.
 
 - # JMeter TS/TJ Time Logs
 
