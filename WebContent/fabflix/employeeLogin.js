@@ -13,7 +13,7 @@ function handleLoginResult(resultDataString) {
 
     // If login succeeds, it will redirect the user to index.html
     if (resultDataJson["status"] === "success") {
-        window.location.replace("fabflix/employeeDashboard.html");
+        window.location.replace("./employeeDashboard.html");
     }
     else if (resultDataJson["status"] === "ReCaptchaFail"){
         alert(resultDataJson["message"]);
