@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <title>Employee Log In</title>
     <link rel="stylesheet" href="fabflix/employeeLogin.css" />
-    <script src="https://www.google.com/recaptcha/api.js"></script>
+<!--    <script src="https://www.google.com/recaptcha/api.js"></script>-->
   </head>
 
   <body>
@@ -22,7 +22,7 @@
 
       <div>
         <!--    Gotta change to post soon because of security-->
-        <form id="login_form" method="post" action="form-recaptcha">
+        <form id="login_form" method="post" action="#">
           <table class="credentialCenter">
             <tr>
               <td>Enter Email:</td>
@@ -47,12 +47,12 @@
               </td>
             </tr>
           </table>
-          <div class="outerCaptcha">
-            <div
-              class="g-recaptcha"
-              data-sitekey="6LeD0coaAAAAAAPoKxNA12Wkhad2KnvZIhOtfLi2"
-            ></div>
-          </div>
+<!--          <div class="outerCaptcha">-->
+<!--            <div-->
+<!--              class="g-recaptcha"-->
+<!--              data-sitekey="6LeD0coaAAAAAAPoKxNA12Wkhad2KnvZIhOtfLi2"-->
+<!--            ></div>-->
+<!--          </div>-->
           <div class="button">
             <input type="submit" value="Log In" class="button" />
           </div>
@@ -63,6 +63,6 @@
     <!-- include jQuery-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- include our own JS file -->
-    <script src="fabflix/employeeLogin.js"></script>
+    <script src="employeeLogin.js"></script>
   </body>
 </html>

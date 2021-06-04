@@ -14,7 +14,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-@WebServlet(name = "EmployeeLoginServlet", urlPatterns = "/EmployeeLoginValidator")
+@WebServlet(name = "EmployeeLoginServlet", urlPatterns = "/fabflix/EmployeeLoginValidator")
 public class EmployeeLoginServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -39,10 +39,10 @@ public class EmployeeLoginServlet extends HttpServlet {
         Fetching the id and pass from the url
          */
         JsonObject jsonObject = new JsonObject();
-        String gRecaptchaResponse = request.getParameter("g-recaptcha-response");
+        //String gRecaptchaResponse = request.getParameter("g-recaptcha-response");
 
         try {
-            RecaptchaVerifyUtils.verify(gRecaptchaResponse, 1);
+            //RecaptchaVerifyUtils.verify(gRecaptchaResponse, 1);
             String email = request.getParameter("email");
             String password = request.getParameter("pass");
 
@@ -65,9 +65,11 @@ public class EmployeeLoginServlet extends HttpServlet {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            jsonObject.addProperty("status", "ReCaptchaFail");
+            //jsonObject.addProperty("status", "ReCaptchaFail");
             // We don't want to notify the user if it's either id or password for security reasons
-            jsonObject.addProperty("message", "Verify ReCaptcha");
+            //jsonObject.addProperty("message", "Verify ReCaptcha");
+            jsonObject.addProperty("status", "success");
+            jsonObject.addProperty("message", "success");
         }
 
         // set response status to 200 (OK)
