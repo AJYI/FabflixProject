@@ -86,12 +86,15 @@
 
 - # JMeter TS/TJ Time Measurement Report
 
-| **Single-instance Version Test Plan**         | **Graph Results Screenshot** | **Average Query Time(ms)** | **Average Search Servlet Time(ms)** | **Average JDBC Time(ms)** | **Analysis** |
-| --------------------------------------------- | ---------------------------- | -------------------------- | ----------------------------------- | ------------------------- | ------------ |
-| Case 1: HTTP/1 thread                         | ![](path to image in img/)   | 138                        | 2.1995                              | 1.8105                    | ??           |
-| Case 2: HTTP/10 threads                       | ![](path to image in img/)   | 136                        | 2.7685                              | 1.8489                    | ??           |
-| Case 3: HTTPS/10 threads                      | ![](path to image in img/)   | 197                        | 2.5956                              | 1.7255                    | ??           |
-| Case 4: HTTP/10 threads/No connection pooling | ![](path to image in img/)   | 186                        | 3.6695                              | 2.6047                    | ??           |
+| **Single-instance Version Test Plan** | **Graph Results Screenshot** | **Average Query Time(ms)** | **Average Search Servlet Time(ms)** | **Average JDBC Time(ms)** | **Analysis**                            |
+| ------------------------------------- | ---------------------------- | -------------------------- | ----------------------------------- | ------------------------- | --------------------------------------- |
+| Case 1: HTTP/1 thread                 | ![](path to image in img/)   | 138                        | 2.1995                              | 1.8105                    | Here is our test of HTTP with 1 thread. |
+
+| Case 2: HTTP/10 threads | ![](path to image in img/) | 136 | 2.7685 | 1.8489 | Here is our test of HTTP with 10 threads. As expected, compared to HTTP with 1 thread, the average query time and TS are all slightly longer in comparison because of the simulation of 10 users entering the site at the same time. What was unexpected was that our TJ time was actually slightly shorter; we assume this is because we are running the same file over again. |
+
+| Case 3: HTTPS/10 threads | ![](path to image in img/) | 197 | 2.5956 | 1.7255 | Here is our test of HTTPS with 10 threads. Unexpectedly, our average query time was slightly longer than that of the HTTP with 10 threads; however, the TJ and TS were slightly shorter, presumably because of the overhead provided by HTTPS. |
+
+| Case 4: HTTP/10 threads/No connection pooling | ![](path to image in img/) | 186 | 3.6695 | 2.6047 | Here is our test without connection pooling. As compared to Cases 1 and 2, the average query time is slightly slower, as expected. It was unexpected that Case 3's query time was slightly longer, but not too significant of a difference. |
 
 | **Scaled Version Test Plan**                  | **Graph Results Screenshot** | **Average Query Time(ms)** | **Average Search Servlet Time(ms)** | **Average JDBC Time(ms)** | **Analysis** |
 | --------------------------------------------- | ---------------------------- | -------------------------- | ----------------------------------- | ------------------------- | ------------ |
