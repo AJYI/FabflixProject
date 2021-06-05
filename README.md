@@ -88,7 +88,7 @@
 
 | **Single-instance Version Test Plan**         | **Graph Results Screenshot** | **Average Query Time(ms)** | **Average Search Servlet Time(ms)** | **Average JDBC Time(ms)** | **Analysis** |
 | --------------------------------------------- | ---------------------------- | -------------------------- | ----------------------------------- | ------------------------- | ------------ |
-| Case 1: HTTP/1 thread                         | ![](path to image in img/)   | 110                        | 3.4672                              | 1.6776                    | ??           |
+| Case 1: HTTP/1 thread                         | ![](path to image in img/)   | 138                        | 2.1995                              | 1.8105                    | ??           |
 | Case 2: HTTP/10 threads                       | ![](path to image in img/)   | 136                        | 2.7685                              | 1.8489                    | ??           |
 | Case 3: HTTPS/10 threads                      | ![](path to image in img/)   | 197                        | 2.5956                              | 1.7255                    | ??           |
 | Case 4: HTTP/10 threads/No connection pooling | ![](path to image in img/)   | 186                        | 3.6695                              | 2.6047                    | ??           |
@@ -97,4 +97,4 @@
 | --------------------------------------------- | ---------------------------- | -------------------------- | ----------------------------------- | ------------------------- | ------------ |
 | Case 1: HTTP/1 thread                         | ![](path to image in img/)   | 133                        | 2.5981                              | 1.9366                    | ??           |
 | Case 2: HTTP/10 threads                       | ![](path to image in img/)   | 184                        | 2.1323                              | 1.5916                    | ??           |
-| Case 3: HTTP/10 threads/No connection pooling | ![](path to image in img/)   | ??                         | ??                                  | ??                        | ??           |
+| Case 3: HTTP/10 threads/No connection pooling | ![](path to image in img/)   | 172                        | 2.3339                              | 1.6004                    | ??           |
