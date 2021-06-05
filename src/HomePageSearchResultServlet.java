@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -39,6 +40,8 @@ public class HomePageSearchResultServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         long JDBCStart, JDBCEnd, TSStart, TSEnd;
         TSStart = System.nanoTime();
+        //System.out.println("HI");
+        //System.out.println("HI");
 
 
         //System.out.println("Entered");
@@ -134,19 +137,21 @@ public class HomePageSearchResultServlet extends HttpServlet {
             // https://www.tutorialspoint.com/Java-Program-to-Append-Text-to-an-Existing-File
             // https://beginnersbook.com/2014/01/how-to-write-to-a-file-in-java-using-fileoutputstream/
 
-            File fileObj = new File("/home/ubuntu/txtFiles/logFile.txt");
+            File fileObj = new File("logFile.txt");
 
             if(fileObj.exists()){
                 fileObj.createNewFile();
             }
 //
-            FileOutputStream fileWriter = new FileOutputStream(fileObj);
+
+            FileOutputStream fileWriter = new FileOutputStream(fileObj, true);
             String value = TSvalue + " " + TJvalue + "\n";
             byte[] bytesArray = value.getBytes();
-            System.out.println("hi");
+            //System.out.println("hi");
             fileWriter.write(bytesArray);
             fileWriter.flush();
             fileWriter.close();
+            //System.out.println("hi");
 
         } catch (Exception e) {
 
