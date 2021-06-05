@@ -4,14 +4,14 @@ import com.google.gson.JsonObject;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
@@ -38,7 +38,13 @@ public class HomePageSearchResultServlet extends HttpServlet {
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        System.out.println("Entered");
+        long JDBCStart, JDBCEnd, TSStart, TSEnd;
+        TSStart = System.nanoTime();
+        //System.out.println("HI");
+        //System.out.println("HI");
+
+
+        //System.out.println("Entered");
         response.setContentType("application/json"); // Response mime type
 
         // Output stream to STDOUT
@@ -49,8 +55,12 @@ public class HomePageSearchResultServlet extends HttpServlet {
         SessionURL.printCurrentSession(request);
 
         // Get a connection from dataSource and let resource manager close the connection after usage.
+
+        // We start the JDBC Part
+        JDBCStart = System.nanoTime();
+
         try (Connection conn = dataSource.getConnection()) {
-            System.out.println("wrong here");
+            //System.out.println("wrong here");
             // Getting the parameters
             String movieTitle = request.getParameter("movieTitle");
             System.out.println(movieTitle);
@@ -71,7 +81,11 @@ public class HomePageSearchResultServlet extends HttpServlet {
             statement.setString(1, actualQuery);
             System.out.println(statement);
             ResultSet rs1 = statement.executeQuery();
-            System.out.println("something");
+
+            // We end the JDBC Part
+            JDBCEnd = System.nanoTime();
+
+            //System.out.println("something");
 
             JsonArray jsonArray = new JsonArray();
             while(rs1.next()){
@@ -97,17 +111,45 @@ public class HomePageSearchResultServlet extends HttpServlet {
                 jsonArray.add(jsonObject);
             }
 
+            // The end of query things
+            TSEnd = System.nanoTime();
+
+            // Obviously, TS > TJ
+            long TSvalue, TJvalue;
+            TSvalue = TSEnd - TSStart;
+            TJvalue = JDBCEnd - JDBCStart;
+
+
+            System.out.println(TSvalue + " " + TJvalue);
+
             rs1.close();
             statement.close();
 
             // For debugging purposes
-            System.out.println(jsonArray.toString());
+            //System.out.println(jsonArray.toString());
 
             // write JSON string to output
             out.write(jsonArray.toString());
             // set response status to 200 (OK)
             response.setStatus(200);
 
+            // SOURCE
+            // https://www.tutorialspoint.com/Java-Program-to-Append-Text-to-an-Existing-File
+            // https://beginnersbook.com/2014/01/how-to-write-to-a-file-in-java-using-fileoutputstream/
+
+            File fileObj = new File("/home/ubuntu/txtFiles/logFile.txt");
+
+            if(fileObj.exists()){
+                fileObj.createNewFile();
+            }
+//
+
+            FileOutputStream fileWriter = new FileOutputStream(fileObj, true);
+            String value = TSvalue + " " + TJvalue + "\n";
+            fileWriter.write(value.getBytes());
+            fileWriter.flush();
+            fileWriter.close();
+            //System.out.println("hi");
 
         } catch (Exception e) {
 
