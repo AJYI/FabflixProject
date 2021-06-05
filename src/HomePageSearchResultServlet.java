@@ -119,19 +119,6 @@ public class HomePageSearchResultServlet extends HttpServlet {
 
             System.out.println(TSvalue + " " + TJvalue);
 
-                        // SOURCE
-            // https://www.tutorialspoint.com/Java-Program-to-Append-Text-to-an-Existing-File
-
-            File fileObj = new File("/tmp/logFile.txt");
-
-            if(fileObj.exists()){
-                fileObj.createNewFile();
-            }
-
-            FileWriter fileWriter = new FileWriter("/tmp/logFile.txt", true);
-            fileWriter.write(TSvalue + " " + TJvalue + "\n");
-            fileWriter.close();
-
             rs1.close();
             statement.close();
 
@@ -143,6 +130,18 @@ public class HomePageSearchResultServlet extends HttpServlet {
             // set response status to 200 (OK)
             response.setStatus(200);
 
+            // SOURCE
+            // https://www.tutorialspoint.com/Java-Program-to-Append-Text-to-an-Existing-File
+
+            File fileObj = new File(getServletContext().getRealPath("/") + "logFile.txt");
+
+            if(fileObj.exists()){
+                fileObj.createNewFile();
+            }
+
+            FileWriter fileWriter = new FileWriter(getServletContext().getRealPath("/") + "/logFile.txt", true);
+            fileWriter.write(TSvalue + " " + TJvalue + "\n");
+            fileWriter.close();
 
         } catch (Exception e) {
 
