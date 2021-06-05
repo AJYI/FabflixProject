@@ -3,7 +3,7 @@ TS = 0
 TJ = 0
 n = 1
 
-f = open("LogProcessing/log1.txt", "r")
+f = open("LogProcessing/HTTP10NoPoolThread.txt", "r")
 
 line = f.readline()
 splitLine = line.split(" ")
