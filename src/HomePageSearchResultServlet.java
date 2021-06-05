@@ -132,15 +132,20 @@ public class HomePageSearchResultServlet extends HttpServlet {
 
             // SOURCE
             // https://www.tutorialspoint.com/Java-Program-to-Append-Text-to-an-Existing-File
+            // https://beginnersbook.com/2014/01/how-to-write-to-a-file-in-java-using-fileoutputstream/
 
             File fileObj = new File("/home/ubuntu/txtFiles/logFile.txt");
 
             if(fileObj.exists()){
                 fileObj.createNewFile();
             }
-
-            FileWriter fileWriter = new FileWriter("/home/ubuntu/txtFiles/logFile.txt", true);
-            fileWriter.write(TSvalue + " " + TJvalue + "\n");
+//
+            FileOutputStream fileWriter = new FileOutputStream(fileObj);
+            String value = TSvalue + " " + TJvalue + "\n";
+            byte[] bytesArray = value.getBytes();
+            System.out.println("hi");
+            fileWriter.write(bytesArray);
+            fileWriter.flush();
             fileWriter.close();
 
         } catch (Exception e) {
