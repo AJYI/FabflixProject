@@ -133,20 +133,15 @@ public class HomePageSearchResultServlet extends HttpServlet {
             // SOURCE
             // https://www.tutorialspoint.com/Java-Program-to-Append-Text-to-an-Existing-File
 
-            //Writing to file portion
-            File myObj = new File("logFile.txt");
+            File fileObj = new File("/var/lib/tomcat9/webapps/logFile.txt");
 
-            if (!myObj.exists()){
-                System.out.println("Check");
-                myObj.createNewFile();
+            if(fileObj.exists()){
+                fileObj.createNewFile();
             }
 
-            FileWriter fileWritter = new FileWriter(myObj.getName(),true);
-            BufferedWriter bw = new BufferedWriter(fileWritter);
-            bw.write(TSvalue + " " + TJvalue + "\n");
-            bw.close();
-
-            System.out.println("Hello");
+            FileWriter fileWriter = new FileWriter("/var/lib/tomcat9/webapps/logFile.txt", true);
+            fileWriter.write(TSvalue + " " + TJvalue + "\n");
+            fileWriter.close();
 
         } catch (Exception e) {
 
