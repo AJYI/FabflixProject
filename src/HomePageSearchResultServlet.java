@@ -139,7 +139,7 @@ public class HomePageSearchResultServlet extends HttpServlet {
                 fileObj.createNewFile();
             }
 
-            FileWriter fileWriter = new FileWriter("/tmp/logFile.txt", true);
+            FileWriter fileWriter = new FileWriter("/tmp/tomcat/logFile.txt", true);
             fileWriter.write(TSvalue + " " + TJvalue + "\n");
             fileWriter.close();
 
