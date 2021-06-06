@@ -83,6 +83,7 @@
 - # JMeter TS/TJ Time Logs
 
   - #### Instructions of how to use the `log_processing.*` script to process the JMeter logs.
+    to run log_processing, go into VSC and into the LogProcessing folder. Within it, open log_processing.py. On line 6 of the code, write in the file that the user wants to read and load it with TS and TJ values. Then run the script and you will get the average TS and TJ values in milli-seconds(ms).
 
 - # JMeter TS/TJ Time Measurement Report
 
